@@ -9,7 +9,8 @@ const { pl, en } = Astro.props
 ---
 
 <section id="omnie" class="about">
-	<div data-reveal>
+<div class="about-inner">
+	<div data-reveal class="about-content">
 		<div class="eyebrow" data-pl={pl.aboutEy} data-en={en.aboutEy}>{pl.aboutEy}</div>
 		<h2 class="about-title" data-pl={pl.aboutTitle} data-en={en.aboutTitle}>{pl.aboutTitle}</h2>
 		<p class="about-p" data-pl={pl.about1} data-en={en.about1}>{pl.about1}</p>
@@ -23,13 +24,21 @@ const { pl, en } = Astro.props
 			<span class="chip">REST API</span>
 		</div>
 	</div>
+</div>
 </section>
 
 <style>
 	.about {
 		padding: 92px 56px;
-		max-width: 760px;
+	}
+
+	.about-inner {
+		max-width: 1100px;
 		margin: 0 auto;
+	}
+
+	.about-content {
+		max-width: 680px;
 	}
 
 	.eyebrow {

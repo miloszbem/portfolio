@@ -8,6 +8,7 @@ interface Props {
 const { pl, en } = Astro.props
 ---
 
+<div class="editor-outer">
 <div class="editor-wrap">
 	<p class="editor-caption" data-pl={pl.heroCodeCaption} data-en={en.heroCodeCaption}>{pl.heroCodeCaption}</p>
 	<div class="editor" data-reveal>
@@ -87,11 +88,15 @@ const { pl, en } = Astro.props
 		</div>
 	</div>
 </div>
+</div>
 
 <style>
-	.editor-wrap {
+	.editor-outer {
 		padding: 0 56px 88px;
-		max-width: 700px;
+	}
+
+	.editor-wrap {
+		max-width: 1100px;
 		margin: 0 auto;
 	}
 
