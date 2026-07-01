@@ -19,7 +19,7 @@ const { pl, en } = Astro.props
 					<a href="mailto:miloszbembnowicz@gmail.com" class="contact-link">miloszbembnowicz@gmail.com</a>
 				</div>
 				<div class="contact-row">
-					<span class="contact-label">Telefon:</span>
+					<span class="contact-label" data-pl="Telefon:" data-en="Phone:">Telefon:</span>
 					<a href="tel:+48733969987" class="contact-link">+48 733 969 987</a>
 				</div>
 			</div>
@@ -126,5 +126,9 @@ const { pl, en } = Astro.props
 
 	.social-icon:hover {
 		color: var(--text);
+	}
+
+	@media (max-width: 768px) {
+		.contact-inner { grid-template-columns: 1fr; }
 	}
 </style>

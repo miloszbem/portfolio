@@ -118,4 +118,8 @@ const { pl, en } = Astro.props
 		color: rgba(15, 22, 41, 0.35);
 		margin-top: 2px;
 	}
+
+	@media (max-width: 768px) {
+		.reviews-grid { grid-template-columns: 1fr; }
+	}
 </style>

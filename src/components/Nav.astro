@@ -9,7 +9,7 @@ const { pl, en } = Astro.props
 ---
 
 <nav>
-	<a href="#" class="nav-home">home</a>
+	<a href="/" class="nav-home">home</a>
 	<div class="nav-links">
 		<a href="#realizacje" data-pl={pl.navWork} data-en={en.navWork}>{pl.navWork}</a>
 		<a href="#uslugi" data-pl={pl.navServ} data-en={en.navServ}>{pl.navServ}</a>
@@ -30,7 +30,7 @@ const { pl, en } = Astro.props
 		position: sticky;
 		top: 0;
 		backdrop-filter: blur(12px);
-		background: var(--bg);
+		background: rgba(244, 241, 235, 0.85);
 		z-index: 50;
 	}
 
@@ -55,5 +55,9 @@ const { pl, en } = Astro.props
 
 	.nav-links a:hover {
 		color: var(--text);
+	}
+
+	@media (max-width: 768px) {
+		.nav-links { display: none; }
 	}
 </style>

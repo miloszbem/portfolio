@@ -172,4 +172,9 @@ const { pl, en } = Astro.props
 		font-size: 14px;
 		line-height: 1.5;
 	}
+
+	@media (max-width: 768px) {
+		.cmp-grid { grid-template-columns: 1fr; }
+		.vs-badge { display: none; }
+	}
 </style>

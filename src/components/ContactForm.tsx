@@ -16,7 +16,7 @@ export default function ContactForm({ pl, en }: Props) {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [message, setMessage] = useState('')
-	const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
+	const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
 
 	useEffect(() => {
 		const handler = (e: Event) => {
@@ -39,7 +39,7 @@ export default function ContactForm({ pl, en }: Props) {
 			})
 			setStatus('done')
 		} catch {
-			setStatus('done')
+			setStatus('error')
 		}
 	}
 
@@ -74,6 +74,10 @@ export default function ContactForm({ pl, en }: Props) {
 			{status === 'done' ? (
 				<p style={{ color: '#fff', fontSize: 16, textAlign: 'center', padding: '40px 0' }}>
 					{t.successMsg}
+				</p>
+			) : status === 'error' ? (
+				<p style={{ color: '#ff6b6b', fontSize: 16, textAlign: 'center', padding: '40px 0' }}>
+					{lang === 'pl' ? 'Błąd wysyłania. Spróbuj ponownie.' : 'Send error. Please try again.'}
 				</p>
 			) : (
 				<>
