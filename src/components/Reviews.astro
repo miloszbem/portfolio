@@ -1,0 +1,121 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<section class="reviews">
+	<div data-reveal class="reviews-header">
+		<div class="eyebrow" data-pl={pl.revEy} data-en={en.revEy}>{pl.revEy}</div>
+		<h2 class="section-title" data-pl={pl.revTitle} data-en={en.revTitle}>{pl.revTitle}</h2>
+	</div>
+	<div class="reviews-grid">
+		<div data-reveal class="review-card">
+			<div class="quote-mark">"</div>
+			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
+			<div class="reviewer">
+				<div class="avatar"></div>
+				<div>
+					<div class="reviewer-name">Anna Kowalczyk</div>
+					<div class="reviewer-role">Kancelaria Lex, Rzeszów</div>
+				</div>
+			</div>
+		</div>
+		<div data-reveal data-reveal-d="1" class="review-card">
+			<div class="quote-mark">"</div>
+			<p class="quote-text" data-pl={pl.rev2} data-en={en.rev2}>{pl.rev2}</p>
+			<div class="reviewer">
+				<div class="avatar"></div>
+				<div>
+					<div class="reviewer-name">Piotr Malinowski</div>
+					<div class="reviewer-role">Studio Glow, Kraków</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.reviews {
+		padding: 84px 56px;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.reviews-header { margin-bottom: 44px; }
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.section-title {
+		font-family: var(--display);
+		font-size: 40px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		line-height: 1.05;
+	}
+
+	.reviews-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px;
+	}
+
+	.review-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		padding: 30px;
+	}
+
+	.quote-mark {
+		font-family: var(--display);
+		font-size: 30px;
+		color: var(--accent);
+		line-height: 1;
+		margin-bottom: 14px;
+	}
+
+	.quote-text {
+		font-size: 15px;
+		line-height: 1.7;
+		color: var(--muted);
+		margin: 0 0 22px;
+	}
+
+	.reviewer {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.avatar {
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		background: repeating-linear-gradient(45deg, #e2dfd8, #e2dfd8 3px, #d8d5cd 3px, #d8d5cd 6px);
+		flex-shrink: 0;
+	}
+
+	.reviewer-name {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--text);
+	}
+
+	.reviewer-role {
+		font-size: 11px;
+		color: rgba(15, 22, 41, 0.35);
+		margin-top: 2px;
+	}
+</style>
