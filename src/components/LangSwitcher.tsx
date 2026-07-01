@@ -11,7 +11,7 @@ export default function LangSwitcher() {
 			const text = next === 'pl' ? el.dataset.pl : el.dataset.en
 			if (text !== undefined) el.textContent = text
 		})
-		window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: next } }))
+		document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: next } }))
 	}
 
 	return (
