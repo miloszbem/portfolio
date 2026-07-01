@@ -1,0 +1,108 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<section id="uslugi" class="services">
+	<div class="services-inner">
+		<div data-reveal class="services-header">
+			<div class="eyebrow" data-pl={pl.servEy} data-en={en.servEy}>{pl.servEy}</div>
+			<h2 class="section-title" data-pl={pl.servTitle} data-en={en.servTitle}>{pl.servTitle}</h2>
+		</div>
+		<div class="services-grid">
+			<div data-reveal class="service-card border-accent">
+				<div class="sv-title" data-pl={pl.sv1t} data-en={en.sv1t}>{pl.sv1t}</div>
+				<div class="sv-desc" data-pl={pl.sv1d} data-en={en.sv1d}>{pl.sv1d}</div>
+				<div class="sv-price" data-pl={pl.sv1p} data-en={en.sv1p}>{pl.sv1p}</div>
+			</div>
+			<div data-reveal data-reveal-d="1" class="service-card border-text">
+				<div class="sv-title" data-pl={pl.sv2t} data-en={en.sv2t}>{pl.sv2t}</div>
+				<div class="sv-desc" data-pl={pl.sv2d} data-en={en.sv2d}>{pl.sv2d}</div>
+				<div class="sv-price" data-pl={pl.sv2p} data-en={en.sv2p}>{pl.sv2p}</div>
+			</div>
+			<div data-reveal class="service-card border-text">
+				<div class="sv-title" data-pl={pl.sv3t} data-en={en.sv3t}>{pl.sv3t}</div>
+				<div class="sv-desc" data-pl={pl.sv3d} data-en={en.sv3d}>{pl.sv3d}</div>
+				<div class="sv-price" data-pl={pl.sv3p} data-en={en.sv3p}>{pl.sv3p}</div>
+			</div>
+			<div data-reveal data-reveal-d="1" class="service-card border-accent">
+				<div class="sv-title" data-pl={pl.sv4t} data-en={en.sv4t}>{pl.sv4t}</div>
+				<div class="sv-desc" data-pl={pl.sv4d} data-en={en.sv4d}>{pl.sv4d}</div>
+				<div class="sv-price" data-pl={pl.sv4p} data-en={en.sv4p}>{pl.sv4p}</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		background: var(--surface);
+		padding: 84px 56px;
+	}
+
+	.services-inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.services-header { margin-bottom: 44px; }
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.section-title {
+		font-family: var(--display);
+		font-size: 40px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		line-height: 1.05;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px;
+	}
+
+	.service-card {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		padding: 30px;
+		border-top-width: 3px;
+	}
+
+	.border-accent { border-top-color: var(--accent); }
+	.border-text { border-top-color: var(--text); }
+
+	.sv-title {
+		font-family: var(--display);
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 9px;
+	}
+
+	.sv-desc {
+		color: var(--muted);
+		font-size: 14px;
+		line-height: 1.65;
+		margin-bottom: 16px;
+	}
+
+	.sv-price {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
+	}
+</style>
