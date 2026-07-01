@@ -132,35 +132,18 @@ const { pl, en } = Astro.props
 			justify-content: center;
 		}
 
-		.nav-backdrop {
-			position: fixed;
-			inset: 0;
-			background: rgba(15, 22, 41, 0.36);
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity 0.28s ease;
-			z-index: 58;
-		}
+		.nav-backdrop { display: none; }
 
 		.nav-links {
 			display: flex;
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: min(86vw, 340px);
-			padding: calc(var(--nav-height, 62px) + 12px) 20px 26px;
 			flex-direction: column;
 			align-items: flex-end;
-			justify-content: flex-start;
-			gap: 14px;
-			background: rgba(244, 241, 235, var(--nav-bg-opacity, 0.98));
-			border-left: 1px solid var(--border);
-			box-shadow: -12px 0 28px rgba(15, 22, 41, 0.12);
-			transform: translateX(100%);
+			gap: 20px;
+			padding: 16px 0 4px;
+			max-height: 0;
+			overflow: hidden;
 			opacity: 0;
-			transition: transform 0.28s cubic-bezier(.2,.9,.3,1), opacity 0.2s ease;
-			z-index: 59;
+			transition: max-height 0.28s ease, opacity 0.2s ease;
 		}
 
 		.nav-links a {
@@ -169,13 +152,8 @@ const { pl, en } = Astro.props
 		}
 
 		nav.is-open .nav-links {
-			transform: translateX(0);
+			max-height: 320px;
 			opacity: 1;
-		}
-
-		nav.is-open .nav-backdrop {
-			opacity: 1;
-			pointer-events: auto;
 		}
 	}
 </style>
@@ -183,7 +161,7 @@ const { pl, en } = Astro.props
 <script>
 	const nav = document.querySelector('nav')
 	const toggle = document.querySelector('.nav-toggle')
-	const backdrop = document.querySelector('.nav-backdrop')
+
 	const links = document.querySelectorAll('.nav-links a')
 
 	if (nav && toggle) {
@@ -211,11 +189,7 @@ const { pl, en } = Astro.props
 			setMenuState(!nav.classList.contains('is-open'))
 		})
 
-		backdrop?.addEventListener('click', () => {
-			setMenuState(false)
-		})
-
-		links.forEach((link) => {
+links.forEach((link) => {
 			link.addEventListener('click', () => {
 				setMenuState(false)
 			})
