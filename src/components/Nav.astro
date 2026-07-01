@@ -1,0 +1,58 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<nav>
+	<a href="#" class="nav-home">home</a>
+	<div class="nav-links">
+		<a href="#realizacje" data-pl={pl.navWork} data-en={en.navWork}>{pl.navWork}</a>
+		<a href="#uslugi" data-pl={pl.navServ} data-en={en.navServ}>{pl.navServ}</a>
+		<a href="#cennik" data-pl={pl.navPrice} data-en={en.navPrice}>{pl.navPrice}</a>
+		<a href="#omnie" data-pl={pl.navAbout} data-en={en.navAbout}>{pl.navAbout}</a>
+		<a href="#kontakt" data-pl={pl.navContact} data-en={en.navContact}>{pl.navContact}</a>
+		<slot name="lang-switcher" />
+	</div>
+</nav>
+
+<style>
+	nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 24px 56px;
+		border-bottom: 1px solid var(--border);
+		position: sticky;
+		top: 0;
+		background: var(--bg);
+		z-index: 50;
+	}
+
+	.nav-home {
+		color: var(--text);
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 26px;
+		align-items: center;
+	}
+
+	.nav-links a {
+		color: var(--muted);
+		text-decoration: none;
+		font-size: 14px;
+	}
+
+	.nav-links a:hover {
+		color: var(--text);
+	}
+</style>
