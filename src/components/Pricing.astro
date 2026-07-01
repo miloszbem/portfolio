@@ -28,7 +28,6 @@ const { pl, en } = Astro.props
 				</div>
 			</div>
 			<div data-reveal data-reveal-d="1" class="plan-card plan-featured">
-				<div class="popular-badge" data-pl={pl.popular} data-en={en.popular}>{pl.popular}</div>
 				<div class="plan-name accent" data-pl={pl.pl2n} data-en={en.pl2n}>{pl.pl2n}</div>
 				<div class="plan-price">3 000</div>
 				<div class="plan-unit muted" data-pl={pl.net} data-en={en.net}>{pl.net}</div>
@@ -100,7 +99,7 @@ const { pl, en } = Astro.props
 	}
 
 	.plan-featured {
-		border: 2px solid var(--accent);
+		border: 1px solid rgba(15, 22, 41, 0.09);
 	}
 
 	.plan-custom {
