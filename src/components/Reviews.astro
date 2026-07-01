@@ -9,6 +9,7 @@ const { pl, en } = Astro.props
 ---
 
 <section class="reviews">
+<div class="reviews-inner">
 	<div data-reveal class="reviews-header">
 		<div class="eyebrow" data-pl={pl.revEy} data-en={en.revEy}>{pl.revEy}</div>
 		<h2 class="section-title" data-pl={pl.revTitle} data-en={en.revTitle}>{pl.revTitle}</h2>
@@ -37,11 +38,15 @@ const { pl, en } = Astro.props
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 
 <style>
 	.reviews {
 		padding: 84px 56px;
+	}
+
+	.reviews-inner {
 		max-width: 1100px;
 		margin: 0 auto;
 	}
