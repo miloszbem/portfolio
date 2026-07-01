@@ -32,12 +32,16 @@ export default function ContactForm({ pl, en }: Props) {
 		e.preventDefault()
 		setStatus('sending')
 		try {
-			await fetch('/', {
+			const res = await fetch('/', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				body: encode({ 'form-name': 'contact', name, email, message }),
 			})
-			setStatus('done')
+			if (res.ok) {
+				setStatus('done')
+			} else {
+				setStatus('error')
+			}
 		} catch {
 			setStatus('error')
 		}
