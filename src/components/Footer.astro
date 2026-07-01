@@ -1,0 +1,42 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<footer>
+	<div class="footer-name">Miłosz Bembnowicz</div>
+	<div class="footer-copy">© 2026 · Rzeszów · Kraków i okolice</div>
+	<div class="footer-lang" data-pl={pl.langLabel} data-en={en.langLabel}>{pl.langLabel}</div>
+</footer>
+
+<style>
+	footer {
+		padding: 22px 56px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: var(--bg);
+		border-top: 1px solid var(--border);
+	}
+
+	.footer-name {
+		font-family: var(--display);
+		font-weight: 600;
+		font-size: 15px;
+	}
+
+	.footer-copy {
+		font-size: 12px;
+		color: rgba(15, 22, 41, 0.25);
+	}
+
+	.footer-lang {
+		font-size: 12px;
+		color: rgba(15, 22, 41, 0.35);
+	}
+</style>
