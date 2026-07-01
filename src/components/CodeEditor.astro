@@ -1,0 +1,239 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<div class="editor-wrap">
+	<p class="editor-caption" data-pl={pl.heroCodeCaption} data-en={en.heroCodeCaption}>{pl.heroCodeCaption}</p>
+	<div class="editor" data-reveal>
+		<div class="editor-titlebar">
+			<span class="tb-dot tb-red"></span>
+			<span class="tb-dot tb-yellow"></span>
+			<span class="tb-dot tb-green"></span>
+			<span class="editor-filename">Hero.astro</span>
+		</div>
+		<div class="editor-body">
+			<!-- Line 0: --- -->
+			<div class="code-line"><span data-tok="0-0" style="color:#d6deeb"></span></div>
+			<!-- Line 1: // comment -->
+			<div class="code-line"><span data-tok="1-0" style="color:#7c8aa6"></span></div>
+			<!-- Line 2: const klient = "..." -->
+			<div class="code-line">
+				<span data-tok="2-0" style="color:#c792ea"></span>
+				<span data-tok="2-1" style="color:#d6deeb"></span>
+				<span data-tok="2-2" style="color:#d6deeb"></span>
+				<span data-tok="2-3" style="color:#c3e88d"></span>
+				<span data-tok="2-4" style="color:#d6deeb"></span>
+			</div>
+			<!-- Line 3: const stack = [...] -->
+			<div class="code-line">
+				<span data-tok="3-0" style="color:#c792ea"></span>
+				<span data-tok="3-1" style="color:#d6deeb"></span>
+				<span data-tok="3-2" style="color:#d6deeb"></span>
+				<span data-tok="3-3" style="color:#c3e88d"></span>
+				<span data-tok="3-4" style="color:#d6deeb"></span>
+				<span data-tok="3-5" style="color:#c3e88d"></span>
+				<span data-tok="3-6" style="color:#d6deeb"></span>
+			</div>
+			<!-- Line 4: --- -->
+			<div class="code-line"><span data-tok="4-0" style="color:#d6deeb"></span></div>
+			<!-- Line 5: empty -->
+			<div class="code-line">&nbsp;</div>
+			<!-- Line 6: <Layout client:load> -->
+			<div class="code-line">
+				<span data-tok="6-0" style="color:#89ddff"></span>
+				<span data-tok="6-1" style="color:#82aaff"></span>
+				<span data-tok="6-2" style="color:#ffcb6b"></span>
+				<span data-tok="6-3" style="color:#89ddff"></span>
+			</div>
+			<!-- Line 7: <Hero tytul={klient} /> -->
+			<div class="code-line">
+				<span data-tok="7-0" style="color:#89ddff"></span>
+				<span data-tok="7-1" style="color:#82aaff"></span>
+				<span data-tok="7-2" style="color:#ffcb6b"></span>
+				<span data-tok="7-3" style="color:#d6deeb"></span>
+				<span data-tok="7-4" style="color:#89ddff"></span>
+			</div>
+			<!-- Line 8: <Uslugi dane={stack} /> -->
+			<div class="code-line">
+				<span data-tok="8-0" style="color:#89ddff"></span>
+				<span data-tok="8-1" style="color:#82aaff"></span>
+				<span data-tok="8-2" style="color:#ffcb6b"></span>
+				<span data-tok="8-3" style="color:#d6deeb"></span>
+				<span data-tok="8-4" style="color:#89ddff"></span>
+			</div>
+			<!-- Line 9: <Kontakt /> -->
+			<div class="code-line">
+				<span data-tok="9-0" style="color:#89ddff"></span>
+				<span data-tok="9-1" style="color:#82aaff"></span>
+				<span data-tok="9-2" style="color:#89ddff"></span>
+			</div>
+			<!-- Line 10: </Layout> -->
+			<div class="code-line">
+				<span data-tok="10-0" style="color:#89ddff"></span>
+				<span data-tok="10-1" style="color:#82aaff"></span>
+				<span data-tok="10-2" style="color:#89ddff"></span>
+			</div>
+			<span class="code-cursor" style="color:#d6deeb">▍</span>
+		</div>
+		<div class="editor-footer">
+			<span data-build-dot class="build-dot"></span>
+			<span data-build-label class="build-label">{pl.buildingLabel}</span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.editor-wrap {
+		padding: 0 56px 88px;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	.editor-caption {
+		font-size: 13px;
+		color: var(--muted-light);
+		margin-bottom: 14px;
+		text-align: center;
+	}
+
+	.editor {
+		background: #0d1320;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 30px 70px rgba(15, 22, 41, 0.16);
+	}
+
+	.editor-titlebar {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+		padding: 13px 16px;
+		background: #171f30;
+	}
+
+	.tb-dot {
+		width: 11px;
+		height: 11px;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.tb-red { background: #ff6058; }
+	.tb-yellow { background: #ffbc2e; }
+	.tb-green { background: #29c942; }
+
+	.editor-filename {
+		margin-left: 10px;
+		font-size: 12px;
+		color: rgba(214, 222, 235, 0.45);
+		font-family: 'DM Sans', sans-serif;
+	}
+
+	.editor-body {
+		padding: 22px 22px 8px;
+		height: 248px;
+		overflow: hidden;
+	}
+
+	.code-line {
+		font-family: ui-monospace, Menlo, Consolas, monospace;
+		font-size: 13px;
+		line-height: 1.65;
+		white-space: pre-wrap;
+		word-break: break-word;
+		overflow-wrap: anywhere;
+	}
+
+	.editor-footer {
+		padding: 12px 22px 16px;
+		border-top: 1px solid rgba(214, 222, 235, 0.07);
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.build-dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: #ffbc2e;
+		display: inline-block;
+	}
+
+	.build-label {
+		font-size: 12px;
+		color: rgba(214, 222, 235, 0.55);
+	}
+</style>
+
+<script>
+	const CODE_LINES = [
+		[{ tx: '---', c: '#d6deeb' }],
+		[{ tx: '// Strona dla Twojej firmy', c: '#7c8aa6' }],
+		[{ tx: 'const ', c: '#c792ea' }, { tx: 'klient', c: '#d6deeb' }, { tx: ' = ', c: '#d6deeb' }, { tx: '"Warsztat Kowalski"', c: '#c3e88d' }, { tx: ';', c: '#d6deeb' }],
+		[{ tx: 'const ', c: '#c792ea' }, { tx: 'stack', c: '#d6deeb' }, { tx: ' = [', c: '#d6deeb' }, { tx: '"Astro"', c: '#c3e88d' }, { tx: ', ', c: '#d6deeb' }, { tx: '"TypeScript"', c: '#c3e88d' }, { tx: '];', c: '#d6deeb' }],
+		[{ tx: '---', c: '#d6deeb' }],
+		[],
+		[{ tx: '<', c: '#89ddff' }, { tx: 'Layout', c: '#82aaff' }, { tx: ' client:load', c: '#ffcb6b' }, { tx: '>', c: '#89ddff' }],
+		[{ tx: '  <', c: '#89ddff' }, { tx: 'Hero', c: '#82aaff' }, { tx: ' tytul=', c: '#ffcb6b' }, { tx: '{klient}', c: '#d6deeb' }, { tx: ' />', c: '#89ddff' }],
+		[{ tx: '  <', c: '#89ddff' }, { tx: 'Uslugi', c: '#82aaff' }, { tx: ' dane=', c: '#ffcb6b' }, { tx: '{stack}', c: '#d6deeb' }, { tx: ' />', c: '#89ddff' }],
+		[{ tx: '  <', c: '#89ddff' }, { tx: 'Kontakt', c: '#82aaff' }, { tx: ' />', c: '#89ddff' }],
+		[{ tx: '</', c: '#89ddff' }, { tx: 'Layout', c: '#82aaff' }, { tx: '>', c: '#89ddff' }],
+	]
+
+	const flat: Array<{ key: string; tx: string }> = []
+	CODE_LINES.forEach((line, li) => {
+		line.forEach((_tok, ti) => flat.push({ key: `${li}-${ti}`, tx: CODE_LINES[li][ti].tx }))
+	})
+
+	const tokenNodes = flat.map(({ key, tx }) => {
+		const el = document.querySelector<HTMLElement>(`[data-tok="${key}"]`)
+		return el ? { el, full: tx } : null
+	}).filter(Boolean) as Array<{ el: HTMLElement; full: string }>
+
+	const buildDot = document.querySelector<HTMLElement>('[data-build-dot]')
+	const buildLabel = document.querySelector<HTMLElement>('[data-build-label]')
+	const totalChars = flat.reduce((s, t) => s + t.tx.length, 0)
+
+	const getLang = () => (document.documentElement.lang || 'pl') as 'pl' | 'en'
+	const getBuildingLabel = () => getLang() === 'en' ? 'Compiling...' : 'Kompilowanie...'
+	const getDoneLabel = () => getLang() === 'en' ? 'Deployed' : 'Wdrożono'
+
+	let chars = 0
+	let interval: ReturnType<typeof setInterval>
+	let restartTimeout: ReturnType<typeof setTimeout>
+
+	function startTyping() {
+		clearInterval(interval)
+		interval = setInterval(() => {
+			chars = Math.min(chars + 2, totalChars)
+			let remaining = chars
+			for (const t of tokenNodes) {
+				const take = Math.max(0, Math.min(remaining, t.full.length))
+				t.el.textContent = t.full.slice(0, take)
+				remaining -= take
+			}
+			if (chars >= totalChars) {
+				clearInterval(interval)
+				if (buildDot) buildDot.style.background = '#29c942'
+				if (buildLabel) buildLabel.textContent = getDoneLabel()
+				clearTimeout(restartTimeout)
+				restartTimeout = setTimeout(() => {
+					chars = 0
+					tokenNodes.forEach((t) => { t.el.textContent = '' })
+					if (buildDot) buildDot.style.background = '#ffbc2e'
+					if (buildLabel) buildLabel.textContent = getBuildingLabel()
+					startTyping()
+				}, 2600)
+			}
+		}, 32)
+	}
+
+	startTyping()
+</script>

@@ -1,0 +1,76 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<section id="omnie" class="about">
+	<div data-reveal>
+		<div class="eyebrow" data-pl={pl.aboutEy} data-en={en.aboutEy}>{pl.aboutEy}</div>
+		<h2 class="about-title" data-pl={pl.aboutTitle} data-en={en.aboutTitle}>{pl.aboutTitle}</h2>
+		<p class="about-p" data-pl={pl.about1} data-en={en.about1}>{pl.about1}</p>
+		<p class="about-p" data-pl={pl.about2} data-en={en.about2}>{pl.about2}</p>
+		<p class="about-p last" data-pl={pl.about3} data-en={en.about3}>{pl.about3}</p>
+		<div class="chips">
+			<span class="chip">Astro</span>
+			<span class="chip">TypeScript</span>
+			<span class="chip">Netlify</span>
+			<span class="chip">PostgreSQL</span>
+			<span class="chip">REST API</span>
+		</div>
+	</div>
+</section>
+
+<style>
+	.about {
+		padding: 92px 56px;
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 16px;
+		font-weight: 600;
+	}
+
+	.about-title {
+		font-family: var(--display);
+		font-size: 40px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		margin: 0 0 26px;
+		line-height: 1.08;
+	}
+
+	.about-p {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.75;
+		margin: 0 0 16px;
+	}
+
+	.last { margin-bottom: 32px; }
+
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.chip {
+		background: var(--chip);
+		color: var(--accent);
+		font-size: 13px;
+		padding: 6px 16px;
+		border-radius: 100px;
+		font-weight: 500;
+	}
+</style>
