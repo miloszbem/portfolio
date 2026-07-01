@@ -22,8 +22,8 @@ export default function ContactForm({ pl, en }: Props) {
 		const handler = (e: Event) => {
 			setLang((e as CustomEvent<{ lang: 'pl' | 'en' }>).detail.lang)
 		}
-		window.addEventListener('langchange', handler)
-		return () => window.removeEventListener('langchange', handler)
+		document.addEventListener('langchange', handler)
+		return () => document.removeEventListener('langchange', handler)
 	}, [])
 
 	const t = lang === 'pl' ? pl : en
