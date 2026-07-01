@@ -129,6 +129,35 @@ const { pl, en } = Astro.props
 	}
 
 	@media (max-width: 768px) {
-		.contact-inner { grid-template-columns: 1fr; }
+		.contact {
+			padding: 72px 20px;
+		}
+
+		.contact-inner { grid-template-columns: 1fr; gap: 32px; }
+
+		.contact-title {
+			font-size: 42px;
+			line-height: 1;
+		}
+
+		.contact-sub {
+			max-width: none;
+			font-size: 14px;
+		}
+
+		.contact-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 2px;
+		}
+
+		.contact-link {
+			font-size: 14px;
+			word-break: break-word;
+		}
+
+		.socials {
+			gap: 12px;
+		}
 	}
 </style>
