@@ -1,0 +1,171 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+---
+
+<section id="cennik" class="pricing">
+	<div class="pricing-inner">
+		<div data-reveal class="pricing-header">
+			<div class="eyebrow" data-pl={pl.priceEy} data-en={en.priceEy}>{pl.priceEy}</div>
+			<h2 class="section-title" data-pl={pl.priceTitle} data-en={en.priceTitle}>{pl.priceTitle}</h2>
+		</div>
+		<div class="pricing-grid">
+			<div data-reveal class="plan-card">
+				<div class="plan-name muted" data-pl={pl.pl1n} data-en={en.pl1n}>{pl.pl1n}</div>
+				<div class="plan-price">1 500</div>
+				<div class="plan-unit muted" data-pl={pl.net} data-en={en.net}>{pl.net}</div>
+				<div class="plan-sep"></div>
+				<div class="plan-features">
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1a} data-en={en.pl1a}>{pl.pl1a}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1b} data-en={en.pl1b}>{pl.pl1b}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1c} data-en={en.pl1c}>{pl.pl1c}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1d} data-en={en.pl1d}>{pl.pl1d}</span></div>
+				</div>
+			</div>
+			<div data-reveal data-reveal-d="1" class="plan-card plan-featured">
+				<div class="popular-badge" data-pl={pl.popular} data-en={en.popular}>{pl.popular}</div>
+				<div class="plan-name accent" data-pl={pl.pl2n} data-en={en.pl2n}>{pl.pl2n}</div>
+				<div class="plan-price">3 000</div>
+				<div class="plan-unit muted" data-pl={pl.net} data-en={en.net}>{pl.net}</div>
+				<div class="plan-sep"></div>
+				<div class="plan-features">
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2a} data-en={en.pl2a}>{pl.pl2a}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2b} data-en={en.pl2b}>{pl.pl2b}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2c} data-en={en.pl2c}>{pl.pl2c}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2d} data-en={en.pl2d}>{pl.pl2d}</span></div>
+				</div>
+			</div>
+			<div data-reveal data-reveal-d="2" class="plan-card plan-custom">
+				<div class="plan-name muted">Custom</div>
+				<div class="plan-price" data-pl={pl.quote} data-en={en.quote}>{pl.quote}</div>
+				<div class="plan-unit muted" data-pl={pl.indiv} data-en={en.indiv}>{pl.indiv}</div>
+				<div class="plan-sep"></div>
+				<div class="plan-features">
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3a} data-en={en.pl3a}>{pl.pl3a}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3b} data-en={en.pl3b}>{pl.pl3b}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3c} data-en={en.pl3c}>{pl.pl3c}</span></div>
+					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3d} data-en={en.pl3d}>{pl.pl3d}</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.pricing {
+		background: var(--surface);
+		padding: 84px 56px;
+	}
+
+	.pricing-inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.pricing-header { margin-bottom: 44px; }
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.section-title {
+		font-family: var(--display);
+		font-size: 40px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		line-height: 1.05;
+	}
+
+	.pricing-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 14px;
+	}
+
+	.plan-card {
+		border: 1px solid rgba(15, 22, 41, 0.09);
+		border-radius: 12px;
+		padding: 30px;
+		position: relative;
+	}
+
+	.plan-featured {
+		border: 2px solid var(--accent);
+	}
+
+	.plan-custom {
+		background: var(--bg);
+	}
+
+	.popular-badge {
+		position: absolute;
+		top: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		background: var(--accent);
+		color: #fff;
+		font-size: 10px;
+		font-weight: 600;
+		padding: 3px 12px;
+		border-radius: 100px;
+		white-space: nowrap;
+	}
+
+	.plan-name {
+		font-size: 11px;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		margin-bottom: 18px;
+	}
+
+	.muted { color: rgba(15, 22, 41, 0.3); }
+	.accent { color: var(--accent); }
+
+	.plan-price {
+		font-family: var(--display);
+		font-size: 36px;
+		font-weight: 700;
+		line-height: 1;
+		margin-bottom: 3px;
+	}
+
+	.plan-unit {
+		font-size: 12px;
+		margin-bottom: 22px;
+	}
+
+	.plan-sep {
+		height: 1px;
+		background: var(--border);
+		margin-bottom: 22px;
+	}
+
+	.plan-features {
+		display: flex;
+		flex-direction: column;
+		gap: 9px;
+	}
+
+	.feature {
+		display: flex;
+		gap: 9px;
+		font-size: 13px;
+		color: rgba(15, 22, 41, 0.55);
+	}
+
+	.check {
+		color: var(--accent);
+		font-weight: 600;
+		flex-shrink: 0;
+	}
+</style>
