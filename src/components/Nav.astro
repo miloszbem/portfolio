@@ -9,8 +9,18 @@ const { pl, en } = Astro.props
 ---
 
 <nav>
-	<a href="/" class="nav-home">home</a>
-	<div class="nav-links">
+	<div class="nav-top">
+		<a href="/" class="nav-home">home</a>
+		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+			<span class="nav-toggle-icon" aria-hidden="true">
+				<span></span>
+				<span></span>
+				<span></span>
+			</span>
+		</button>
+	</div>
+	<div class="nav-backdrop" aria-hidden="true"></div>
+	<div id="nav-links" class="nav-links">
 		<a href="#realizacje" data-pl={pl.navWork} data-en={en.navWork}>{pl.navWork}</a>
 		<a href="#uslugi" data-pl={pl.navServ} data-en={en.navServ}>{pl.navServ}</a>
 		<a href="#cennik" data-pl={pl.navPrice} data-en={en.navPrice}>{pl.navPrice}</a>
@@ -25,13 +35,22 @@ const { pl, en } = Astro.props
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		--nav-height: 62px;
 		padding: 24px 56px;
 		border-bottom: 1px solid var(--border);
 		position: sticky;
 		top: 0;
 		backdrop-filter: blur(12px);
-		background: rgba(244, 241, 235, 0.85);
-		z-index: 50;
+		background: rgba(244, 241, 235, var(--nav-bg-opacity, 0.85));
+		z-index: 70;
+	}
+
+	.nav-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		z-index: 72;
 	}
 
 	.nav-home {
@@ -43,6 +62,7 @@ const { pl, en } = Astro.props
 
 	.nav-links {
 		display: flex;
+		justify-content: flex-end;
 		gap: 26px;
 		align-items: center;
 	}
@@ -57,7 +77,148 @@ const { pl, en } = Astro.props
 		color: var(--text);
 	}
 
+	.nav-toggle {
+		display: none;
+		border: 0;
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+		align-items: center;
+		gap: 8px;
+		padding: 0;
+	}
+
+	.nav-toggle-icon {
+		width: 18px;
+		display: grid;
+		gap: 3px;
+	}
+
+	.nav-toggle-icon span {
+		display: block;
+		height: 2px;
+		border-radius: 999px;
+		background: currentColor;
+	}
+
 	@media (max-width: 768px) {
-		.nav-links { display: none; }
+		nav {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+			padding: 18px 20px;
+			z-index: 70;
+		}
+
+		nav.is-open {
+			background: var(--bg);
+			backdrop-filter: none;
+		}
+
+		.nav-top {
+			width: 100%;
+		}
+
+		.nav-home {
+			font-size: 13px;
+		}
+
+		.nav-toggle {
+			display: inline-flex;
+			background: rgba(244, 241, 235, var(--nav-bg-opacity, 0.98));
+			border-radius: 8px;
+			padding: 6px;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.nav-backdrop {
+			position: fixed;
+			inset: 0;
+			background: rgba(15, 22, 41, 0.36);
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.28s ease;
+			z-index: 58;
+		}
+
+		.nav-links {
+			display: flex;
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: min(86vw, 340px);
+			padding: calc(var(--nav-height, 62px) + 12px) 20px 26px;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: flex-start;
+			gap: 14px;
+			background: rgba(244, 241, 235, var(--nav-bg-opacity, 0.98));
+			border-left: 1px solid var(--border);
+			box-shadow: -12px 0 28px rgba(15, 22, 41, 0.12);
+			transform: translateX(100%);
+			opacity: 0;
+			transition: transform 0.28s cubic-bezier(.2,.9,.3,1), opacity 0.2s ease;
+			z-index: 59;
+		}
+
+		.nav-links a {
+			font-size: 15px;
+			text-align: right;
+		}
+
+		nav.is-open .nav-links {
+			transform: translateX(0);
+			opacity: 1;
+		}
+
+		nav.is-open .nav-backdrop {
+			opacity: 1;
+			pointer-events: auto;
+		}
 	}
 </style>
+
+<script>
+	const nav = document.querySelector('nav')
+	const toggle = document.querySelector('.nav-toggle')
+	const backdrop = document.querySelector('.nav-backdrop')
+	const links = document.querySelectorAll('.nav-links a')
+
+	if (nav && toggle) {
+		const updateNavOpacity = () => {
+			if (nav.classList.contains('is-open')) {
+				nav.style.setProperty('--nav-bg-opacity', '0.98')
+				return
+			}
+			const scrollFactor = Math.min(window.scrollY / 220, 1)
+			const opacity = (0.9 - scrollFactor * 0.18).toFixed(2)
+			nav.style.setProperty('--nav-bg-opacity', opacity)
+		}
+
+		const setMenuState = (isOpen: boolean) => {
+			nav.classList.toggle('is-open', isOpen)
+			toggle.setAttribute('aria-expanded', String(isOpen))
+			document.body.style.overflow = isOpen ? 'hidden' : ''
+			updateNavOpacity()
+		}
+
+		updateNavOpacity()
+		window.addEventListener('scroll', updateNavOpacity, { passive: true })
+
+		toggle.addEventListener('click', () => {
+			setMenuState(!nav.classList.contains('is-open'))
+		})
+
+		backdrop?.addEventListener('click', () => {
+			setMenuState(false)
+		})
+
+		links.forEach((link) => {
+			link.addEventListener('click', () => {
+				setMenuState(false)
+			})
+		})
+	}
+</script>
