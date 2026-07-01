@@ -9,38 +9,31 @@ const { pl, en } = Astro.props
 ---
 
 <nav>
-	<a href="/" class="nav-home">home</a>
-	<div id="nav-links" class="nav-links">
+	<div class="nav-top">
+		<a href="/" class="nav-home">home</a>
+		<div class="nav-right">
+			<slot name="lang-switcher" />
+			<button class="nav-toggle" type="button" aria-expanded="false">
+				<span class="nav-toggle-icon" aria-hidden="true">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</button>
+		</div>
+	</div>
+	<div class="nav-links">
 		<a href="#realizacje" data-pl={pl.navWork} data-en={en.navWork}>{pl.navWork}</a>
 		<a href="#uslugi" data-pl={pl.navServ} data-en={en.navServ}>{pl.navServ}</a>
 		<a href="#cennik" data-pl={pl.navPrice} data-en={en.navPrice}>{pl.navPrice}</a>
 		<a href="#omnie" data-pl={pl.navAbout} data-en={en.navAbout}>{pl.navAbout}</a>
 		<a href="#kontakt" data-pl={pl.navContact} data-en={en.navContact}>{pl.navContact}</a>
 	</div>
-	<div class="nav-right">
-		<slot name="lang-switcher" />
-		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-overlay">
-			<span class="nav-toggle-icon" aria-hidden="true">
-				<span></span>
-				<span></span>
-				<span></span>
-			</span>
-		</button>
-	</div>
 </nav>
-
-<div id="nav-overlay" class="nav-overlay" role="dialog" aria-modal="true" aria-label="Menu">
-	<a href="#realizacje" data-pl={pl.navWork} data-en={en.navWork}>{pl.navWork}</a>
-	<a href="#uslugi" data-pl={pl.navServ} data-en={en.navServ}>{pl.navServ}</a>
-	<a href="#cennik" data-pl={pl.navPrice} data-en={en.navPrice}>{pl.navPrice}</a>
-	<a href="#omnie" data-pl={pl.navAbout} data-en={en.navAbout}>{pl.navAbout}</a>
-	<a href="#kontakt" data-pl={pl.navContact} data-en={en.navContact}>{pl.navContact}</a>
-</div>
 
 <style>
 	nav {
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
 		position: fixed;
 		top: 16px;
@@ -55,6 +48,11 @@ const { pl, en } = Astro.props
 		border-radius: 999px;
 		box-shadow: 0 4px 20px rgba(15, 22, 41, 0.08);
 		z-index: 70;
+		transition: border-radius 0.25s ease;
+	}
+
+	.nav-top {
+		display: contents;
 	}
 
 	.nav-home {
@@ -62,12 +60,16 @@ const { pl, en } = Astro.props
 		text-decoration: none;
 		font-size: 14px;
 		font-weight: 500;
+		order: 1;
 	}
 
 	.nav-links {
 		display: flex;
 		gap: 24px;
 		align-items: center;
+		order: 2;
+		flex: 1;
+		justify-content: center;
 	}
 
 	.nav-links a {
@@ -85,6 +87,7 @@ const { pl, en } = Astro.props
 		display: flex;
 		align-items: center;
 		gap: 12px;
+		order: 3;
 	}
 
 	.nav-toggle {
@@ -109,10 +112,6 @@ const { pl, en } = Astro.props
 		background: currentColor;
 	}
 
-	.nav-overlay {
-		display: none;
-	}
-
 	@media (max-width: 768px) {
 		nav {
 			top: 12px;
@@ -121,61 +120,59 @@ const { pl, en } = Astro.props
 			width: auto;
 			transform: none;
 			padding: 11px 18px;
-			border-radius: 999px;
+			flex-direction: column;
+			align-items: stretch;
+			border-radius: 20px;
+		}
+
+		nav.is-open {
+			border-radius: 20px;
+		}
+
+		.nav-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.nav-home {
+			order: unset;
+		}
+
+		.nav-right {
+			order: unset;
 		}
 
 		.nav-links {
-			display: none;
+			order: unset;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0;
+			flex: unset;
+			justify-content: unset;
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.28s ease;
+		}
+
+		nav.is-open .nav-links {
+			max-height: 280px;
+		}
+
+		.nav-links a {
+			padding: 12px 0;
+			border-bottom: 1px solid var(--border);
+			width: 100%;
+			font-size: 15px;
+		}
+
+		.nav-links a:last-child {
+			border-bottom: none;
 		}
 
 		.nav-toggle {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-		}
-
-		.nav-overlay {
-			display: flex;
-			flex-direction: column;
-			position: fixed;
-			top: 72px;
-			left: 16px;
-			right: 16px;
-			background: rgba(244, 241, 235, 0.97);
-			backdrop-filter: blur(14px);
-			border: 1px solid var(--border-med);
-			border-radius: 12px;
-			box-shadow: 0 8px 28px rgba(15, 22, 41, 0.12);
-			z-index: 69;
-			pointer-events: none;
-			opacity: 0;
-			transform: translateY(-6px);
-			transition: opacity 0.2s ease, transform 0.2s ease;
-			overflow: hidden;
-		}
-
-		.nav-overlay.is-open {
-			opacity: 1;
-			transform: translateY(0);
-			pointer-events: auto;
-		}
-
-		.nav-overlay a {
-			color: var(--muted);
-			text-decoration: none;
-			font-size: 15px;
-			padding: 14px 18px;
-			border-bottom: 1px solid var(--border);
-			transition: color 0.15s, background 0.15s;
-		}
-
-		.nav-overlay a:last-child {
-			border-bottom: none;
-		}
-
-		.nav-overlay a:hover {
-			color: var(--text);
-			background: rgba(15, 22, 41, 0.03);
 		}
 	}
 </style>
@@ -183,27 +180,26 @@ const { pl, en } = Astro.props
 <script>
 	const nav = document.querySelector('nav')
 	const toggle = document.querySelector('.nav-toggle')
-	const overlay = document.getElementById('nav-overlay')
-	const overlayLinks = document.querySelectorAll('#nav-overlay a')
+	const links = document.querySelectorAll('.nav-links a')
 
-	if (nav && toggle && overlay) {
+	if (nav && toggle) {
 		const setMenuState = (isOpen: boolean) => {
-			overlay.classList.toggle('is-open', isOpen)
+			nav.classList.toggle('is-open', isOpen)
 			toggle.setAttribute('aria-expanded', String(isOpen))
 		}
 
 		toggle.addEventListener('click', (e) => {
 			e.stopPropagation()
-			setMenuState(!overlay.classList.contains('is-open'))
+			setMenuState(!nav.classList.contains('is-open'))
 		})
 
 		document.addEventListener('click', (e) => {
-			if (!nav.contains(e.target as Node) && !overlay.contains(e.target as Node)) {
+			if (!nav.contains(e.target as Node)) {
 				setMenuState(false)
 			}
 		})
 
-		overlayLinks.forEach((link) => {
+		links.forEach((link) => {
 			link.addEventListener('click', () => setMenuState(false))
 		})
 	}
