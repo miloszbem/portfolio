@@ -1,0 +1,281 @@
+---
+import type { LangCopy } from '../i18n/copy'
+
+interface Props {
+	pl: LangCopy
+	en: LangCopy
+}
+const { pl, en } = Astro.props
+
+const projects = [
+	{ color: '#214eb8', domain: 'kancelarialex.pl', name: 'Kancelaria Lex', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da' },
+	{ color: '#d97642', domain: 'trattoriabella.pl', name: 'Trattoria Bella', descPl: pl.p2, descEn: en.p2, mockupAccent: '#d97642', mockupBg: '#f3e7df', mockupLine: '#ecddd2' },
+	{ color: '#3f9b72', domain: 'warsztatmechanika.pl', name: 'Warsztat Mechanika', descPl: pl.p3, descEn: en.p3, mockupAccent: '#3f9b72', mockupBg: '#e3efe8', mockupLine: '#d8e8de' },
+	{ color: '#2b2a3d', domain: 'studioglow.pl', name: 'Studio Glow', descPl: pl.p4, descEn: en.p4, mockupAccent: '#2b2a3d', mockupBg: '#e7e6ee', mockupLine: '#dddce8' },
+]
+---
+
+<section id="realizacje" class="projects">
+	<div class="projects-header">
+		<div data-reveal>
+			<div class="eyebrow" data-pl={pl.workEy} data-en={en.workEy}>{pl.workEy}</div>
+			<h2 class="section-title" data-pl={pl.workTitle} data-en={en.workTitle}>{pl.workTitle}</h2>
+			<p class="section-note" data-pl={pl.workNote} data-en={en.workNote}>{pl.workNote}</p>
+		</div>
+		<a href="#" data-reveal data-reveal-d="1" class="see-all">
+			<span data-pl={pl.workAll} data-en={en.workAll}>{pl.workAll}</span>
+			<span class="see-all-icon">↗</span>
+		</a>
+	</div>
+
+	<div class="projects-grid">
+		{projects.map((p, i) => (
+			<a href="#" class="project-card" data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined}>
+				<div class="card-img" style={`background:${p.color}`}>
+					<span class="demo-badge">DEMO</span>
+					<div class="preview-overlay">
+						<span class="preview-label">
+							<span data-pl={pl.previewCta} data-en={en.previewCta}>{pl.previewCta}</span> ↗
+						</span>
+					</div>
+					<div class="browser-window">
+						<div class="browser-bar">
+							<span class="dot red"></span>
+							<span class="dot yellow"></span>
+							<span class="dot green"></span>
+						</div>
+						<div class="browser-url-row">
+							<div class="browser-url">{p.domain}</div>
+						</div>
+						<div class="browser-content">
+							<div class="mock-hero" style={`background:repeating-linear-gradient(135deg,${p.mockupBg},${p.mockupBg} 7px,${p.mockupLine} 7px,${p.mockupLine} 14px)`}></div>
+							<div class="mock-line" style={`background:${p.mockupLine};width:74%`}></div>
+							<div class="mock-line" style={`background:${p.mockupLine};width:56%`}></div>
+							<div class="mock-btn" style={`background:${p.mockupAccent}`}></div>
+						</div>
+					</div>
+				</div>
+				<div class="card-meta">
+					<div class="card-name">{p.name}</div>
+					<div class="card-desc" data-pl={p.descPl} data-en={p.descEn}>{p.descPl}</div>
+				</div>
+			</a>
+		))}
+	</div>
+</section>
+
+<style>
+	.projects {
+		padding: 88px 56px;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.projects-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		margin-bottom: 48px;
+	}
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 12px;
+		font-weight: 600;
+	}
+
+	.section-title {
+		font-family: var(--display);
+		font-size: 46px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		margin: 0 0 10px;
+		line-height: 1;
+	}
+
+	.section-note {
+		font-size: 14px;
+		color: var(--muted-light);
+		max-width: 420px;
+	}
+
+	.see-all {
+		display: inline-flex;
+		align-items: center;
+		gap: 9px;
+		font-size: 15px;
+		color: var(--text);
+		text-decoration: none;
+		font-weight: 500;
+		white-space: nowrap;
+	}
+
+	.see-all-icon {
+		width: 30px;
+		height: 30px;
+		border: 1px solid var(--border-med);
+		border-radius: 50%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 13px;
+	}
+
+	.projects-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 28px;
+	}
+
+	.project-card {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.25s ease;
+	}
+
+	.project-card:hover {
+		transform: translateY(-4px);
+	}
+
+	.card-img {
+		border-radius: 18px;
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding: 34px 34px 0;
+		position: relative;
+		transition: box-shadow 0.25s ease;
+	}
+
+	.project-card:hover .card-img {
+		box-shadow: 0 16px 36px rgba(15, 22, 41, 0.22);
+	}
+
+	.demo-badge {
+		position: absolute;
+		top: 16px;
+		left: 16px;
+		background: rgba(255, 255, 255, 0.92);
+		color: var(--ink);
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.5px;
+		padding: 4px 11px;
+		border-radius: 100px;
+		z-index: 2;
+	}
+
+	.preview-overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(15, 22, 41, 0.62);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		z-index: 3;
+	}
+
+	.card-img:hover .preview-overlay {
+		opacity: 1;
+	}
+
+	.preview-label {
+		color: #fff;
+		font-size: 14px;
+		font-weight: 500;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		background: rgba(255, 255, 255, 0.14);
+		padding: 10px 20px;
+		border-radius: 100px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+	}
+
+	.browser-window {
+		width: 86%;
+		background: #fff;
+		border-radius: 9px 9px 0 0;
+		box-shadow: 0 22px 50px rgba(0, 0, 0, 0.26);
+		overflow: hidden;
+	}
+
+	.browser-bar {
+		background: #f0ede7;
+		padding: 9px 12px;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+	}
+
+	.red { background: #ff6058; }
+	.yellow { background: #ffbc2e; }
+	.green { background: #29c942; }
+
+	.browser-url-row {
+		background: #fff;
+		padding: 6px 12px 8px;
+	}
+
+	.browser-url {
+		background: #f4f1eb;
+		border-radius: 6px;
+		padding: 5px 10px;
+		font-size: 10px;
+		color: rgba(15, 22, 41, 0.4);
+	}
+
+	.browser-content {
+		padding: 10px 16px 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.mock-hero {
+		height: 44px;
+		border-radius: 5px;
+	}
+
+	.mock-line {
+		height: 8px;
+		border-radius: 3px;
+	}
+
+	.mock-btn {
+		height: 20px;
+		width: 34%;
+		border-radius: 100px;
+		margin-top: 5px;
+	}
+
+	.card-meta { }
+
+	.card-name {
+		font-family: var(--display);
+		font-size: 25px;
+		font-weight: 600;
+	}
+
+	.card-desc {
+		font-size: 14px;
+		color: var(--muted-light);
+		margin-top: 5px;
+	}
+</style>
