@@ -37,6 +37,11 @@ const projects = [
 			<a href="#" class="project-card" data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined}>
 				<div class="card-img" style={`background:${p.color}`}>
 					<span class="demo-badge">DEMO</span>
+					{p.deviceMockup && (
+						<span class="view-hint-badge">
+							<span data-pl={pl.viewHint} data-en={en.viewHint}>{pl.viewHint}</span> ↗
+						</span>
+					)}
 					{p.deviceMockup ? (
 						<div class="device-mockup">
 							<div class="device-group">
@@ -193,6 +198,23 @@ const projects = [
 
 	.project-card:hover .card-img {
 		box-shadow: 0 16px 36px rgba(15, 22, 41, 0.22);
+	}
+
+	.view-hint-badge {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		background: rgba(255, 255, 255, 0.14);
+		color: #fff;
+		font-size: 12px;
+		font-weight: 500;
+		padding: 6px 13px;
+		border-radius: 100px;
+		border: 1px solid rgba(255, 255, 255, 0.3);
 	}
 
 	.demo-badge {
