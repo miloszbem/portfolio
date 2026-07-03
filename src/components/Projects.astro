@@ -24,10 +24,12 @@ const projects = [
 			<h2 class="section-title" data-pl={pl.workTitle} data-en={en.workTitle}>{pl.workTitle}</h2>
 			<p class="section-note" data-pl={pl.workNote} data-en={en.workNote}>{pl.workNote}</p>
 		</div>
-		<a href="#" data-reveal data-reveal-d="1" class="see-all">
-			<span data-pl={pl.workAll} data-en={en.workAll}>{pl.workAll}</span>
-			<span class="see-all-icon">↗</span>
-		</a>
+		{projects.length > 1 && (
+			<a href="#" data-reveal data-reveal-d="1" class="see-all">
+				<span data-pl={pl.workAll} data-en={en.workAll}>{pl.workAll}</span>
+				<span class="see-all-icon">↗</span>
+			</a>
+		)}
 	</div>
 
 	<div class={`projects-grid${projects.length === 1 ? ' single' : ''}`}>
