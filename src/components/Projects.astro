@@ -42,6 +42,7 @@ const projects = [
 									{/* Podmień na realny screenshot: <img src="/projects/kancelaria-desktop.png" alt={p.name} /> */}
 									<div class="screen-placeholder" style={`background:repeating-linear-gradient(135deg,${p.mockupBg},${p.mockupBg} 7px,${p.mockupLine} 7px,${p.mockupLine} 14px)`}></div>
 								</div>
+								<div class="laptop-base"></div>
 							</div>
 							<div class="device-phone">
 								<div class="phone-screen">
@@ -302,36 +303,44 @@ const projects = [
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
+		padding: 0 6% 30px;
 	}
 
 	.device-laptop {
 		width: 84%;
 		background: #1c1c1c;
-		border-radius: 10px 10px 2px 2px;
-		padding: 10px 10px 12px;
+		border-radius: 9px 9px 2px 2px;
+		padding: 8px 8px 0;
 		box-shadow: 0 22px 50px rgba(0, 0, 0, 0.26);
 	}
 
 	.laptop-screen {
 		aspect-ratio: 16 / 10;
-		border-radius: 4px;
+		border-radius: 3px 3px 0 0;
 		overflow: hidden;
+	}
+
+	.laptop-base {
+		height: 9px;
+		margin-top: 2px;
+		background: #2a2a2a;
+		border-radius: 0 0 6px 6px;
 	}
 
 	.device-phone {
 		position: absolute;
-		left: 4%;
-		bottom: 4px;
-		width: 25%;
+		left: 0;
+		bottom: -6px;
+		width: 15%;
 		background: #1c1c1c;
-		border-radius: 18px;
-		padding: 8px 5px;
+		border-radius: 14px;
+		padding: 6px 4px;
 		box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
 	}
 
 	.phone-screen {
 		aspect-ratio: 9 / 19;
-		border-radius: 10px;
+		border-radius: 8px;
 		overflow: hidden;
 	}
 
