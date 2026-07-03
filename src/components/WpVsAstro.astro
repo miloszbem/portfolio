@@ -33,15 +33,21 @@ const { pl, en } = Astro.props
 		<div data-reveal data-reveal-d="2" class="card-astro">
 			<div class="tag tag-astro" data-pl={pl.cmpRightTag} data-en={en.cmpRightTag}>{pl.cmpRightTag}</div>
 			<div class="card-title card-title-white" data-pl={pl.cmpRightTitle} data-en={en.cmpRightTitle}>{pl.cmpRightTitle}</div>
+			<div class="stack-chips">
+				<span class="stack-chip">Astro</span>
+				<span class="stack-chip">TypeScript</span>
+			</div>
 			<div class="checklist">
 				<div class="check-item">
 					<span class="check-mark">✓</span>
 					<span class="check-text-wrap">
 						<span data-pl={pl.cmpR1} data-en={en.cmpR1}>{pl.cmpR1}</span>
-						<details class="cmp-explain">
-							<summary data-pl={pl.explainLabel} data-en={en.explainLabel}>{pl.explainLabel}</summary>
-							<p data-pl={pl.cmpR1Explain} data-en={en.cmpR1Explain}>{pl.cmpR1Explain}</p>
-						</details>
+						<div class="cmp-explain">
+							<button type="button" class="cmp-explain-toggle" aria-expanded="false" data-pl={pl.explainLabel} data-en={en.explainLabel}>{pl.explainLabel}</button>
+							<div class="cmp-explain-panel">
+								<p data-pl={pl.cmpR1Explain} data-en={en.cmpR1Explain}>{pl.cmpR1Explain}</p>
+							</div>
+						</div>
 					</span>
 				</div>
 				<div class="check-item"><span class="check-mark">✓</span><span data-pl={pl.cmpR2} data-en={en.cmpR2}>{pl.cmpR2}</span></div>
@@ -87,7 +93,7 @@ const { pl, en } = Astro.props
 	.cmp-grid {
 		display: grid;
 		grid-template-columns: 1fr 56px 1fr;
-		align-items: center;
+		align-items: start;
 		gap: 24px;
 	}
 
@@ -146,6 +152,7 @@ const { pl, en } = Astro.props
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		align-self: center;
 		width: 44px;
 		height: 44px;
 		border-radius: 50%;
@@ -161,6 +168,21 @@ const { pl, en } = Astro.props
 		background: var(--ink);
 		border-radius: 16px;
 		padding: 32px;
+	}
+
+	.stack-chips {
+		display: flex;
+		gap: 9px;
+		margin-bottom: 20px;
+	}
+
+	.stack-chip {
+		background: rgba(255, 255, 255, 0.08);
+		color: #fff;
+		font-size: 12px;
+		font-weight: 600;
+		padding: 6px 13px;
+		border-radius: 8px;
 	}
 
 	.checklist {
@@ -196,31 +218,42 @@ const { pl, en } = Astro.props
 		margin-top: 6px;
 	}
 
-	.cmp-explain summary {
+	.cmp-explain-toggle {
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
 		font-size: 12px;
 		font-weight: 600;
 		color: var(--accent);
 		cursor: pointer;
-		list-style: none;
 		display: inline-flex;
 		align-items: center;
 		gap: 4px;
 	}
 
-	.cmp-explain summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.cmp-explain summary::after {
+	.cmp-explain-toggle::after {
 		content: '+';
 		font-weight: 700;
 	}
 
-	.cmp-explain[open] summary::after {
+	.cmp-explain.is-open .cmp-explain-toggle::after {
 		content: '−';
 	}
 
-	.cmp-explain p {
+	.cmp-explain-panel {
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 0.3s ease, opacity 0.25s ease;
+	}
+
+	.cmp-explain.is-open .cmp-explain-panel {
+		max-height: 160px;
+		opacity: 1;
+	}
+
+	.cmp-explain-panel p {
 		margin-top: 8px;
 		color: rgba(255, 255, 255, 0.55);
 		font-size: 13px;
@@ -232,3 +265,14 @@ const { pl, en } = Astro.props
 		.vs-badge { display: none; }
 	}
 </style>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('.cmp-explain-toggle').forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const wrap = btn.closest('.cmp-explain')
+			if (!wrap) return
+			const isOpen = wrap.classList.toggle('is-open')
+			btn.setAttribute('aria-expanded', String(isOpen))
+		})
+	})
+</script>

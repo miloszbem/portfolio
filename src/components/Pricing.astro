@@ -23,8 +23,20 @@ const { pl, en } = Astro.props
 				<div class="plan-features">
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1a} data-en={en.pl1a}>{pl.pl1a}</span></div>
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1b} data-en={en.pl1b}>{pl.pl1b}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1c} data-en={en.pl1c}>{pl.pl1c}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1d} data-en={en.pl1d}>{pl.pl1d}</span></div>
+					<div class="feature feature-explain">
+						<span class="check">✓</span>
+						<span class="feature-text-wrap">
+							<span data-pl={pl.pl1c} data-en={en.pl1c}>{pl.pl1c}</span>
+							<span class="feature-note" data-pl={pl.pl1cExplain} data-en={en.pl1cExplain}>{pl.pl1cExplain}</span>
+						</span>
+					</div>
+					<div class="feature feature-explain">
+						<span class="check">✓</span>
+						<span class="feature-text-wrap">
+							<span data-pl={pl.pl1d} data-en={en.pl1d}>{pl.pl1d}</span>
+							<span class="feature-note" data-pl={pl.pl1dExplain} data-en={en.pl1dExplain}>{pl.pl1dExplain}</span>
+						</span>
+					</div>
 				</div>
 			</div>
 			<div data-reveal data-reveal-d="1" class="plan-card plan-featured">
@@ -36,7 +48,13 @@ const { pl, en } = Astro.props
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2a} data-en={en.pl2a}>{pl.pl2a}</span></div>
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2b} data-en={en.pl2b}>{pl.pl2b}</span></div>
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2c} data-en={en.pl2c}>{pl.pl2c}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2d} data-en={en.pl2d}>{pl.pl2d}</span></div>
+					<div class="feature feature-explain">
+						<span class="check">✓</span>
+						<span class="feature-text-wrap">
+							<span data-pl={pl.pl2d} data-en={en.pl2d}>{pl.pl2d}</span>
+							<span class="feature-note" data-pl={pl.pl2dExplain} data-en={en.pl2dExplain}>{pl.pl2dExplain}</span>
+						</span>
+					</div>
 				</div>
 			</div>
 			<div data-reveal data-reveal-d="2" class="plan-card plan-custom">
