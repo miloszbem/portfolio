@@ -8,7 +8,7 @@ interface Props {
 const { pl, en } = Astro.props
 
 const projects = [
-	{ color: '#214eb8', domain: 'kancelaria-demo.pl', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true },
+	{ color: '#214eb8', domain: 'adwokatdamiandzida.pl', href: 'https://adwokatdamiandzida.pl/', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true },
 	// Wyłączone na razie — wracają jak będą gotowe realne realizacje.
 	// { color: '#d97642', domain: 'restauracja-demo.pl', name: 'Restauracja', descPl: pl.p2, descEn: en.p2, mockupAccent: '#d97642', mockupBg: '#f3e7df', mockupLine: '#ecddd2' },
 	// { color: '#3f9b72', domain: 'warsztat-demo.pl', name: 'Warsztat', descPl: pl.p3, descEn: en.p3, mockupAccent: '#3f9b72', mockupBg: '#e3efe8', mockupLine: '#d8e8de' },
@@ -34,9 +34,16 @@ const projects = [
 
 	<div class={`projects-grid${projects.length === 1 ? ' single' : ''}`}>
 		{projects.map((p, i) => (
-			<a href="#" class="project-card" data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined}>
+			<a
+				href={p.href ?? '#'}
+				target={p.href ? '_blank' : undefined}
+				rel={p.href ? 'noopener noreferrer' : undefined}
+				class="project-card"
+				data-reveal
+				data-reveal-d={i % 2 === 1 ? '1' : undefined}
+			>
 				<div class="card-img" style={`background:${p.color}`}>
-					<span class="demo-badge">DEMO</span>
+					{!p.deviceMockup && <span class="demo-badge">DEMO</span>}
 					{p.deviceMockup && (
 						<span class="view-hint-badge">
 							<span data-pl={pl.viewHint} data-en={en.viewHint}>{pl.viewHint}</span> ↗
@@ -47,15 +54,13 @@ const projects = [
 							<div class="device-group">
 								<div class="device-laptop">
 									<div class="laptop-screen">
-										{/* Podmień na realny screenshot: <img src="/projects/kancelaria-desktop.png" alt={p.name} /> */}
-										<div class="screen-placeholder" style={`background:repeating-linear-gradient(135deg,${p.mockupBg},${p.mockupBg} 7px,${p.mockupLine} 7px,${p.mockupLine} 14px)`}></div>
+										<img src="/projects/kancelaria-desktop.png" alt={p.name} class="screen-shot" loading="lazy" />
 									</div>
 									<div class="laptop-base"></div>
 								</div>
 								<div class="device-phone">
 									<div class="phone-screen">
-										{/* Podmień na realny screenshot: <img src="/projects/kancelaria-mobile.png" alt={p.name} /> */}
-										<div class="screen-placeholder" style={`background:repeating-linear-gradient(135deg,${p.mockupBg},${p.mockupBg} 7px,${p.mockupLine} 7px,${p.mockupLine} 14px)`}></div>
+										<img src="/projects/kancelaria-mobile.png" alt={p.name} class="screen-shot" loading="lazy" />
 									</div>
 								</div>
 							</div>
@@ -348,7 +353,7 @@ const projects = [
 	}
 
 	.laptop-screen {
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 1905 / 961;
 		border-radius: 3px 3px 0 0;
 		overflow: hidden;
 	}
@@ -372,9 +377,17 @@ const projects = [
 	}
 
 	.phone-screen {
-		aspect-ratio: 9 / 19;
+		aspect-ratio: 293 / 633;
 		border-radius: 8px;
 		overflow: hidden;
+	}
+
+	.screen-shot {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top;
 	}
 
 	.screen-placeholder {
