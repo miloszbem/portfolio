@@ -14,29 +14,31 @@ const { pl, en } = Astro.props
 		<div class="eyebrow" data-pl={pl.revEy} data-en={en.revEy}>{pl.revEy}</div>
 		<h2 class="section-title" data-pl={pl.revTitle} data-en={en.revTitle}>{pl.revTitle}</h2>
 	</div>
-	<div class="reviews-grid">
+	<div class="reviews-grid single">
 		<div data-reveal class="review-card">
 			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
 			<div class="reviewer">
 				<div class="avatar"></div>
 				<div>
-					<div class="reviewer-name">Anna Kowalczyk</div>
-					<div class="reviewer-role">Kancelaria Lex, Rzeszów</div>
+					<div class="reviewer-name">Damian Dzida</div>
+					<div class="reviewer-role">Kancelaria Adwokacka Damian Dzida</div>
 				</div>
 			</div>
 		</div>
-		<div data-reveal data-reveal-d="1" class="review-card">
-			<div class="quote-mark">"</div>
-			<p class="quote-text" data-pl={pl.rev2} data-en={en.rev2}>{pl.rev2}</p>
-			<div class="reviewer">
-				<div class="avatar"></div>
-				<div>
-					<div class="reviewer-name">Piotr Malinowski</div>
-					<div class="reviewer-role">Studio Glow, Kraków</div>
+		{false && (
+			<div data-reveal data-reveal-d="1" class="review-card">
+				<div class="quote-mark">"</div>
+				<p class="quote-text" data-pl={pl.rev2} data-en={en.rev2}>{pl.rev2}</p>
+				<div class="reviewer">
+					<div class="avatar"></div>
+					<div>
+						<div class="reviewer-name">Piotr Malinowski</div>
+						<div class="reviewer-role">Studio Glow, Kraków</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		)}
 	</div>
 </div>
 </section>
@@ -74,6 +76,12 @@ const { pl, en } = Astro.props
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 14px;
+	}
+
+	.reviews-grid.single {
+		grid-template-columns: 1fr;
+		max-width: 540px;
+		margin: 0 auto;
 	}
 
 	.review-card {
