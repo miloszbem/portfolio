@@ -47,7 +47,13 @@ const { pl, en } = Astro.props
 				<div class="plan-features">
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3a} data-en={en.pl3a}>{pl.pl3a}</span></div>
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3b} data-en={en.pl3b}>{pl.pl3b}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3c} data-en={en.pl3c}>{pl.pl3c}</span></div>
+					<div class="feature feature-explain">
+						<span class="check">✓</span>
+						<span class="feature-text-wrap">
+							<span data-pl={pl.pl3c} data-en={en.pl3c}>{pl.pl3c}</span>
+							<span class="feature-note" data-pl={pl.pl3cExplain} data-en={en.pl3cExplain}>{pl.pl3cExplain}</span>
+						</span>
+					</div>
 					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3d} data-en={en.pl3d}>{pl.pl3d}</span></div>
 				</div>
 			</div>
@@ -166,6 +172,18 @@ const { pl, en } = Astro.props
 		color: var(--accent);
 		font-weight: 600;
 		flex-shrink: 0;
+	}
+
+	.feature-text-wrap {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.feature-note {
+		color: rgba(15, 22, 41, 0.4);
+		font-size: 12px;
+		line-height: 1.55;
 	}
 
 	@media (max-width: 900px) {

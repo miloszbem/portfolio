@@ -19,6 +19,10 @@ const { pl, en } = Astro.props
 				<div class="sv-title" data-pl={pl.sv1t} data-en={en.sv1t}>{pl.sv1t}</div>
 				<div class="sv-desc" data-pl={pl.sv1d} data-en={en.sv1d}>{pl.sv1d}</div>
 				<div class="sv-price" data-pl={pl.sv1p} data-en={en.sv1p}>{pl.sv1p}</div>
+				<details class="sv-explain">
+					<summary data-pl={pl.explainLabel} data-en={en.explainLabel}>{pl.explainLabel}</summary>
+					<p data-pl={pl.sv1Explain} data-en={en.sv1Explain}>{pl.sv1Explain}</p>
+				</details>
 			</div>
 			<div data-reveal data-reveal-d="1" class="service-card border-text">
 				<div class="sv-title" data-pl={pl.sv2t} data-en={en.sv2t}>{pl.sv2t}</div>
@@ -34,6 +38,10 @@ const { pl, en } = Astro.props
 				<div class="sv-title" data-pl={pl.sv4t} data-en={en.sv4t}>{pl.sv4t}</div>
 				<div class="sv-desc" data-pl={pl.sv4d} data-en={en.sv4d}>{pl.sv4d}</div>
 				<div class="sv-price" data-pl={pl.sv4p} data-en={en.sv4p}>{pl.sv4p}</div>
+				<details class="sv-explain">
+					<summary data-pl={pl.explainLabel} data-en={en.explainLabel}>{pl.explainLabel}</summary>
+					<p data-pl={pl.sv4Explain} data-en={en.sv4Explain}>{pl.sv4Explain}</p>
+				</details>
 			</div>
 		</div>
 	</div>
@@ -104,6 +112,41 @@ const { pl, en } = Astro.props
 		font-size: 13px;
 		font-weight: 600;
 		color: var(--accent);
+	}
+
+	.sv-explain {
+		margin-top: 12px;
+	}
+
+	.sv-explain summary {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
+		cursor: pointer;
+		list-style: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.sv-explain summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.sv-explain summary::after {
+		content: '+';
+		font-weight: 700;
+	}
+
+	.sv-explain[open] summary::after {
+		content: '−';
+	}
+
+	.sv-explain p {
+		margin-top: 10px;
+		color: var(--muted);
+		font-size: 13px;
+		line-height: 1.6;
 	}
 
 	@media (max-width: 768px) {

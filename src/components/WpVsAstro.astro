@@ -34,7 +34,16 @@ const { pl, en } = Astro.props
 			<div class="tag tag-astro" data-pl={pl.cmpRightTag} data-en={en.cmpRightTag}>{pl.cmpRightTag}</div>
 			<div class="card-title card-title-white" data-pl={pl.cmpRightTitle} data-en={en.cmpRightTitle}>{pl.cmpRightTitle}</div>
 			<div class="checklist">
-				<div class="check-item"><span class="check-mark">✓</span><span data-pl={pl.cmpR1} data-en={en.cmpR1}>{pl.cmpR1}</span></div>
+				<div class="check-item">
+					<span class="check-mark">✓</span>
+					<span class="check-text-wrap">
+						<span data-pl={pl.cmpR1} data-en={en.cmpR1}>{pl.cmpR1}</span>
+						<details class="cmp-explain">
+							<summary data-pl={pl.explainLabel} data-en={en.explainLabel}>{pl.explainLabel}</summary>
+							<p data-pl={pl.cmpR1Explain} data-en={en.cmpR1Explain}>{pl.cmpR1Explain}</p>
+						</details>
+					</span>
+				</div>
 				<div class="check-item"><span class="check-mark">✓</span><span data-pl={pl.cmpR2} data-en={en.cmpR2}>{pl.cmpR2}</span></div>
 				<div class="check-item"><span class="check-mark">✓</span><span data-pl={pl.cmpR3} data-en={en.cmpR3}>{pl.cmpR3}</span></div>
 				<div class="check-item"><span class="check-mark">✓</span><span data-pl={pl.cmpR4} data-en={en.cmpR4}>{pl.cmpR4}</span></div>
@@ -176,6 +185,46 @@ const { pl, en } = Astro.props
 		color: rgba(255, 255, 255, 0.75);
 		font-size: 14px;
 		line-height: 1.5;
+	}
+
+	.check-text-wrap {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.cmp-explain {
+		margin-top: 6px;
+	}
+
+	.cmp-explain summary {
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--accent);
+		cursor: pointer;
+		list-style: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.cmp-explain summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.cmp-explain summary::after {
+		content: '+';
+		font-weight: 700;
+	}
+
+	.cmp-explain[open] summary::after {
+		content: '−';
+	}
+
+	.cmp-explain p {
+		margin-top: 8px;
+		color: rgba(255, 255, 255, 0.55);
+		font-size: 13px;
+		line-height: 1.6;
 	}
 
 	@media (max-width: 768px) {
