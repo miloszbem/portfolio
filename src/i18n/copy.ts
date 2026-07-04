@@ -1,4 +1,21 @@
-export const COPY = {
+function noOrphans(text: string): string {
+	return text.replace(/\b(a|i|o|u|w|z|A|I|O|U|W|Z)\s+/g, '$1 ')
+}
+
+function deepNoOrphans<T>(value: T): T {
+	if (typeof value === 'string') return noOrphans(value) as unknown as T
+	if (Array.isArray(value)) return value.map((v) => deepNoOrphans(v)) as unknown as T
+	if (value !== null && typeof value === 'object') {
+		const result: Record<string, unknown> = {}
+		for (const key of Object.keys(value as Record<string, unknown>)) {
+			result[key] = deepNoOrphans((value as Record<string, unknown>)[key])
+		}
+		return result as T
+	}
+	return value
+}
+
+const RAW_COPY = {
 	pl: {
 		status: 'Dostępny na nowe projekty',
 		navWork: 'realizacje',
@@ -195,6 +212,9 @@ export const COPY = {
 		fName: 'Imię i nazwisko',
 		fNameP: 'Wpisz swoje imię',
 		fEmailP: 'Wpisz swój email',
+		fPhone: 'Numer telefonu',
+		fPhoneP: 'Wpisz swój numer telefonu',
+		fOptional: 'opcjonalnie',
 		fMsg: 'Twój projekt',
 		fMsgP: 'Opowiedz o swoim projekcie',
 		send: 'Wyślij →',
@@ -397,6 +417,9 @@ export const COPY = {
 		fName: 'Full name',
 		fNameP: 'Enter your name',
 		fEmailP: 'Enter your email',
+		fPhone: 'Phone number',
+		fPhoneP: 'Enter your phone number',
+		fOptional: 'optional',
 		fMsg: 'Your project',
 		fMsgP: 'Tell me about your project',
 		send: 'Send →',
@@ -404,6 +427,8 @@ export const COPY = {
 		successMsg: "Thank you! I'll be in touch soon.",
 	},
 } as const
+
+export const COPY = deepNoOrphans(RAW_COPY)
 
 export type LangCopy = typeof COPY.pl
 export type Lang = 'pl' | 'en'

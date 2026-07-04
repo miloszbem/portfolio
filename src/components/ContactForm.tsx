@@ -15,6 +15,7 @@ export default function ContactForm({ pl, en }: Props) {
 	const [lang, setLang] = useState<'pl' | 'en'>('pl')
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
+	const [phone, setPhone] = useState('')
 	const [message, setMessage] = useState('')
 	const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
 
@@ -35,7 +36,7 @@ export default function ContactForm({ pl, en }: Props) {
 			const res = await fetch('/', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: encode({ 'form-name': 'contact', name, email, message }),
+				body: encode({ 'form-name': 'contact', name, email, phone, message }),
 			})
 			if (res.ok) {
 				setStatus('done')
@@ -104,6 +105,18 @@ export default function ContactForm({ pl, en }: Props) {
 							placeholder={t.fEmailP}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							style={inputStyle}
+						/>
+					</div>
+					<div style={{ marginBottom: 20 }}>
+						<label style={labelStyle}>
+							{t.fPhone} <span style={{ opacity: 0.5 }}>({t.fOptional})</span>
+						</label>
+						<input
+							type="tel"
+							placeholder={t.fPhoneP}
+							value={phone}
+							onChange={(e) => setPhone(e.target.value)}
 							style={inputStyle}
 						/>
 					</div>
