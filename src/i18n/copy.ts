@@ -117,7 +117,7 @@ const RAW_COPY = {
 			includesNote: 'Wszystko z pakietu Wizytówka Pro +',
 			price: null,
 			carePrice: 'w abonamencie',
-			teaser: 'Własne miejsce do publikowania treści — Ty dodajesz artykuły i aktualności, ja dbam o to, żeby wszystko działało bez zarzutu, niezależnie od tego, ile treści dodasz.',
+			teaser: 'Własne miejsce do publikowania treści — Ty dodajesz artykuły i aktualności, ja dbam o to, żeby wszystko działało bez zarzutu, niezależnie od tego, ile treści dodasz.',
 			checklist: [
 				'Panel do samodzielnego dodawania artykułów/aktualności',
 				'Nielimitowana liczba podstron i wpisów',
@@ -145,7 +145,7 @@ const RAW_COPY = {
 				'Panel logowania dla Twoich klientów',
 				'Funkcjonalność pod Twój konkretny proces biznesowy',
 			],
-			desc: 'Gdy Twój biznes potrzebuje więcej niż strony — budujemy to od zera, dopasowane dokładnie do tego, jak działa Twoja firma. Żadnych kompromisów wynikających z ograniczeń gotowych narzędzi.',
+			desc: 'Gdy Twój biznes potrzebuje więcej niż strony — budujemy to od zera, dopasowane dokładnie do tego, jak działa Twoja firma. Żadnych kompromisów wynikających z ograniczeń gotowych narzędzi.',
 			retainerChecklist: [
 				'Utrzymanie i rozwój funkcjonalności aplikacji',
 				'Wsparcie techniczne',
@@ -162,7 +162,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Zero szablonów, zero kompromisów',
-				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon — chcesz coś zmienić, dodać, przearanżować? Robimy to bez wymówek typu "wtyczka tego nie wspiera".',
+				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon — chcesz coś zmienić, dodać, przearanżować? Robimy to bez wymówek typu "wtyczka tego nie wspiera".',
 			},
 			{
 				title: 'Prędkość, która się liczy',
@@ -186,7 +186,7 @@ const RAW_COPY = {
 		analyticsListTitle: 'Co znajdziesz w raporcie:',
 		analyticsItems: [
 			{ lead: 'Ile osób odwiedziło Twoją stronę', text: '— dziennie i w skali miesiąca, żebyś widział czy ruch rośnie' },
-			{ lead: 'Skąd trafili do Ciebie klienci', text: '— z Google, z Facebooka, czy wpisali adres wprost do przeglądarki (to mówi Ci, które działania marketingowe faktycznie działają)' },
+			{ lead: 'Skąd trafili do Ciebie klienci', text: '— z Google, z Facebooka, czy wpisali adres wprost do przeglądarki (to mówi Ci, które działania marketingowe faktycznie działają)' },
 			{ lead: 'Co ich najbardziej interesowało', text: '— np. czy więcej osób sprawdza cennik czy może stronę kontaktową' },
 			{ lead: 'Jak długo zostają na stronie', text: '— im dłużej, tym większa szansa że treść ich zainteresowała' },
 			{ lead: 'Z jakich urządzeń wchodzą', text: '— telefon czy komputer, żebyś wiedział na co bardziej postawić' },

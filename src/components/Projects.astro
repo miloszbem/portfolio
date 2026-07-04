@@ -391,6 +391,7 @@ const projects = [
 		width: 100%;
 		height: auto;
 		animation: device-scroll 11s ease-in-out infinite;
+		animation-play-state: paused;
 	}
 
 	.scroll-flash {
@@ -399,6 +400,12 @@ const projects = [
 		background: var(--bg);
 		opacity: 0;
 		animation: device-scroll-flash 11s ease-in-out infinite;
+		animation-play-state: paused;
+	}
+
+	.project-card.in-view .screen-shot,
+	.project-card.in-view .scroll-flash {
+		animation-play-state: running;
 	}
 
 	@keyframes device-scroll {
@@ -470,3 +477,20 @@ const projects = [
 		}
 	}
 </style>
+
+<script>
+	const cards = document.querySelectorAll('.project-card')
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const card = entry.target
+					setTimeout(() => card.classList.add('in-view'), 2000)
+					observer.unobserve(card)
+				}
+			})
+		},
+		{ threshold: 0.2 }
+	)
+	cards.forEach((card) => observer.observe(card))
+</script>
