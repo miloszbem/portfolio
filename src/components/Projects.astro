@@ -54,13 +54,15 @@ const projects = [
 							<div class="device-group">
 								<div class="device-laptop">
 									<div class="laptop-screen">
-										<img src="/projects/kancelaria-desktop.png" alt={p.name} class="screen-shot" loading="lazy" />
+										<img src="/projects/kancelaria-desktop-scroll.jpg" alt={p.name} class="screen-shot" style="--scroll-end: -76.2%" loading="lazy" />
+										<div class="scroll-flash"></div>
 									</div>
 									<div class="laptop-base"></div>
 								</div>
 								<div class="device-phone">
 									<div class="phone-screen">
-										<img src="/projects/kancelaria-mobile.png" alt={p.name} class="screen-shot" loading="lazy" />
+										<img src="/projects/kancelaria-mobile-scroll.jpg" alt={p.name} class="screen-shot" style="--scroll-end: -86.1%" loading="lazy" />
+										<div class="scroll-flash"></div>
 									</div>
 								</div>
 							</div>
@@ -353,7 +355,8 @@ const projects = [
 	}
 
 	.laptop-screen {
-		aspect-ratio: 1905 / 961;
+		position: relative;
+		aspect-ratio: 16 / 10;
 		border-radius: 3px 3px 0 0;
 		overflow: hidden;
 	}
@@ -377,7 +380,8 @@ const projects = [
 	}
 
 	.phone-screen {
-		aspect-ratio: 287 / 633;
+		position: relative;
+		aspect-ratio: 9 / 19.5;
 		border-radius: 8px;
 		overflow: hidden;
 	}
@@ -385,14 +389,32 @@ const projects = [
 	.screen-shot {
 		display: block;
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: top;
+		height: auto;
+		animation: device-scroll 13s ease-in-out infinite;
 	}
 
-	.screen-placeholder {
-		width: 100%;
-		height: 100%;
+	.scroll-flash {
+		position: absolute;
+		inset: 0;
+		background: var(--bg);
+		opacity: 0;
+		animation: device-scroll-flash 13s ease-in-out infinite;
+	}
+
+	@keyframes device-scroll {
+		0% { transform: translateY(0%); }
+		45% { transform: translateY(var(--scroll-end)); }
+		62% { transform: translateY(var(--scroll-end)); }
+		74.9% { transform: translateY(var(--scroll-end)); }
+		75% { transform: translateY(0%); }
+		100% { transform: translateY(0%); }
+	}
+
+	@keyframes device-scroll-flash {
+		0%, 55% { opacity: 0; }
+		68% { opacity: 1; }
+		80% { opacity: 1; }
+		92%, 100% { opacity: 0; }
 	}
 
 	.card-meta { }
