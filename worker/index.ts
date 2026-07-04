@@ -48,16 +48,18 @@ export default {
 			return Response.json({ error: 'Missing required fields' }, { status: 400 })
 		}
 
+		const safeName = name.replace(/[\r\n]+/g, ' ').trim()
+
 		try {
 			await env.EMAIL.send({
 				to: 'miloszbembnowicz@gmail.com',
 				from: { email: 'kontakt@miloszbembnowicz.pl', name: 'Formularz kontaktowy' },
 				replyTo: email,
-				subject: `Nowa wiadomość od ${name}`,
+				subject: `Nowa wiadomość od ${safeName}`,
 				text: `Imię: ${name}\nEmail: ${email}\nTelefon: ${phone || '-'}\n\n${message}`,
 				html: `<p><strong>Imię:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Telefon:</strong> ${escapeHtml(phone || '-')}</p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
 			})
-		} catch (err) {
+		} catch {
 			return Response.json({ error: 'Send failed' }, { status: 502 })
 		}
 
