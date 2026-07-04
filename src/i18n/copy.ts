@@ -88,7 +88,7 @@ const RAW_COPY = {
 				'Monitoring działania strony',
 				'Wsparcie techniczne w razie problemów',
 			],
-			retainerDesc: 'Ty prowadzisz biznes, my dbamy o to, żeby strona zawsze działała i była aktualna. Wystarczy do nas napisać, resztą się zajmujemy.',
+			retainerDesc: 'Ty prowadzisz biznes, ja dbam o to, żeby strona zawsze działała i była aktualna. Wystarczy do mnie napisać, resztą się zajmuję.',
 		},
 		pkg2: {
 			name: 'Wizytówka Pro',
@@ -124,14 +124,14 @@ const RAW_COPY = {
 				'Szybkie wczytywanie zdjęć i plików niezależnie od ilości treści',
 				'Struktura kategorii/tagów dopasowana do potrzeb',
 			],
-			desc: 'Proste narzędzie do samodzielnego zarządzania treścią, bez potrzeby znajomości kodu. Ty decydujesz co publikujesz, my zapewniamy, że wszystko działa szybko i bez awarii.',
+			desc: 'Proste narzędzie do samodzielnego zarządzania treścią, bez potrzeby znajomości kodu. Ty decydujesz co publikujesz, ja zapewniam, że wszystko działa szybko i bez awarii.',
 			retainerChecklist: [
 				'Utrzymanie systemu do zarządzania treścią',
 				'Techniczne aktualizacje i poprawki',
 				'Wsparcie w obsłudze panelu publikacji',
 				'Dostosowania struktury/wyglądu na życzenie',
 			],
-			retainerDesc: 'Zajmujemy się techniczną stroną Twojego portalu – panel działa bezawaryjnie, a strona się nie zwalnia mimo rosnącej ilości treści. Redagowanie i pisanie treści zostaje po Twojej stronie.',
+			retainerDesc: 'Zajmuję się techniczną stroną Twojego portalu – panel działa bezawaryjnie, a strona się nie zwalnia mimo rosnącej ilości treści. Redagowanie i pisanie treści zostaje po Twojej stronie.',
 		},
 		pkg4: {
 			name: 'Aplikacja webowa',
@@ -145,13 +145,13 @@ const RAW_COPY = {
 				'Panel logowania dla Twoich klientów',
 				'Funkcjonalność pod Twój konkretny proces biznesowy',
 			],
-			desc: 'Gdy Twój biznes potrzebuje więcej niż strony – budujemy to od zera, dopasowane dokładnie do tego, jak działa Twoja firma. Żadnych kompromisów wynikających z ograniczeń gotowych narzędzi.',
+			desc: 'Gdy Twój biznes potrzebuje więcej niż strony – buduję to od zera, dopasowane dokładnie do tego, jak działa Twoja firma. Żadnych kompromisów wynikających z ograniczeń gotowych narzędzi.',
 			retainerChecklist: [
 				'Utrzymanie i rozwój funkcjonalności aplikacji',
 				'Wsparcie techniczne',
 				'Wprowadzanie zmian w logice działania na życzenie',
 			],
-			retainerDesc: 'Twoja aplikacja rozwija się razem z biznesem – zgłaszasz potrzebę, wprowadzamy zmianę.',
+			retainerDesc: 'Twoja aplikacja rozwija się razem z biznesem – zgłaszasz potrzebę, wprowadzam zmianę.',
 		},
 		aboutEy: 'Dlaczego warto?',
 		aboutTitle: 'Nie ogranicza mnie WordPress.',
@@ -162,7 +162,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Zero szablonów, zero kompromisów',
-				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon – chcesz coś zmienić, dodać, przearanżować? Robimy to bez wymówek typu "wtyczka tego nie wspiera".',
+				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon – chcesz coś zmienić, dodać, przearanżować? Robię to bez wymówek typu "wtyczka tego nie wspiera".',
 			},
 			{
 				title: 'Prędkość, która się liczy',
@@ -170,7 +170,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Widoczność tam, gdzie Cię szukają',
-				body: 'Zajmujemy się tym, żeby Twoja strona była gotowa do znalezienia, poprawnie skonfigurowana w Google Search Console, zoptymalizowana wizytówka w Google Maps, i tak przygotowana technicznie, żeby wyszukiwarka mogła ją właściwie zrozumieć i pokazać wyżej w wynikach. Do tego zadbamy, żeby link do Twojej strony wysłany na Facebooku czy Messengerze wyglądał profesjonalnie, z podglądem, zdjęciem i opisem, a nie gołym adresem.',
+				body: 'Zajmuję się tym, żeby Twoja strona była gotowa do znalezienia, poprawnie skonfigurowana w Google Search Console, zoptymalizowana wizytówka w Google Maps, i tak przygotowana technicznie, żeby wyszukiwarka mogła ją właściwie zrozumieć i pokazać wyżej w wynikach. Do tego zadbam, żeby link do Twojej strony wysłany na Facebooku czy Messengerze wyglądał profesjonalnie, z podglądem, zdjęciem i opisem, a nie gołym adresem.',
 			},
 			{
 				title: 'Wiesz, co się dzieje na Twojej stronie',
@@ -182,7 +182,7 @@ const RAW_COPY = {
 		analyticsPageEyebrow: 'Pakiet Wizytówka Pro i wyżej',
 		analyticsPageTitle: 'Co widzisz w raporcie analitycznym',
 		analyticsIntroTitle: 'Twoja strona, Twoje dane',
-		analyticsIntro: 'Co miesiąc dostajesz od nas krótki, przetłumaczony na ludzki język raport z tego, co dzieje się na Twojej stronie. Nie musisz rozumieć wykresów ani statystyk – zrobiliśmy to za Ciebie.',
+		analyticsIntro: 'Co miesiąc dostajesz ode mnie krótki, przetłumaczony na ludzki język raport z tego, co dzieje się na Twojej stronie. Nie musisz rozumieć wykresów ani statystyk – zrobiłem to za Ciebie.',
 		analyticsListTitle: 'Co znajdziesz w raporcie:',
 		analyticsItems: [
 			{ lead: 'Ile osób odwiedziło Twoją stronę', text: ', dziennie i w skali miesiąca, żebyś widział czy ruch rośnie' },
@@ -293,7 +293,7 @@ const RAW_COPY = {
 				'Site uptime monitoring',
 				'Technical support if issues arise',
 			],
-			retainerDesc: "You run the business, we make sure the site always works and stays up to date. Just drop us a message and we'll take it from there.",
+			retainerDesc: "You run the business, I make sure the site always works and stays up to date. Just drop me a message and I'll take it from there.",
 		},
 		pkg2: {
 			name: 'Business Card Site Pro',
@@ -329,14 +329,14 @@ const RAW_COPY = {
 				'Fast-loading photos and files regardless of content volume',
 				'Category/tag structure tailored to your needs',
 			],
-			desc: 'A simple tool for managing content yourself, no coding knowledge required. You decide what to publish, we make sure everything runs fast and stays reliable.',
+			desc: 'A simple tool for managing content yourself, no coding knowledge required. You decide what to publish, I make sure everything runs fast and stays reliable.',
 			retainerChecklist: [
 				'Upkeep of the content management system',
 				'Technical updates and fixes',
 				'Support using the publishing panel',
 				'Structure/layout adjustments on request',
 			],
-			retainerDesc: "We handle the technical side of your portal – the panel runs smoothly and the site doesn't slow down as content grows. Editing and writing content stays entirely up to you.",
+			retainerDesc: "I handle the technical side of your portal – the panel runs smoothly and the site doesn't slow down as content grows. Editing and writing content stays entirely up to you.",
 		},
 		pkg4: {
 			name: 'Web Application',
@@ -350,13 +350,13 @@ const RAW_COPY = {
 				'Login portal for your clients',
 				'Functionality tailored to your specific business process',
 			],
-			desc: "For when your business needs more than a website – we build it from the ground up, matched exactly to how your company operates. No compromises from the limits of off-the-shelf tools.",
+			desc: "For when your business needs more than a website – I build it from the ground up, matched exactly to how your company operates. No compromises from the limits of off-the-shelf tools.",
 			retainerChecklist: [
 				'Upkeep and development of application features',
 				'Technical support',
 				'Changes to business logic on request',
 			],
-			retainerDesc: "Your application grows with your business – you tell us what you need, we implement it.",
+			retainerDesc: "Your application grows with your business – you tell me what you need, I implement it.",
 		},
 		aboutEy: 'Why me?',
 		aboutTitle: "WordPress doesn't limit me.",
@@ -367,7 +367,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Zero templates, zero compromises',
-				body: 'Your site isn\'t another theme pulled off the shelf, looking like hundreds of others. Every line of code is written for you, which means you\'re never boxed in by what a template "allows" — want to change something, add something, rearrange something? We do it, no "the plugin doesn\'t support that" excuses.',
+				body: 'Your site isn\'t another theme pulled off the shelf, looking like hundreds of others. Every line of code is written for you, which means you\'re never boxed in by what a template "allows" — want to change something, add something, rearrange something? I do it, no "the plugin doesn\'t support that" excuses.',
 			},
 			{
 				title: 'Speed that actually matters',
@@ -375,7 +375,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Visible where people are looking for you',
-				body: "We make sure your site is set up to be found, properly configured in Google Search Console, an optimized Google Maps listing, and technically prepared so search engines can understand it and rank it higher. On top of that, we make sure a link to your site shared on Facebook or Messenger looks professional, with a preview, image and description, not just a bare URL.",
+				body: "I make sure your site is set up to be found, properly configured in Google Search Console, an optimized Google Maps listing, and technically prepared so search engines can understand it and rank it higher. On top of that, I make sure a link to your site shared on Facebook or Messenger looks professional, with a preview, image and description, not just a bare URL.",
 			},
 			{
 				title: "You know what's happening on your site",
@@ -387,7 +387,7 @@ const RAW_COPY = {
 		analyticsPageEyebrow: 'Business Card Pro package and above',
 		analyticsPageTitle: "What you'll see in the analytics report",
 		analyticsIntroTitle: 'Your site, your data',
-		analyticsIntro: "Every month you get a short report from us, translated into plain human language, about what's happening on your site. You don't need to understand charts or statistics – we've done that part for you.",
+		analyticsIntro: "Every month you get a short report from me, translated into plain human language, about what's happening on your site. You don't need to understand charts or statistics – I've done that part for you.",
 		analyticsListTitle: "What's in the report:",
 		analyticsItems: [
 			{ lead: 'How many people visited your site', text: ', daily and over the month, so you can see whether traffic is growing' },
