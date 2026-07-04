@@ -19,7 +19,7 @@ const { pl, en } = Astro.props
 			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
 			<div class="reviewer">
-				<div class="avatar"></div>
+				<img src="/damian-dzida-logo.png" alt="Damian Dzida" class="avatar" loading="lazy" />
 				<div>
 					<div class="reviewer-name">Damian Dzida</div>
 					<div class="reviewer-role">Kancelaria Adwokacka Damian Dzida · Jasło</div>
@@ -116,7 +116,7 @@ const { pl, en } = Astro.props
 		width: 34px;
 		height: 34px;
 		border-radius: 50%;
-		background: repeating-linear-gradient(45deg, #e2dfd8, #e2dfd8 3px, #d8d5cd 3px, #d8d5cd 6px);
+		object-fit: cover;
 		flex-shrink: 0;
 	}
 

@@ -32,8 +32,11 @@ export const COPY = {
 		detailsCta: 'Zobacz szczegóły',
 		implementationLabel: 'Wdrożenie',
 		careLabel: 'Opieka miesięczna',
+		careAddonLabel: '+ opieka',
+		careAddonQuote: '+ opieka wyceniona indywidualnie',
 		pkg1: {
 			name: 'Wizytówka',
+			includesNote: 'Usługa podstawowa',
 			price: '1 500',
 			carePrice: 'od 100 zł / mies.',
 			teaser: 'Twoja firma w internecie — szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie stała opieka: hosting, domena i bieżące zmiany treści, żebyś nie musiał się tym martwić.',
@@ -121,9 +124,6 @@ export const COPY = {
 		},
 		aboutEy: 'Dlaczego warto?',
 		aboutTitle: 'Nie ogranicza mnie WordPress.',
-		about1: 'Większość freelancerów buduje strony na WordPressie i gotowych wtyczkach. Mnie ten sufit nie dotyczy — bezpieczny kod piszę samodzielnie, od podstaw.',
-		about2: 'Dzięki temu mogę przyjąć każde zlecenie, także to nietypowe, i zbudować dokładnie to, czego potrzebujesz. Pracuję w Astro: czysty kod zamiast zlepka wtyczek, a w efekcie strony szybsze, bezpieczniejsze i bez ograniczeń.',
-		about3: 'Jestem programistą i jednocześnie studiuję zaocznie informatykę na krakowskiej uczelni — łączę praktykę z bieżącą wiedzą akademicką.',
 		reasons: [
 			{
 				title: 'Bezpieczeństwo, o które nie musisz się martwić',
@@ -234,8 +234,11 @@ export const COPY = {
 		detailsCta: 'View details',
 		implementationLabel: 'Implementation',
 		careLabel: 'Monthly care',
+		careAddonLabel: '+ care',
+		careAddonQuote: '+ care individually quoted',
 		pkg1: {
 			name: 'Business Card Site',
+			includesNote: 'Base service',
 			price: '1,500',
 			carePrice: 'from 100 zł / mo.',
 			teaser: "Your business online — a fast, clean site with a map location and visibility in Google search. Ongoing care is included: hosting, domain and content updates, so you don't have to worry about it.",
@@ -323,9 +326,6 @@ export const COPY = {
 		},
 		aboutEy: 'Why me?',
 		aboutTitle: "WordPress doesn't limit me.",
-		about1: "Most freelancers build on WordPress and ready-made plugins. That ceiling doesn't apply to me — I write secure code myself, from the ground up.",
-		about2: 'So I can take on any project, including the unusual ones, and build exactly what you need. I work in Astro: clean code instead of a pile of plugins, which makes the sites faster, safer and without limits.',
-		about3: "I'm a developer and I'm also studying Computer Science part-time at a university in Kraków — combining hands-on practice with up-to-date academic knowledge.",
 		reasons: [
 			{
 				title: "Security you don't have to worry about",

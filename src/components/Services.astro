@@ -7,12 +7,7 @@ interface Props {
 }
 const { pl, en } = Astro.props
 
-const packages = [
-	{ key: 'pkg1', border: 'border-accent' },
-	{ key: 'pkg2', border: 'border-text' },
-	{ key: 'pkg3', border: 'border-accent' },
-	{ key: 'pkg4', border: 'border-text' },
-] as const
+const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 ---
 
 <section id="uslugi" class="services">
@@ -22,11 +17,11 @@ const packages = [
 			<h2 class="section-title" data-pl={pl.servTitle} data-en={en.servTitle}>{pl.servTitle}</h2>
 		</div>
 		<div class="services-grid">
-			{packages.map(({ key, border }, i) => {
+			{packages.map((key, i) => {
 				const plPkg = pl[key]
 				const enPkg = en[key]
 				return (
-					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class={`service-card ${border}`}>
+					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class="service-card border-accent">
 						{plPkg.includesNote && (
 							<div class="sv-note" data-pl={plPkg.includesNote} data-en={enPkg.includesNote}>{plPkg.includesNote}</div>
 						)}
@@ -47,8 +42,15 @@ const packages = [
 									<span data-pl={pl.indiv} data-en={en.indiv}>{pl.indiv}</span>
 								</div>
 							)}
-							{plPkg.carePrice && (
-								<div class="sv-care" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
+							{plPkg.price ? (
+								plPkg.carePrice && (
+									<div class="sv-care">
+										<span data-pl={pl.careAddonLabel} data-en={en.careAddonLabel}>{pl.careAddonLabel}</span>{' '}
+										<span data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</span>
+									</div>
+								)
+							) : (
+								<div class="sv-care" data-pl={pl.careAddonQuote} data-en={en.careAddonQuote}>{pl.careAddonQuote}</div>
 							)}
 						</div>
 						<a href="#cennik" class="sv-cta" data-pl={pl.detailsCta} data-en={en.detailsCta}>{pl.detailsCta}</a>
@@ -106,7 +108,6 @@ const packages = [
 	}
 
 	.border-accent { border-top-color: var(--accent); }
-	.border-text { border-top-color: var(--text); }
 
 	.sv-note {
 		color: var(--accent);

@@ -7,12 +7,7 @@ interface Props {
 }
 const { pl, en } = Astro.props
 
-const packages = [
-	{ key: 'pkg1', border: 'border-accent' },
-	{ key: 'pkg2', border: 'border-text' },
-	{ key: 'pkg3', border: 'border-accent' },
-	{ key: 'pkg4', border: 'border-text' },
-] as const
+const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 ---
 
 <section id="cennik" class="pricing">
@@ -22,11 +17,11 @@ const packages = [
 			<h2 class="section-title" data-pl={pl.priceTitle} data-en={en.priceTitle}>{pl.priceTitle}</h2>
 		</div>
 		<div class="pricing-grid">
-			{packages.map(({ key, border }, i) => {
+			{packages.map((key, i) => {
 				const plPkg = pl[key]
 				const enPkg = en[key]
 				return (
-					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class={`plan-card ${border}`}>
+					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class="plan-card border-accent">
 						{plPkg.includesNote && (
 							<div class="plan-note" data-pl={plPkg.includesNote} data-en={enPkg.includesNote}>{plPkg.includesNote}</div>
 						)}
@@ -119,7 +114,6 @@ const packages = [
 	}
 
 	.border-accent { border-top-color: var(--accent); }
-	.border-text { border-top-color: var(--text); }
 
 	.plan-note {
 		color: var(--accent);
