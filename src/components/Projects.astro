@@ -390,7 +390,7 @@ const projects = [
 		display: block;
 		width: 100%;
 		height: auto;
-		animation: device-scroll 13s ease-in-out infinite;
+		animation: device-scroll 8s ease-in-out infinite;
 	}
 
 	.scroll-flash {
@@ -398,23 +398,23 @@ const projects = [
 		inset: 0;
 		background: var(--bg);
 		opacity: 0;
-		animation: device-scroll-flash 13s ease-in-out infinite;
+		animation: device-scroll-flash 8s ease-in-out infinite;
 	}
 
 	@keyframes device-scroll {
 		0% { transform: translateY(0%); }
-		45% { transform: translateY(var(--scroll-end)); }
-		62% { transform: translateY(var(--scroll-end)); }
-		64.9% { transform: translateY(var(--scroll-end)); }
-		65% { transform: translateY(0%); }
+		38% { transform: translateY(var(--scroll-end)); }
+		48% { transform: translateY(var(--scroll-end)); }
+		58.9% { transform: translateY(var(--scroll-end)); }
+		59% { transform: translateY(0%); }
 		100% { transform: translateY(0%); }
 	}
 
 	@keyframes device-scroll-flash {
-		0%, 55% { opacity: 0; }
+		0%, 48% { opacity: 0; }
+		56% { opacity: 1; }
 		62% { opacity: 1; }
-		68% { opacity: 1; }
-		74%, 100% { opacity: 0; }
+		68%, 100% { opacity: 0; }
 	}
 
 	.card-meta { }
