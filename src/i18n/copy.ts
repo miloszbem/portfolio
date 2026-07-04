@@ -1,5 +1,19 @@
+const GLUE_WORDS = [
+	'a', 'i', 'o', 'u', 'w', 'z',
+	'do', 'od', 'na', 'po', 'ze', 'we', 'za', 'by', 'ku',
+	'czy', 'nie', 'już', 'że', 'aż', 'iż', 'tak', 'ta', 'to', 'co', 'który', 'są', 'być', 'mnie', 'jest',
+]
+
+const GLUE_PATTERN = new RegExp(`(?<=^|\\s)(${GLUE_WORDS.join('|')})\\s+`, 'gi')
+
 function noOrphans(text: string): string {
-	return text.replace(/\b(a|i|o|u|w|z|A|I|O|U|W|Z)\s+/g, '$1 ')
+	let result = text.replace(GLUE_PATTERN, '$1 ')
+	result = result.replace(/(\d)\s(\d)/g, '$1 $2')
+	const lastSpace = result.lastIndexOf(' ')
+	if (lastSpace !== -1) {
+		result = result.slice(0, lastSpace) + ' ' + result.slice(lastSpace + 1)
+	}
+	return result
 }
 
 function deepNoOrphans<T>(value: T): T {
@@ -32,7 +46,7 @@ const RAW_COPY = {
 		s1: 'rok\ndoświadczenia',
 		s2: 'własny\nkod',
 		s3: 'brak\nograniczeń',
-		s4: 'strony\nod 1 500 zł',
+		s4: 'strony\nod 1 000 zł',
 		workEy: 'Moje prace',
 		workTitle: 'Realizacje',
 		workNote: 'Strony, które zaprojektowałem i wdrożyłem dla moich klientów.',
@@ -54,8 +68,8 @@ const RAW_COPY = {
 		pkg1: {
 			name: 'Wizytówka',
 			includesNote: 'Usługa podstawowa',
-			price: '1 500',
-			carePrice: 'od 100 zł / mies.',
+			price: '1 000',
+			carePrice: 'od 150 zł / mies.',
 			teaser: 'Twoja firma w internecie — szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie stała opieka: hosting, domena i bieżące zmiany treści, żebyś nie musiał się tym martwić.',
 			checklist: [
 				'Do 5 podstawowych podstron',
@@ -237,7 +251,7 @@ const RAW_COPY = {
 		s1: 'year of\nexperience',
 		s2: 'hand-\nwritten code',
 		s3: 'no\nlimits',
-		s4: 'sites\nfrom 1,500 zł',
+		s4: 'sites\nfrom 1,000 zł',
 		workEy: 'My work',
 		workTitle: 'Case studies',
 		workNote: 'Websites I designed and built for my clients.',
@@ -259,8 +273,8 @@ const RAW_COPY = {
 		pkg1: {
 			name: 'Business Card Site',
 			includesNote: 'Base service',
-			price: '1,500',
-			carePrice: 'from 100 zł / mo.',
+			price: '1,000',
+			carePrice: 'from 150 zł / mo.',
 			teaser: "Your business online — a fast, clean site with a map location and visibility in Google search. Ongoing care is included: hosting, domain and content updates, so you don't have to worry about it.",
 			checklist: [
 				'Up to 5 core pages',

@@ -405,16 +405,16 @@ const projects = [
 		0% { transform: translateY(0%); }
 		45% { transform: translateY(var(--scroll-end)); }
 		62% { transform: translateY(var(--scroll-end)); }
-		74.9% { transform: translateY(var(--scroll-end)); }
-		75% { transform: translateY(0%); }
+		64.9% { transform: translateY(var(--scroll-end)); }
+		65% { transform: translateY(0%); }
 		100% { transform: translateY(0%); }
 	}
 
 	@keyframes device-scroll-flash {
 		0%, 55% { opacity: 0; }
+		62% { opacity: 1; }
 		68% { opacity: 1; }
-		80% { opacity: 1; }
-		92%, 100% { opacity: 0; }
+		74%, 100% { opacity: 0; }
 	}
 
 	.card-meta { }
