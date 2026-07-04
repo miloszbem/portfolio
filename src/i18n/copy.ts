@@ -1,7 +1,7 @@
 const GLUE_WORDS = [
 	'a', 'i', 'o', 'u', 'w', 'z',
 	'do', 'od', 'na', 'po', 'ze', 'we', 'za', 'by', 'ku',
-	'czy', 'nie', 'już', 'że', 'aż', 'iż', 'tak', 'ta', 'to', 'co', 'który', 'są', 'być', 'mnie', 'jest',
+	'czy', 'nie', 'już', 'że', 'aż', 'iż', 'tak', 'ta', 'to', 'co', 'który', 'są', 'być', 'mnie', 'jest', 'ci', 'cię',
 ]
 
 const GLUE_PATTERN = new RegExp(`(?<=^|\\s)(${GLUE_WORDS.join('|')})\\s+`, 'gi')
