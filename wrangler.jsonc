@@ -1,7 +1,10 @@
 {
 	"name": "miloszbembnowicz-pl",
 	"compatibility_date": "2026-07-04",
+	"main": "./worker/index.ts",
 	"assets": {
-		"directory": "./dist"
-	}
+		"directory": "./dist",
+		"run_worker_first": ["/api/contact"]
+	},
+	"send_email": [{ "name": "EMAIL" }]
 }
