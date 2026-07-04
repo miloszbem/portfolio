@@ -36,19 +36,21 @@ const en = COPY.en
 		<LangSwitcher client:load slot="lang-switcher" />
 	</Nav>
 
-	<Hero pl={pl} en={en} />
-	<Stats pl={pl} en={en} />
-	<Projects pl={pl} en={en} />
-	<Services pl={pl} en={en} />
-	<About pl={pl} en={en} />
-	<CodeEditor pl={pl} en={en} />
-	<WpVsAstro pl={pl} en={en} />
-	<Pricing pl={pl} en={en} />
-	<Reviews pl={pl} en={en} />
+	<main>
+		<Hero pl={pl} en={en} />
+		<Stats pl={pl} en={en} />
+		<Projects pl={pl} en={en} />
+		<Services pl={pl} en={en} />
+		<About pl={pl} en={en} />
+		<CodeEditor pl={pl} en={en} />
+		<WpVsAstro pl={pl} en={en} />
+		<Pricing pl={pl} en={en} />
+		<Reviews pl={pl} en={en} />
 
-	<Contact pl={pl} en={en}>
-		<ContactForm client:visible pl={pl} en={en} slot="form" />
-	</Contact>
+		<Contact pl={pl} en={en}>
+			<ContactForm client:visible pl={pl} en={en} slot="form" />
+		</Contact>
+	</main>
 
 	<Footer pl={pl} en={en} />
 </Layout>

@@ -17,38 +17,40 @@ const en = COPY.en
 		<LangSwitcher client:load slot="lang-switcher" />
 	</Nav>
 
-	<section class="analytics">
-		<div class="analytics-inner">
-			<div data-reveal class="analytics-header">
-				<div class="eyebrow" data-pl={pl.analyticsPageEyebrow} data-en={en.analyticsPageEyebrow}>{pl.analyticsPageEyebrow}</div>
-				<h1 class="page-title" data-pl={pl.analyticsPageTitle} data-en={en.analyticsPageTitle}>{pl.analyticsPageTitle}</h1>
-			</div>
-
-			<div data-reveal class="analytics-intro">
-				<h2 class="intro-title" data-pl={pl.analyticsIntroTitle} data-en={en.analyticsIntroTitle}>{pl.analyticsIntroTitle}</h2>
-				<p class="intro-text" data-pl={pl.analyticsIntro} data-en={en.analyticsIntro}>{pl.analyticsIntro}</p>
-			</div>
-
-			<div data-reveal class="analytics-list-block">
-				<div class="list-label" data-pl={pl.analyticsListTitle} data-en={en.analyticsListTitle}>{pl.analyticsListTitle}</div>
-				<div class="analytics-list">
-					{pl.analyticsItems.map((item, idx) => (
-						<div class="feature">
-							<span class="check">✓</span>
-							<span>
-								<strong data-pl={item.lead} data-en={en.analyticsItems[idx].lead}>{item.lead}</strong>{' '}
-								<span data-pl={item.text} data-en={en.analyticsItems[idx].text}>{item.text}</span>
-							</span>
-						</div>
-					))}
+	<main>
+		<section class="analytics">
+			<div class="analytics-inner">
+				<div data-reveal class="analytics-header">
+					<div class="eyebrow" data-pl={pl.analyticsPageEyebrow} data-en={en.analyticsPageEyebrow}>{pl.analyticsPageEyebrow}</div>
+					<h1 class="page-title" data-pl={pl.analyticsPageTitle} data-en={en.analyticsPageTitle}>{pl.analyticsPageTitle}</h1>
 				</div>
+
+				<div data-reveal class="analytics-intro">
+					<h2 class="intro-title" data-pl={pl.analyticsIntroTitle} data-en={en.analyticsIntroTitle}>{pl.analyticsIntroTitle}</h2>
+					<p class="intro-text" data-pl={pl.analyticsIntro} data-en={en.analyticsIntro}>{pl.analyticsIntro}</p>
+				</div>
+
+				<div data-reveal class="analytics-list-block">
+					<div class="list-label" data-pl={pl.analyticsListTitle} data-en={en.analyticsListTitle}>{pl.analyticsListTitle}</div>
+					<div class="analytics-list">
+						{pl.analyticsItems.map((item, idx) => (
+							<div class="feature">
+								<span class="check">✓</span>
+								<span>
+									<strong data-pl={item.lead} data-en={en.analyticsItems[idx].lead}>{item.lead}</strong>{' '}
+									<span data-pl={item.text} data-en={en.analyticsItems[idx].text}>{item.text}</span>
+								</span>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<p data-reveal class="analytics-closing" data-pl={pl.analyticsClosing} data-en={en.analyticsClosing}>{pl.analyticsClosing}</p>
+
+				<a data-reveal href="/" class="back-home" data-pl={pl.backHome} data-en={en.backHome}>{pl.backHome}</a>
 			</div>
-
-			<p data-reveal class="analytics-closing" data-pl={pl.analyticsClosing} data-en={en.analyticsClosing}>{pl.analyticsClosing}</p>
-
-			<a data-reveal href="/" class="back-home" data-pl={pl.backHome} data-en={en.backHome}>{pl.backHome}</a>
-		</div>
-	</section>
+		</section>
+	</main>
 
 	<Footer pl={pl} en={en} />
 </Layout>
