@@ -6,6 +6,13 @@ interface Props {
 	en: LangCopy
 }
 const { pl, en } = Astro.props
+
+const packages = [
+	{ key: 'pkg1', border: 'border-accent' },
+	{ key: 'pkg2', border: 'border-text' },
+	{ key: 'pkg3', border: 'border-accent' },
+	{ key: 'pkg4', border: 'border-text' },
+] as const
 ---
 
 <section id="cennik" class="pricing">
@@ -15,66 +22,51 @@ const { pl, en } = Astro.props
 			<h2 class="section-title" data-pl={pl.priceTitle} data-en={en.priceTitle}>{pl.priceTitle}</h2>
 		</div>
 		<div class="pricing-grid">
-			<div data-reveal class="plan-card">
-				<div class="plan-name muted" data-pl={pl.pl1n} data-en={en.pl1n}>{pl.pl1n}</div>
-				<div class="plan-price">1 500</div>
-				<div class="plan-unit muted" data-pl={pl.net} data-en={en.net}>{pl.net}</div>
-				<div class="plan-sep"></div>
-				<div class="plan-features">
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1a} data-en={en.pl1a}>{pl.pl1a}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl1b} data-en={en.pl1b}>{pl.pl1b}</span></div>
-					<div class="feature feature-explain">
-						<span class="check">✓</span>
-						<span class="feature-text-wrap">
-							<span data-pl={pl.pl1c} data-en={en.pl1c}>{pl.pl1c}</span>
-							<span class="feature-note" data-pl={pl.pl1cExplain} data-en={en.pl1cExplain}>{pl.pl1cExplain}</span>
-						</span>
+			{packages.map(({ key, border }, i) => {
+				const plPkg = pl[key]
+				const enPkg = en[key]
+				return (
+					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class={`plan-card ${border}`}>
+						{plPkg.includesNote && (
+							<div class="plan-note" data-pl={plPkg.includesNote} data-en={enPkg.includesNote}>{plPkg.includesNote}</div>
+						)}
+						<div class="plan-name" data-pl={plPkg.name} data-en={enPkg.name}>{plPkg.name}</div>
+						{plPkg.price ? (
+							<div class="plan-price">
+								<span data-pl={plPkg.price} data-en={enPkg.price}>{plPkg.price}</span>{' '}
+								<span class="plan-unit" data-pl={pl.net} data-en={en.net}>{pl.net}</span>
+							</div>
+						) : (
+							<div class="plan-price">
+								<span data-pl={pl.quote} data-en={en.quote}>{pl.quote}</span>{' '}
+								<span class="plan-unit" data-pl={pl.indiv} data-en={en.indiv}>{pl.indiv}</span>
+							</div>
+						)}
+						<div class="plan-sep"></div>
+						<div class="plan-label" data-pl={pl.implementationLabel} data-en={en.implementationLabel}>{pl.implementationLabel}</div>
+						<div class="plan-desc" data-pl={plPkg.desc} data-en={enPkg.desc}>{plPkg.desc}</div>
+						<div class="plan-features">
+							{plPkg.checklist.map((item, idx) => (
+								<div class="feature"><span class="check">✓</span><span data-pl={item} data-en={enPkg.checklist[idx]}>{item}</span></div>
+							))}
+						</div>
+						<details class="plan-retainer">
+							<summary data-pl={pl.careLabel} data-en={en.careLabel}>{pl.careLabel}</summary>
+							<div class="retainer-body">
+								<div class="plan-desc" data-pl={plPkg.retainerDesc} data-en={enPkg.retainerDesc}>{plPkg.retainerDesc}</div>
+								<div class="plan-features">
+									{plPkg.retainerChecklist.map((item, idx) => (
+										<div class="feature"><span class="check">✓</span><span data-pl={item} data-en={enPkg.retainerChecklist[idx]}>{item}</span></div>
+									))}
+								</div>
+								{plPkg.carePrice && (
+									<div class="plan-care-price" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
+								)}
+							</div>
+						</details>
 					</div>
-					<div class="feature feature-explain">
-						<span class="check">✓</span>
-						<span class="feature-text-wrap">
-							<span data-pl={pl.pl1d} data-en={en.pl1d}>{pl.pl1d}</span>
-							<span class="feature-note" data-pl={pl.pl1dExplain} data-en={en.pl1dExplain}>{pl.pl1dExplain}</span>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div data-reveal data-reveal-d="1" class="plan-card plan-featured">
-				<div class="plan-name accent" data-pl={pl.pl2n} data-en={en.pl2n}>{pl.pl2n}</div>
-				<div class="plan-price">3 000</div>
-				<div class="plan-unit muted" data-pl={pl.net} data-en={en.net}>{pl.net}</div>
-				<div class="plan-sep"></div>
-				<div class="plan-features">
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2a} data-en={en.pl2a}>{pl.pl2a}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2b} data-en={en.pl2b}>{pl.pl2b}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl2c} data-en={en.pl2c}>{pl.pl2c}</span></div>
-					<div class="feature feature-explain">
-						<span class="check">✓</span>
-						<span class="feature-text-wrap">
-							<span data-pl={pl.pl2d} data-en={en.pl2d}>{pl.pl2d}</span>
-							<span class="feature-note" data-pl={pl.pl2dExplain} data-en={en.pl2dExplain}>{pl.pl2dExplain}</span>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div data-reveal data-reveal-d="2" class="plan-card plan-custom">
-				<div class="plan-name muted">Custom</div>
-				<div class="plan-price" data-pl={pl.quote} data-en={en.quote}>{pl.quote}</div>
-				<div class="plan-unit muted" data-pl={pl.indiv} data-en={en.indiv}>{pl.indiv}</div>
-				<div class="plan-sep"></div>
-				<div class="plan-features">
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3a} data-en={en.pl3a}>{pl.pl3a}</span></div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3b} data-en={en.pl3b}>{pl.pl3b}</span></div>
-					<div class="feature feature-explain">
-						<span class="check">✓</span>
-						<span class="feature-text-wrap">
-							<span data-pl={pl.pl3c} data-en={en.pl3c}>{pl.pl3c}</span>
-							<span class="feature-note" data-pl={pl.pl3cExplain} data-en={en.pl3cExplain}>{pl.pl3cExplain}</span>
-						</span>
-					</div>
-					<div class="feature"><span class="check">✓</span><span data-pl={pl.pl3d} data-en={en.pl3d}>{pl.pl3d}</span></div>
-				</div>
-			</div>
+				)
+			})}
 		</div>
 	</div>
 </section>
@@ -111,60 +103,48 @@ const { pl, en } = Astro.props
 
 	.pricing-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 14px;
 	}
 
 	.plan-card {
-		border: 1px solid rgba(15, 22, 41, 0.09);
+		background: var(--bg);
+		border: 1px solid var(--border);
 		border-radius: 12px;
 		padding: 30px;
-		position: relative;
+		border-top-width: 3px;
 	}
 
-	.plan-featured {
-		border: 1px solid rgba(15, 22, 41, 0.09);
-	}
+	.border-accent { border-top-color: var(--accent); }
+	.border-text { border-top-color: var(--text); }
 
-	.plan-custom {
-		background: var(--bg);
-	}
-
-	.popular-badge {
-		position: absolute;
-		top: -12px;
-		left: 50%;
-		transform: translateX(-50%);
-		background: var(--accent);
-		color: #fff;
-		font-size: 10px;
+	.plan-note {
+		color: var(--accent);
+		font-size: 11px;
 		font-weight: 600;
-		padding: 3px 12px;
-		border-radius: 100px;
-		white-space: nowrap;
+		margin-bottom: 8px;
 	}
 
 	.plan-name {
-		font-size: 11px;
-		letter-spacing: 1.5px;
-		text-transform: uppercase;
-		margin-bottom: 18px;
+		font-family: var(--display);
+		font-size: 20px;
+		font-weight: 600;
+		margin-bottom: 9px;
 	}
-
-	.muted { color: rgba(15, 22, 41, 0.3); }
-	.accent { color: var(--accent); }
 
 	.plan-price {
 		font-family: var(--display);
 		font-size: 36px;
 		font-weight: 700;
 		line-height: 1;
-		margin-bottom: 3px;
+		margin-bottom: 22px;
 	}
 
 	.plan-unit {
+		font-family: sans-serif;
 		font-size: 12px;
-		margin-bottom: 22px;
+		font-weight: 400;
+		color: var(--muted);
 	}
 
 	.plan-sep {
@@ -173,10 +153,26 @@ const { pl, en } = Astro.props
 		margin-bottom: 22px;
 	}
 
+	.plan-label {
+		font-size: 11px;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		color: var(--muted);
+		margin-bottom: 10px;
+	}
+
+	.plan-desc {
+		color: var(--muted);
+		font-size: 14px;
+		line-height: 1.65;
+		margin-bottom: 16px;
+	}
+
 	.plan-features {
 		display: flex;
 		flex-direction: column;
 		gap: 9px;
+		margin-bottom: 22px;
 	}
 
 	.feature {
@@ -192,16 +188,28 @@ const { pl, en } = Astro.props
 		flex-shrink: 0;
 	}
 
-	.feature-text-wrap {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
+	.plan-retainer {
+		border-top: 1px solid var(--border);
+		padding-top: 16px;
 	}
 
-	.feature-note {
-		color: rgba(15, 22, 41, 0.4);
-		font-size: 12px;
-		line-height: 1.55;
+	.plan-retainer summary {
+		cursor: pointer;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--text);
+	}
+
+	.retainer-body {
+		margin-top: 16px;
+	}
+
+	.retainer-body .plan-features { margin-bottom: 16px; }
+
+	.plan-care-price {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
 	}
 
 	@media (max-width: 900px) {

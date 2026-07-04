@@ -6,6 +6,13 @@ interface Props {
 	en: LangCopy
 }
 const { pl, en } = Astro.props
+
+const packages = [
+	{ key: 'pkg1', border: 'border-accent' },
+	{ key: 'pkg2', border: 'border-text' },
+	{ key: 'pkg3', border: 'border-accent' },
+	{ key: 'pkg4', border: 'border-text' },
+] as const
 ---
 
 <section id="uslugi" class="services">
@@ -15,28 +22,36 @@ const { pl, en } = Astro.props
 			<h2 class="section-title" data-pl={pl.servTitle} data-en={en.servTitle}>{pl.servTitle}</h2>
 		</div>
 		<div class="services-grid">
-			<div data-reveal class="service-card border-accent">
-				<div class="sv-title" data-pl={pl.sv1t} data-en={en.sv1t}>{pl.sv1t}</div>
-				<div class="sv-desc" data-pl={pl.sv1d} data-en={en.sv1d}>{pl.sv1d}</div>
-				<div class="sv-explain" data-pl={pl.sv1Explain} data-en={en.sv1Explain}>{pl.sv1Explain}</div>
-				<div class="sv-price" data-pl={pl.sv1p} data-en={en.sv1p}>{pl.sv1p}</div>
-			</div>
-			<div data-reveal data-reveal-d="1" class="service-card border-text">
-				<div class="sv-title" data-pl={pl.sv2t} data-en={en.sv2t}>{pl.sv2t}</div>
-				<div class="sv-desc" data-pl={pl.sv2d} data-en={en.sv2d}>{pl.sv2d}</div>
-				<div class="sv-price" data-pl={pl.sv2p} data-en={en.sv2p}>{pl.sv2p}</div>
-			</div>
-			<div data-reveal class="service-card border-accent">
-				<div class="sv-title" data-pl={pl.sv3t} data-en={en.sv3t}>{pl.sv3t}</div>
-				<div class="sv-desc" data-pl={pl.sv3d} data-en={en.sv3d}>{pl.sv3d}</div>
-				<div class="sv-price" data-pl={pl.sv3p} data-en={en.sv3p}>{pl.sv3p}</div>
-			</div>
-			<div data-reveal data-reveal-d="1" class="service-card border-text">
-				<div class="sv-title" data-pl={pl.sv4t} data-en={en.sv4t}>{pl.sv4t}</div>
-				<div class="sv-desc" data-pl={pl.sv4d} data-en={en.sv4d}>{pl.sv4d}</div>
-				<div class="sv-explain" data-pl={pl.sv4Explain} data-en={en.sv4Explain}>{pl.sv4Explain}</div>
-				<div class="sv-price" data-pl={pl.sv4p} data-en={en.sv4p}>{pl.sv4p}</div>
-			</div>
+			{packages.map(({ key, border }, i) => {
+				const plPkg = pl[key]
+				const enPkg = en[key]
+				return (
+					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class={`service-card ${border}`}>
+						{plPkg.includesNote && (
+							<div class="sv-note" data-pl={plPkg.includesNote} data-en={enPkg.includesNote}>{plPkg.includesNote}</div>
+						)}
+						<div class="sv-title" data-pl={plPkg.name} data-en={enPkg.name}>{plPkg.name}</div>
+						<div class="sv-desc" data-pl={plPkg.teaser} data-en={enPkg.teaser}>{plPkg.teaser}</div>
+						<div class="sv-price-block">
+							{plPkg.price ? (
+								<div class="sv-price">
+									<span data-pl={plPkg.price} data-en={enPkg.price}>{plPkg.price}</span>{' '}
+									<span data-pl={pl.net} data-en={en.net}>{pl.net}</span>
+								</div>
+							) : (
+								<div class="sv-price">
+									<span data-pl={pl.quote} data-en={en.quote}>{pl.quote}</span>{' '}
+									<span data-pl={pl.indiv} data-en={en.indiv}>{pl.indiv}</span>
+								</div>
+							)}
+							{plPkg.carePrice && (
+								<div class="sv-care" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
+							)}
+						</div>
+						<a href="#cennik" class="sv-cta" data-pl={pl.detailsCta} data-en={en.detailsCta}>{pl.detailsCta}</a>
+					</div>
+				)
+			})}
 		</div>
 	</div>
 </section>
@@ -83,10 +98,19 @@ const { pl, en } = Astro.props
 		border-radius: 12px;
 		padding: 30px;
 		border-top-width: 3px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.border-accent { border-top-color: var(--accent); }
 	.border-text { border-top-color: var(--text); }
+
+	.sv-note {
+		color: var(--accent);
+		font-size: 11px;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
 
 	.sv-title {
 		font-family: var(--display);
@@ -99,6 +123,11 @@ const { pl, en } = Astro.props
 		color: var(--muted);
 		font-size: 14px;
 		line-height: 1.65;
+		margin-bottom: 20px;
+	}
+
+	.sv-price-block {
+		margin-top: auto;
 		margin-bottom: 16px;
 	}
 
@@ -108,11 +137,19 @@ const { pl, en } = Astro.props
 		color: var(--accent);
 	}
 
-	.sv-explain {
-		color: rgba(15, 22, 41, 0.4);
+	.sv-care {
 		font-size: 12px;
-		line-height: 1.55;
-		margin-bottom: 16px;
+		color: rgba(15, 22, 41, 0.4);
+		margin-top: 3px;
+	}
+
+	.sv-cta {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--text);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		align-self: flex-start;
 	}
 
 	@media (max-width: 768px) {
