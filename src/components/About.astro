@@ -16,10 +16,21 @@ const { pl, en } = Astro.props
 		<p class="about-p" data-pl={pl.about1} data-en={en.about1}>{pl.about1}</p>
 		<p class="about-p" data-pl={pl.about2} data-en={en.about2}>{pl.about2}</p>
 		<p class="about-p last" data-pl={pl.about3} data-en={en.about3}>{pl.about3}</p>
+		<div class="reasons-grid">
+			{pl.reasons.map((reason, i) => {
+				const enReason = en.reasons[i]
+				return (
+					<div class="reason-card">
+						<div class="reason-title" data-pl={reason.title} data-en={enReason.title}>{reason.title}</div>
+						<p class="reason-body" data-pl={reason.body} data-en={enReason.body}>{reason.body}</p>
+					</div>
+				)
+			})}
+		</div>
 		<div class="chips">
 			<span class="chip">Astro</span>
 			<span class="chip">TypeScript</span>
-			<span class="chip">Netlify</span>
+			<span class="chip">Cloudflare</span>
 			<span class="chip">PostgreSQL</span>
 			<span class="chip">REST API</span>
 		</div>
@@ -64,6 +75,31 @@ const { pl, en } = Astro.props
 	}
 
 	.last { margin-bottom: 32px; }
+
+	.reasons-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px;
+		margin-bottom: 32px;
+	}
+
+	.reason-title {
+		font-family: var(--display);
+		font-size: 18px;
+		font-weight: 600;
+		margin: 0 0 8px;
+	}
+
+	.reason-body {
+		color: var(--muted);
+		font-size: 15px;
+		line-height: 1.65;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.reasons-grid { grid-template-columns: 1fr; }
+	}
 
 	.chips {
 		display: flex;

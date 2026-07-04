@@ -32,6 +32,9 @@ const packages = [
 						)}
 						<div class="sv-title" data-pl={plPkg.name} data-en={enPkg.name}>{plPkg.name}</div>
 						<div class="sv-desc" data-pl={plPkg.teaser} data-en={enPkg.teaser}>{plPkg.teaser}</div>
+						{key === 'pkg2' && (
+							<a href="/miesieczna-analiza" class="sv-analytics-link" data-pl={pl.analyticsCta} data-en={en.analyticsCta}>{pl.analyticsCta}</a>
+						)}
 						<div class="sv-price-block">
 							{plPkg.price ? (
 								<div class="sv-price">
@@ -124,6 +127,19 @@ const packages = [
 		font-size: 14px;
 		line-height: 1.65;
 		margin-bottom: 20px;
+	}
+
+	.sv-analytics-link {
+		display: inline-block;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		margin-bottom: 20px;
+	}
+
+	.sv-analytics-link:hover {
+		text-decoration: underline;
 	}
 
 	.sv-price-block {

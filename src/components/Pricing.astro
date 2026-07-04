@@ -62,6 +62,9 @@ const packages = [
 								{plPkg.carePrice && (
 									<div class="plan-care-price" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
 								)}
+								{key === 'pkg2' && (
+									<a href="/miesieczna-analiza" class="plan-analytics-link" data-pl={pl.analyticsCta} data-en={en.analyticsCta}>{pl.analyticsCta}</a>
+								)}
 							</div>
 						</details>
 					</div>
@@ -210,6 +213,19 @@ const packages = [
 		font-size: 13px;
 		font-weight: 600;
 		color: var(--accent);
+	}
+
+	.plan-analytics-link {
+		display: inline-block;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		margin-top: 8px;
+	}
+
+	.plan-analytics-link:hover {
+		text-decoration: underline;
 	}
 
 	@media (max-width: 900px) {

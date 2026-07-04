@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Nav from '../components/Nav.astro'
+import LangSwitcher from '../components/LangSwitcher'
+import Footer from '../components/Footer.astro'
+import { COPY } from '../i18n/copy'
+
+const pl = COPY.pl
+const en = COPY.en
+---
+
+<Layout
+	title="Co widzisz w raporcie analitycznym — Miłosz Bembnowicz"
+	description="Co miesiąc dostajesz krótki, przetłumaczony na ludzki język raport z tego, co dzieje się na Twojej stronie."
+>
+	<Nav pl={pl} en={en}>
+		<LangSwitcher client:load slot="lang-switcher" />
+	</Nav>
+
+	<section class="analytics">
+		<div class="analytics-inner">
+			<div data-reveal class="analytics-header">
+				<div class="eyebrow" data-pl={pl.analyticsPageEyebrow} data-en={en.analyticsPageEyebrow}>{pl.analyticsPageEyebrow}</div>
+				<h1 class="page-title" data-pl={pl.analyticsPageTitle} data-en={en.analyticsPageTitle}>{pl.analyticsPageTitle}</h1>
+			</div>
+
+			<div data-reveal class="analytics-intro">
+				<h2 class="intro-title" data-pl={pl.analyticsIntroTitle} data-en={en.analyticsIntroTitle}>{pl.analyticsIntroTitle}</h2>
+				<p class="intro-text" data-pl={pl.analyticsIntro} data-en={en.analyticsIntro}>{pl.analyticsIntro}</p>
+			</div>
+
+			<div data-reveal class="analytics-list-block">
+				<div class="list-label" data-pl={pl.analyticsListTitle} data-en={en.analyticsListTitle}>{pl.analyticsListTitle}</div>
+				<div class="analytics-list">
+					{pl.analyticsItems.map((item, idx) => (
+						<div class="feature">
+							<span class="check">✓</span>
+							<span>
+								<strong data-pl={item.lead} data-en={en.analyticsItems[idx].lead}>{item.lead}</strong>{' '}
+								<span data-pl={item.text} data-en={en.analyticsItems[idx].text}>{item.text}</span>
+							</span>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<p data-reveal class="analytics-closing" data-pl={pl.analyticsClosing} data-en={en.analyticsClosing}>{pl.analyticsClosing}</p>
+
+			<a data-reveal href="/" class="back-home" data-pl={pl.backHome} data-en={en.backHome}>{pl.backHome}</a>
+		</div>
+	</section>
+
+	<Footer pl={pl} en={en} />
+</Layout>
+
+<style>
+	.analytics {
+		background: var(--surface);
+		padding: 148px 56px 92px;
+	}
+
+	.analytics-inner {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.eyebrow {
+		font-size: 11px;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.page-title {
+		font-family: var(--display);
+		font-size: 44px;
+		font-weight: 600;
+		letter-spacing: -0.5px;
+		line-height: 1.05;
+		margin-bottom: 48px;
+	}
+
+	.analytics-intro {
+		margin-bottom: 40px;
+	}
+
+	.intro-title {
+		font-family: var(--display);
+		font-size: 24px;
+		font-weight: 600;
+		margin-bottom: 14px;
+	}
+
+	.intro-text {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.7;
+		max-width: 700px;
+	}
+
+	.analytics-list-block {
+		margin-bottom: 40px;
+	}
+
+	.list-label {
+		font-size: 11px;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+		color: var(--muted);
+		margin-bottom: 18px;
+	}
+
+	.analytics-list {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.feature {
+		display: flex;
+		gap: 12px;
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--muted);
+	}
+
+	.feature strong {
+		color: var(--text);
+		font-weight: 600;
+	}
+
+	.check {
+		color: var(--accent);
+		font-weight: 600;
+		flex-shrink: 0;
+	}
+
+	.analytics-closing {
+		color: var(--muted);
+		font-size: 16px;
+		line-height: 1.7;
+		max-width: 700px;
+		margin-bottom: 40px;
+	}
+
+	.back-home {
+		display: inline-block;
+		color: var(--accent);
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.back-home:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 768px) {
+		.analytics {
+			padding: 128px 20px 64px;
+		}
+
+		.page-title {
+			font-size: 32px;
+		}
+	}
+</style>
