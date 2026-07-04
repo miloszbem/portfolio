@@ -72,6 +72,16 @@ const personSchema = {
 		padding: 0;
 	}
 
+	html {
+		scroll-behavior: smooth;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+
 	p, h1, h2, h3, h4 {
 		text-wrap: pretty;
 	}

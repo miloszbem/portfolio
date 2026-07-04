@@ -48,18 +48,20 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 						<details class="plan-retainer">
 							<summary data-pl={pl.careLabel} data-en={en.careLabel}>{pl.careLabel}</summary>
 							<div class="retainer-body">
-								<div class="plan-desc" data-pl={plPkg.retainerDesc} data-en={enPkg.retainerDesc}>{plPkg.retainerDesc}</div>
-								<div class="plan-features">
-									{plPkg.retainerChecklist.map((item, idx) => (
-										<div class="feature"><span class="check">✓</span><span data-pl={item} data-en={enPkg.retainerChecklist[idx]}>{item}</span></div>
-									))}
+								<div class="retainer-body-inner">
+									<div class="plan-desc" data-pl={plPkg.retainerDesc} data-en={enPkg.retainerDesc}>{plPkg.retainerDesc}</div>
+									<div class="plan-features">
+										{plPkg.retainerChecklist.map((item, idx) => (
+											<div class="feature"><span class="check">✓</span><span data-pl={item} data-en={enPkg.retainerChecklist[idx]}>{item}</span></div>
+										))}
+									</div>
+									{plPkg.carePrice && (
+										<div class="plan-care-price" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
+									)}
+									{key === 'pkg2' && (
+										<a href="/miesieczna-analiza" class="plan-analytics-link" data-pl={pl.analyticsCta} data-en={en.analyticsCta}>{pl.analyticsCta}</a>
+									)}
 								</div>
-								{plPkg.carePrice && (
-									<div class="plan-care-price" data-pl={plPkg.carePrice} data-en={enPkg.carePrice}>{plPkg.carePrice}</div>
-								)}
-								{key === 'pkg2' && (
-									<a href="/miesieczna-analiza" class="plan-analytics-link" data-pl={pl.analyticsCta} data-en={en.analyticsCta}>{pl.analyticsCta}</a>
-								)}
 							</div>
 						</details>
 					</div>
@@ -198,7 +200,17 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 	}
 
 	.retainer-body {
-		margin-top: 16px;
+		overflow: hidden;
+		height: 0;
+		transition: height 0.3s ease;
+	}
+
+	.plan-retainer[open] .retainer-body {
+		height: auto;
+	}
+
+	.retainer-body-inner {
+		padding-top: 16px;
 	}
 
 	.retainer-body .plan-features { margin-bottom: 16px; }
@@ -226,3 +238,45 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 		.pricing-grid { grid-template-columns: 1fr; }
 	}
 </style>
+
+<script>
+	document.querySelectorAll<HTMLDetailsElement>('.plan-retainer').forEach((details) => {
+		const summary = details.querySelector('summary')
+		const body = details.querySelector<HTMLElement>('.retainer-body')
+		if (!summary || !body) return
+
+		summary.addEventListener('click', (e) => {
+			e.preventDefault()
+
+			if (details.open) {
+				const startHeight = body.scrollHeight
+				body.style.height = startHeight + 'px'
+				requestAnimationFrame(() => {
+					body.style.height = '0px'
+				})
+				body.addEventListener(
+					'transitionend',
+					() => {
+						details.open = false
+						body.style.height = ''
+					},
+					{ once: true }
+				)
+			} else {
+				details.open = true
+				const endHeight = body.scrollHeight
+				body.style.height = '0px'
+				requestAnimationFrame(() => {
+					body.style.height = endHeight + 'px'
+				})
+				body.addEventListener(
+					'transitionend',
+					() => {
+						body.style.height = ''
+					},
+					{ once: true }
+				)
+			}
+		})
+	})
+</script>
