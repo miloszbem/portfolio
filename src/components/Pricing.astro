@@ -245,8 +245,15 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 		const body = details.querySelector<HTMLElement>('.retainer-body')
 		if (!summary || !body) return
 
+		let pendingHandler: (() => void) | null = null
+
 		summary.addEventListener('click', (e) => {
 			e.preventDefault()
+
+			if (pendingHandler) {
+				body.removeEventListener('transitionend', pendingHandler)
+				pendingHandler = null
+			}
 
 			if (details.open) {
 				const startHeight = body.scrollHeight
@@ -254,14 +261,12 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 				requestAnimationFrame(() => {
 					body.style.height = '0px'
 				})
-				body.addEventListener(
-					'transitionend',
-					() => {
-						details.open = false
-						body.style.height = ''
-					},
-					{ once: true }
-				)
+				pendingHandler = () => {
+					details.open = false
+					body.style.height = ''
+					pendingHandler = null
+				}
+				body.addEventListener('transitionend', pendingHandler, { once: true })
 			} else {
 				details.open = true
 				const endHeight = body.scrollHeight
@@ -269,13 +274,11 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 				requestAnimationFrame(() => {
 					body.style.height = endHeight + 'px'
 				})
-				body.addEventListener(
-					'transitionend',
-					() => {
-						body.style.height = ''
-					},
-					{ once: true }
-				)
+				pendingHandler = () => {
+					body.style.height = ''
+					pendingHandler = null
+				}
+				body.addEventListener('transitionend', pendingHandler, { once: true })
 			}
 		})
 	})
