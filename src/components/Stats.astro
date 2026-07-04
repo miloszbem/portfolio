@@ -88,24 +88,25 @@ const { pl, en } = Astro.props
 
 		.stats-inner {
 			display: flex;
-			flex-wrap: wrap;
-			gap: 16px 0;
 		}
 
 		.stat {
-			width: 50%;
+			flex: 1 1 0;
+			width: auto;
 			padding: 0;
-			gap: 8px;
+			gap: 2px;
 			min-width: 0;
-			align-items: flex-start;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
 		}
 
 		.stat-num {
-			font-size: 18px;
+			font-size: 16px;
 		}
 
 		.stat-label {
-			font-size: 9px;
+			font-size: 8px;
 			line-height: 1.15;
 		}
 
