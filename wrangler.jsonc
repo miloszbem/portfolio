@@ -1,5 +1,5 @@
 {
-	"name": "miloszbembnowicz-pl",
+	"name": "portfolio",
 	"compatibility_date": "2026-07-04",
 	"main": "./worker/index.ts",
 	"assets": {
