@@ -23,7 +23,7 @@ const OUTBOUND_LINKS: Record<string, string> = {
 	kancelaria: 'https://adwokatdamiandzida.pl/',
 }
 
-const CF_BEACON_TOKEN = 'da86680366da4d868bea0cffae86859f'
+const CF_BEACON_TOKEN = '16d2c7c31783412ebe212a664f11bd99'
 
 function outboundRedirectPage(target: string): Response {
 	const html = `<!doctype html>
