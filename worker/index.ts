@@ -23,6 +23,22 @@ const OUTBOUND_LINKS: Record<string, string> = {
 	kancelaria: 'https://adwokatdamiandzida.pl/',
 }
 
+const CF_BEACON_TOKEN = 'da86680366da4d868bea0cffae86859f'
+
+function outboundRedirectPage(target: string): Response {
+	const html = `<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="refresh" content="0; url=${target}" />
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${CF_BEACON_TOKEN}"}'></script>
+<script>location.replace(${JSON.stringify(target)})</script>
+</head>
+<body>Przekierowuję… <a href="${target}">${target}</a></body>
+</html>`
+	return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url)
@@ -33,7 +49,7 @@ export default {
 			if (!target) {
 				return new Response('Not found', { status: 404 })
 			}
-			return Response.redirect(target, 302)
+			return outboundRedirectPage(target)
 		}
 
 		if (url.pathname !== '/api/contact' || request.method !== 'POST') {
