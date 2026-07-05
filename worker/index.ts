@@ -47,7 +47,9 @@ export default {
 			return handleContact(request, env)
 		}
 
-		if (request.method === 'GET' && !url.pathname.startsWith('/api/')) {
+		const lastSegment = url.pathname.split('/').pop() ?? ''
+		const isPageRoute = request.method === 'GET' && !url.pathname.startsWith('/api/') && !lastSegment.includes('.')
+		if (isPageRoute) {
 			env.ANALYTICS.writeDataPoint({ blobs: ['pageview', url.pathname], indexes: ['pageview'] })
 		}
 
