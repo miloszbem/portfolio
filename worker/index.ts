@@ -19,9 +19,22 @@ function escapeHtml(value: string): string {
 		.replace(/'/g, '&#39;')
 }
 
+const OUTBOUND_LINKS: Record<string, string> = {
+	kancelaria: 'https://adwokatdamiandzida.pl/',
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url)
+
+		const outboundMatch = url.pathname.match(/^\/out\/([a-z0-9-]+)$/)
+		if (outboundMatch) {
+			const target = OUTBOUND_LINKS[outboundMatch[1]]
+			if (!target) {
+				return new Response('Not found', { status: 404 })
+			}
+			return Response.redirect(target, 302)
+		}
 
 		if (url.pathname !== '/api/contact' || request.method !== 'POST') {
 			return new Response('Not found', { status: 404 })

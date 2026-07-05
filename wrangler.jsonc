@@ -4,6 +4,6 @@
 	"main": "./worker/index.ts",
 	"assets": {
 		"directory": "./dist",
-		"run_worker_first": ["/api/contact"]
+		"run_worker_first": ["/api/contact", "/out/*"]
 	}
 }
