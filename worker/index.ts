@@ -1,14 +1,5 @@
 export interface Env {
-	EMAIL: { send(message: EmailMessage): Promise<void> }
-}
-
-interface EmailMessage {
-	to: string
-	from: { email: string; name?: string }
-	replyTo?: string
-	subject: string
-	text: string
-	html: string
+	RESEND_API_KEY: string
 }
 
 interface ContactPayload {
@@ -51,14 +42,25 @@ export default {
 		const safeName = name.replace(/[\r\n]+/g, ' ').trim()
 
 		try {
-			await env.EMAIL.send({
-				to: 'miloszbembnowicz@gmail.com',
-				from: { email: 'kontakt@miloszbembnowicz.pl', name: 'Formularz kontaktowy' },
-				replyTo: email,
-				subject: `Nowa wiadomość od ${safeName}`,
-				text: `Imię: ${name}\nEmail: ${email}\nTelefon: ${phone || '-'}\n\n${message}`,
-				html: `<p><strong>Imię:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Telefon:</strong> ${escapeHtml(phone || '-')}</p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
+			const res = await fetch('https://api.resend.com/emails', {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${env.RESEND_API_KEY}`,
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					from: 'Formularz kontaktowy <kontakt@miloszbembnowicz.pl>',
+					to: ['miloszbembnowicz@gmail.com'],
+					reply_to: email,
+					subject: `Nowa wiadomość od ${safeName}`,
+					text: `Imię: ${name}\nEmail: ${email}\nTelefon: ${phone || '-'}\n\n${message}`,
+					html: `<p><strong>Imię:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Telefon:</strong> ${escapeHtml(phone || '-')}</p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
+				}),
 			})
+
+			if (!res.ok) {
+				return Response.json({ error: 'Send failed' }, { status: 502 })
+			}
 		} catch {
 			return Response.json({ error: 'Send failed' }, { status: 502 })
 		}
