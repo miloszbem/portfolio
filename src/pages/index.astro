@@ -24,14 +24,6 @@ const en = COPY.en
 	title="Miłosz Bembnowicz — Strony internetowe dla przedsiębiorców"
 	description="Tworzę szybkie, nowoczesne strony internetowe dla firm i freelancerów. Projektowanie, wdrożenie i wsparcie — od wyceny po launch."
 >
-	<!-- Ukryty formularz dla Netlify (wykrywany przy buildzie) -->
-	<form name="contact" data-netlify="true" hidden>
-		<input type="text" name="name" />
-		<input type="email" name="email" />
-		<input type="tel" name="phone" />
-		<textarea name="message"></textarea>
-	</form>
-
 	<Nav pl={pl} en={en}>
 		<LangSwitcher client:load slot="lang-switcher" />
 	</Nav>

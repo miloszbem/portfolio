@@ -6,11 +6,6 @@ interface Props {
 	en: LangCopy
 }
 
-const encode = (data: Record<string, string>) =>
-	Object.keys(data)
-		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-		.join('&')
-
 export default function ContactForm({ pl, en }: Props) {
 	const [lang, setLang] = useState<'pl' | 'en'>('pl')
 	const [name, setName] = useState('')
@@ -33,10 +28,10 @@ export default function ContactForm({ pl, en }: Props) {
 		e.preventDefault()
 		setStatus('sending')
 		try {
-			const res = await fetch('/', {
+			const res = await fetch('/api/contact', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: encode({ 'form-name': 'contact', name, email, phone, message }),
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, phone, message }),
 			})
 			if (res.ok) {
 				setStatus('done')
