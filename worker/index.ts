@@ -31,8 +31,37 @@ const OUTBOUND_LINKS: Record<string, string> = {
 
 const TRACKABLE_EVENTS = new Set(['opieka_miesieczna_open'])
 
+const MAINTENANCE_MODE = true
+
+const MAINTENANCE_HTML = `<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prace techniczne — Miłosz Bembnowicz</title>
+<style>
+	body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f4f1eb; color: #0f1629; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
+	h1 { font-size: 28px; margin: 0 0 12px; }
+	p { color: rgba(15, 22, 41, 0.6); font-size: 16px; margin: 0; }
+</style>
+</head>
+<body>
+	<div>
+		<h1>Prace techniczne</h1>
+		<p>Strona jest chwilowo niedostępna. Wróć za jakiś czas.</p>
+	</div>
+</body>
+</html>`
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
+		if (MAINTENANCE_MODE) {
+			return new Response(MAINTENANCE_HTML, {
+				status: 503,
+				headers: { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '3600' },
+			})
+		}
+
 		const url = new URL(request.url)
 
 		const outboundMatch = url.pathname.match(/^\/out\/([a-z0-9-]+)$/)
