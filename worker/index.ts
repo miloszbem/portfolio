@@ -1,5 +1,6 @@
 export interface Env {
 	RESEND_API_KEY: string
+	CONTACT_TO_EMAIL: string
 }
 
 interface ContactPayload {
@@ -50,7 +51,7 @@ export default {
 				},
 				body: JSON.stringify({
 					from: 'Formularz kontaktowy <kontakt@miloszbembnowicz.pl>',
-					to: ['miloszbembnowicz@gmail.com'],
+					to: [env.CONTACT_TO_EMAIL],
 					reply_to: email,
 					subject: `Nowa wiadomość od ${safeName}`,
 					text: `Imię: ${name}\nEmail: ${email}\nTelefon: ${phone || '-'}\n\n${message}`,
