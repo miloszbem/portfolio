@@ -271,6 +271,12 @@ const packages = ['pkg1', 'pkg2', 'pkg3', 'pkg4'] as const
 				}
 				body.addEventListener('transitionend', pendingHandler, { once: true })
 			} else {
+				fetch('/api/track', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ event: 'opieka_miesieczna_open' }),
+				}).catch(() => {})
+
 				details.open = true
 				const endHeight = body.scrollHeight
 				body.style.height = '0px'

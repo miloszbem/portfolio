@@ -29,6 +29,8 @@ const OUTBOUND_LINKS: Record<string, string> = {
 	kancelaria: 'https://adwokatdamiandzida.pl/',
 }
 
+const TRACKABLE_EVENTS = new Set(['opieka_miesieczna_open'])
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url)
@@ -47,6 +49,10 @@ export default {
 			return handleContact(request, env)
 		}
 
+		if (url.pathname === '/api/track' && request.method === 'POST') {
+			return handleTrack(request, env)
+		}
+
 		const lastSegment = url.pathname.split('/').pop() ?? ''
 		const isPageRoute = request.method === 'GET' && !url.pathname.startsWith('/api/') && !lastSegment.includes('.')
 		if (isPageRoute) {
@@ -55,6 +61,22 @@ export default {
 
 		return env.ASSETS.fetch(request)
 	},
+}
+
+async function handleTrack(request: Request, env: Env): Promise<Response> {
+	let payload: { event?: string }
+	try {
+		payload = await request.json()
+	} catch {
+		return Response.json({ error: 'Invalid JSON' }, { status: 400 })
+	}
+
+	if (!payload.event || !TRACKABLE_EVENTS.has(payload.event)) {
+		return Response.json({ error: 'Unknown event' }, { status: 400 })
+	}
+
+	env.ANALYTICS.writeDataPoint({ blobs: ['custom_event', payload.event], indexes: ['custom_event'] })
+	return Response.json({ ok: true })
 }
 
 async function handleContact(request: Request, env: Env): Promise<Response> {
@@ -97,5 +119,6 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
 		return Response.json({ error: 'Send failed' }, { status: 502 })
 	}
 
+	env.ANALYTICS.writeDataPoint({ blobs: ['form_submit'], indexes: ['form_submit'] })
 	return Response.json({ ok: true })
 }
