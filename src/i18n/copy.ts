@@ -315,7 +315,7 @@ const RAW_COPY = {
 				'Higher content-change allowance in your plan',
 				'Extended layout and section modifications',
 			],
-			retainerDesc: "Every month you get a short summary of what's happening on your site — no charts, no jargon, just plain language.",
+			retainerDesc: "Every month you get a short summary of what's happening on your site - no charts, no jargon, just plain language.",
 		},
 		pkg3: {
 			name: 'Portal / Blog',
@@ -367,7 +367,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Zero templates, zero compromises',
-				body: 'Your site isn\'t another theme pulled off the shelf, looking like hundreds of others. Every line of code is written for you, which means you\'re never boxed in by what a template "allows" — want to change something, add something, rearrange something? I do it, no "the plugin doesn\'t support that" excuses.',
+				body: 'Your site isn\'t another theme pulled off the shelf, looking like hundreds of others. Every line of code is written for you, which means you\'re never boxed in by what a template "allows" - want to change something, add something, rearrange something? I do it, no "the plugin doesn\'t support that" excuses.',
 			},
 			{
 				title: 'Speed that actually matters',

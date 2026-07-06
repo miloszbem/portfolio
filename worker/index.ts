@@ -38,7 +38,7 @@ const MAINTENANCE_HTML = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Prace techniczne — Miłosz Bembnowicz</title>
+<title>Prace techniczne - Miłosz Bembnowicz</title>
 <meta name="description" content="Strona jest chwilowo niedostępna z powodu prac technicznych. Wróć za jakiś czas." />
 <style>
 	body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f4f1eb; color: #0f1629; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
