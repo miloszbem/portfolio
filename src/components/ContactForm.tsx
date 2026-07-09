@@ -49,7 +49,7 @@ export default function ContactForm({ pl, en }: Props) {
 		borderRadius: 11,
 		padding: '14px 16px',
 		color: '#fff',
-		fontSize: 14,
+		fontSize: 16,
 		fontFamily: "'DM Sans', sans-serif",
 		outline: 'none',
 		width: '100%',
@@ -72,13 +72,55 @@ export default function ContactForm({ pl, en }: Props) {
 			}}
 		>
 			{status === 'done' ? (
-				<p style={{ color: '#fff', fontSize: 16, textAlign: 'center', padding: '40px 0' }}>
-					{t.successMsg}
-				</p>
+				<div style={{ textAlign: 'center', padding: '40px 0' }}>
+					<p style={{ color: '#fff', fontSize: 16, margin: '0 0 20px' }}>
+						{t.successMsg}
+					</p>
+					<button
+						type="button"
+						onClick={() => {
+							setName('')
+							setEmail('')
+							setPhone('')
+							setMessage('')
+							setStatus('idle')
+						}}
+						style={{
+							background: 'transparent',
+							color: '#fff',
+							border: '1px solid rgba(255,255,255,0.3)',
+							padding: '10px 22px',
+							borderRadius: 12,
+							fontSize: 14,
+							fontFamily: "'DM Sans', sans-serif",
+							cursor: 'pointer',
+						}}
+					>
+						{lang === 'pl' ? 'Wyślij kolejną wiadomość' : 'Send another message'}
+					</button>
+				</div>
 			) : status === 'error' ? (
-				<p style={{ color: '#ff6b6b', fontSize: 16, textAlign: 'center', padding: '40px 0' }}>
-					{lang === 'pl' ? 'Błąd wysyłania. Spróbuj ponownie.' : 'Send error. Please try again.'}
-				</p>
+				<div style={{ textAlign: 'center', padding: '40px 0' }}>
+					<p style={{ color: '#ff6b6b', fontSize: 16, margin: '0 0 20px' }}>
+						{lang === 'pl' ? 'Błąd wysyłania. Spróbuj ponownie.' : 'Send error. Please try again.'}
+					</p>
+					<button
+						type="button"
+						onClick={() => setStatus('idle')}
+						style={{
+							background: 'transparent',
+							color: '#fff',
+							border: '1px solid rgba(255,255,255,0.3)',
+							padding: '10px 22px',
+							borderRadius: 12,
+							fontSize: 14,
+							fontFamily: "'DM Sans', sans-serif",
+							cursor: 'pointer',
+						}}
+					>
+						{lang === 'pl' ? 'Wróć do formularza' : 'Back to form'}
+					</button>
+				</div>
 			) : (
 				<>
 					<div style={{ marginBottom: 20 }}>
