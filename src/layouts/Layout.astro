@@ -18,6 +18,13 @@ const personSchema = {
 	email: 'miloszbembnowicz@gmail.com',
 	areaServed: 'PL',
 }
+
+const websiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'Miłosz Bembnowicz',
+	url: Astro.site?.toString(),
+}
 ---
 
 <html lang="pl">
@@ -48,6 +55,7 @@ const personSchema = {
 		<meta name="twitter:image:alt" content="Miłosz Bembnowicz - Strony internetowe dla przedsiębiorców" />
 
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
 
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
