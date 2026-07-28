@@ -54,7 +54,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 								<div class="sv-care" data-pl={pl.careAddonQuote} data-en={en.careAddonQuote}>{pl.careAddonQuote}</div>
 							)}
 						</div>
-						<a href="#cennik" class="sv-cta" data-pl={pl.detailsCta} data-en={en.detailsCta}>{pl.detailsCta}</a>
+						<a href="#cennik" class="sv-cta" data-pl={`${pl.detailsCta}: ${plPkg.name}`} data-en={`${en.detailsCta}: ${enPkg.name}`}>{`${pl.detailsCta}: ${plPkg.name}`}</a>
 					</div>
 				)
 			})}
