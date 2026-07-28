@@ -31,7 +31,7 @@ const OUTBOUND_LINKS: Record<string, string> = {
 
 const TRACKABLE_EVENTS = new Set(['opieka_miesieczna_open'])
 
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 
 const MAINTENANCE_HTML = `<!doctype html>
 <html lang="pl">
