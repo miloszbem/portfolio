@@ -89,7 +89,19 @@ export default {
 			env.ANALYTICS.writeDataPoint({ blobs: ['pageview', url.pathname], indexes: ['pageview'] })
 		}
 
-		return env.ASSETS.fetch(request)
+		const assetResponse = await env.ASSETS.fetch(request)
+		const contentType = assetResponse.headers.get('Content-Type')
+		if (!contentType?.startsWith('text/html') || contentType.includes('charset')) {
+			return assetResponse
+		}
+
+		const headers = new Headers(assetResponse.headers)
+		headers.set('Content-Type', 'text/html; charset=utf-8')
+		return new Response(assetResponse.body, {
+			status: assetResponse.status,
+			statusText: assetResponse.statusText,
+			headers,
+		})
 	},
 }
 
