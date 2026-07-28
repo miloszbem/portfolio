@@ -33,6 +33,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 						<div class="sv-price-block">
 							{plPkg.price ? (
 								<div class="sv-price">
+									<span data-pl={pl.priceFrom} data-en={en.priceFrom}>{pl.priceFrom}</span>{' '}
 									<span data-pl={plPkg.price} data-en={enPkg.price}>{plPkg.price}</span>{' '}
 									<span data-pl={pl.net} data-en={en.net}>{pl.net}</span>
 								</div>
@@ -58,6 +59,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 				)
 			})}
 		</div>
+		<div data-reveal class="services-disclaimer" data-pl={pl.priceDisclaimer} data-en={en.priceDisclaimer}>{pl.priceDisclaimer}</div>
 	</div>
 </section>
 
@@ -93,7 +95,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 
 	.services-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 14px;
 	}
 
@@ -167,6 +169,13 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		text-decoration: underline;
 		text-underline-offset: 3px;
 		align-self: flex-start;
+	}
+
+	.services-disclaimer {
+		margin-top: 24px;
+		font-size: 13px;
+		color: var(--muted-light);
+		text-align: center;
 	}
 
 	@media (max-width: 768px) {

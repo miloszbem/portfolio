@@ -28,6 +28,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 						<div class="plan-name" data-pl={plPkg.name} data-en={enPkg.name}>{plPkg.name}</div>
 						{plPkg.price ? (
 							<div class="plan-price">
+								<span class="plan-from" data-pl={pl.priceFrom} data-en={en.priceFrom}>{pl.priceFrom}</span>{' '}
 								<span data-pl={plPkg.price} data-en={enPkg.price}>{plPkg.price}</span>{' '}
 								<span class="plan-unit" data-pl={pl.net} data-en={en.net}>{pl.net}</span>
 							</div>
@@ -68,6 +69,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 				)
 			})}
 		</div>
+		<div data-reveal class="pricing-disclaimer" data-pl={pl.priceDisclaimer} data-en={en.priceDisclaimer}>{pl.priceDisclaimer}</div>
 	</div>
 </section>
 
@@ -103,7 +105,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 
 	.pricing-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 14px;
 	}
 
@@ -113,6 +115,8 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		border-radius: 12px;
 		padding: 30px;
 		border-top-width: 3px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.border-accent { border-top-color: var(--accent); }
@@ -140,6 +144,12 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 	}
 
 	.plan-unit {
+		font-family: var(--display);
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.plan-from {
 		font-family: var(--display);
 		font-size: 18px;
 		font-weight: 700;
@@ -189,6 +199,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 	.plan-retainer {
 		border-top: 1px solid var(--border);
 		padding-top: 16px;
+		margin-top: auto;
 	}
 
 	.plan-retainer summary {
@@ -231,6 +242,13 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 
 	.plan-analytics-link:hover {
 		text-decoration: underline;
+	}
+
+	.pricing-disclaimer {
+		margin-top: 24px;
+		font-size: 13px;
+		color: var(--muted-light);
+		text-align: center;
 	}
 
 	@media (max-width: 900px) {
