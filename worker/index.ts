@@ -149,6 +149,23 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
 		return Response.json({ error: 'Send failed' }, { status: 502 })
 	}
 
+	try {
+		await fetch('https://api.resend.com/emails', {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${env.RESEND_API_KEY}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				from: 'Miłosz Bembnowicz <kontakt@miloszbembnowicz.pl>',
+				to: [email],
+				subject: 'Potwierdzenie wysłania wiadomości',
+				text: `Cześć ${name},\n\nTwoja wiadomość została wysłana. Oto przesłane dane:\n\nImię: ${name}\nEmail: ${email}\nTelefon: ${phone || '-'}\n\nWiadomość:\n${message}\n\nOdpowiem najszybciej jak to możliwe.`,
+				html: `<p>Cześć ${escapeHtml(name)},</p><p>Twoja wiadomość została wysłana. Oto przesłane dane:</p><p><strong>Imię:</strong> ${escapeHtml(name)}</p><p><strong>Email:</strong> ${escapeHtml(email)}</p><p><strong>Telefon:</strong> ${escapeHtml(phone || '-')}</p><p><strong>Wiadomość:</strong><br>${escapeHtml(message).replace(/\n/g, '<br>')}</p><p>Odpowiem najszybciej jak to możliwe.</p>`,
+			}),
+		})
+	} catch {}
+
 	env.ANALYTICS.writeDataPoint({ blobs: ['form_submit'], indexes: ['form_submit'] })
 	return Response.json({ ok: true })
 }
