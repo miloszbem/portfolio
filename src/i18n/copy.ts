@@ -2,12 +2,15 @@ const GLUE_WORDS = [
 	'a', 'i', 'o', 'u', 'w', 'z',
 	'do', 'od', 'na', 'po', 'ze', 'we', 'za', 'by', 'ku',
 	'czy', 'nie', 'już', 'że', 'aż', 'iż', 'tak', 'ta', 'to', 'co', 'który', 'są', 'być', 'mnie', 'jest', 'ci', 'cię',
+	'się', 'gdzie', 'jak', 'gdy', 'lub', 'dla', 'bez', 'mu', 'go', 'ją', 'nam', 'wam', 'im', 'ich', 'bo', 'aby', 'żeby', 'tu', 'tam', 'oraz', 'ani', 'lecz', 'kto', 'ty',
 ]
 
 const GLUE_PATTERN = new RegExp(`(?<=^|\\s)(${GLUE_WORDS.join('|')})\\s+`, 'gi')
+const SENTENCE_START_PATTERN = /([.,]\s+\S+)\s+/g
 
 function noOrphans(text: string): string {
 	let result = text.replace(GLUE_PATTERN, '$1 ')
+	result = result.replace(SENTENCE_START_PATTERN, '$1 ')
 	result = result.replace(/(\d)\s(\d)/g, '$1 $2')
 	const lastSpace = result.lastIndexOf(' ')
 	if (lastSpace !== -1) {
@@ -117,7 +120,7 @@ const RAW_COPY = {
 			includesNote: 'Wszystko z pakietu Wizytówka Pro +',
 			price: null,
 			carePrice: 'w abonamencie',
-			teaser: 'Własne miejsce do publikowania treści – Ty dodajesz artykuły i aktualności, ja dbam o to, żeby wszystko działało bez zarzutu, niezależnie od tego, ile treści dodasz.',
+			teaser: 'Własne miejsce do publikowania treści - Ty dodajesz artykuły i aktualności, ja dbam o to, żeby wszystko działało bez zarzutu, niezależnie od tego, ile treści dodasz.',
 			checklist: [
 				'Panel do samodzielnego dodawania artykułów/aktualności',
 				'Nielimitowana liczba podstron i wpisów',
@@ -131,7 +134,7 @@ const RAW_COPY = {
 				'Wsparcie w obsłudze panelu publikacji',
 				'Dostosowania struktury/wyglądu na życzenie',
 			],
-			retainerDesc: 'Zajmuję się techniczną stroną Twojego portalu – panel działa bezawaryjnie, a strona się nie zwalnia mimo rosnącej ilości treści. Redagowanie i pisanie treści zostaje po Twojej stronie.',
+			retainerDesc: 'Zajmuję się techniczną stroną Twojego portalu - panel działa bezawaryjnie, a strona się nie zwalnia mimo rosnącej ilości treści. Redagowanie i pisanie treści zostaje po Twojej stronie.',
 		},
 		aboutEy: 'Dlaczego warto?',
 		aboutTitle: 'Nie ogranicza mnie WordPress.',
@@ -142,7 +145,7 @@ const RAW_COPY = {
 			},
 			{
 				title: 'Zero szablonów, zero kompromisów',
-				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon – chcesz coś zmienić, dodać, przearanżować? Robię to bez wymówek typu "wtyczka tego nie wspiera".',
+				body: 'Twoja strona nie jest kolejnym motywem ściągniętym z internetu, który wygląda jak setki innych. Każda linijka kodu jest pisana pod Ciebie, co znaczy że nie jesteś ograniczony tym, co "pozwala" szablon - chcesz coś zmienić, dodać, przearanżować? Robię to bez wymówek typu "wtyczka tego nie wspiera".',
 			},
 			{
 				title: 'Prędkość, która się liczy',
@@ -162,7 +165,7 @@ const RAW_COPY = {
 		analyticsPageEyebrow: 'Pakiet Wizytówka Pro i wyżej',
 		analyticsPageTitle: 'Co widzisz w raporcie analitycznym',
 		analyticsIntroTitle: 'Twoja strona, Twoje dane',
-		analyticsIntro: 'Co miesiąc dostajesz ode mnie krótki, przetłumaczony na ludzki język raport z tego, co dzieje się na Twojej stronie. Nie musisz rozumieć wykresów ani statystyk – zrobiłem to za Ciebie.',
+		analyticsIntro: 'Co miesiąc dostajesz ode mnie krótki, przetłumaczony na ludzki język raport z tego, co dzieje się na Twojej stronie. Nie musisz rozumieć wykresów ani statystyk - zrobiłem to za Ciebie.',
 		analyticsListTitle: 'Co znajdziesz w raporcie:',
 		analyticsItems: [
 			{ lead: 'Ile osób odwiedziło Twoją stronę', text: ', dziennie i w skali miesiąca, żebyś widział czy ruch rośnie' },
@@ -172,7 +175,7 @@ const RAW_COPY = {
 			{ lead: 'Z jakich urządzeń wchodzą', text: ', telefon czy komputer, żebyś wiedział na co bardziej postawić' },
 			{ lead: 'Czy faktycznie działają na Twojej stronie', text: ', np. czy klikają w numer telefonu albo wypełniają formularz kontaktowy, czyli robią to, na czym Ci najbardziej zależy' },
 		],
-		analyticsClosing: 'Dzięki temu wiesz nie tylko że strona działa, ale jak działa – i możemy razem decydować co warto zmienić, żeby działała jeszcze lepiej.',
+		analyticsClosing: 'Dzięki temu wiesz nie tylko że strona działa, ale jak działa - i możemy razem decydować co warto zmienić, żeby działała jeszcze lepiej.',
 		backHome: '← Wróć na stronę główną',
 		heroCodeCaption: 'Tak właśnie wygląda Twoja strona od środka:',
 		buildingLabel: 'Kompilowanie...',
@@ -188,7 +191,7 @@ const RAW_COPY = {
 		cmpRightTag: 'MOJE PODEJŚCIE',
 		cmpRightTitle: 'Astro + kod pisany od podstaw',
 		cmpR1: 'Czysty kod, zero zbędnych zależności',
-		cmpR1Explain: 'Brak WordPressa oznacza brak wirusów, psujących się aktualizacji i drogich wtyczek – dostajesz system, który po prostu działa, bez niespodzianek.',
+		cmpR1Explain: 'Brak WordPressa oznacza brak wirusów, psujących się aktualizacji i drogich wtyczek - dostajesz system, który po prostu działa, bez niespodzianek.',
 		cmpR2: 'Pełna kontrola nad bezpieczeństwem',
 		cmpR3: 'Błyskawiczne ładowanie strony',
 		cmpR4: 'Dowolna funkcja na życzenie, bez ograniczeń',
@@ -304,7 +307,7 @@ const RAW_COPY = {
 			includesNote: 'Everything in the Business Card Site Pro package +',
 			price: null,
 			carePrice: 'included in the plan',
-			teaser: 'Your own place to publish content – you add articles and news, I make sure everything runs flawlessly no matter how much content you add.',
+			teaser: 'Your own place to publish content - you add articles and news, I make sure everything runs flawlessly no matter how much content you add.',
 			checklist: [
 				'Self-service panel for adding articles/news',
 				'Unlimited pages and posts',
@@ -318,7 +321,7 @@ const RAW_COPY = {
 				'Support using the publishing panel',
 				'Structure/layout adjustments on request',
 			],
-			retainerDesc: "I handle the technical side of your portal – the panel runs smoothly and the site doesn't slow down as content grows. Editing and writing content stays entirely up to you.",
+			retainerDesc: "I handle the technical side of your portal - the panel runs smoothly and the site doesn't slow down as content grows. Editing and writing content stays entirely up to you.",
 		},
 		aboutEy: 'Why me?',
 		aboutTitle: "WordPress doesn't limit me.",
@@ -349,7 +352,7 @@ const RAW_COPY = {
 		analyticsPageEyebrow: 'Business Card Pro package and above',
 		analyticsPageTitle: "What you'll see in the analytics report",
 		analyticsIntroTitle: 'Your site, your data',
-		analyticsIntro: "Every month you get a short report from me, translated into plain human language, about what's happening on your site. You don't need to understand charts or statistics – I've done that part for you.",
+		analyticsIntro: "Every month you get a short report from me, translated into plain human language, about what's happening on your site. You don't need to understand charts or statistics - I've done that part for you.",
 		analyticsListTitle: "What's in the report:",
 		analyticsItems: [
 			{ lead: 'How many people visited your site', text: ', daily and over the month, so you can see whether traffic is growing' },
@@ -359,7 +362,7 @@ const RAW_COPY = {
 			{ lead: 'What devices they use', text: ', phone or computer, so you know what to prioritize' },
 			{ lead: 'Whether they actually take action on your site', text: ', for example, clicking your phone number or filling out the contact form, i.e. doing the things you actually care about' },
 		],
-		analyticsClosing: "This way you know not just that your site works, but how it works – and together we can decide what's worth changing to make it work even better.",
+		analyticsClosing: "This way you know not just that your site works, but how it works - and together we can decide what's worth changing to make it work even better.",
 		backHome: '← Back to homepage',
 		heroCodeCaption: 'This is what your website looks like under the hood:',
 		buildingLabel: 'Compiling...',
@@ -375,7 +378,7 @@ const RAW_COPY = {
 		cmpRightTag: 'MY APPROACH',
 		cmpRightTitle: 'Astro + hand-written code',
 		cmpR1: 'Clean code, zero bloated dependencies',
-		cmpR1Explain: "No WordPress means no malware, no breaking updates, and no expensive plugins – you get a system that just works, with no surprises.",
+		cmpR1Explain: "No WordPress means no malware, no breaking updates, and no expensive plugins - you get a system that just works, with no surprises.",
 		cmpR2: 'Full control over security',
 		cmpR3: 'Lightning-fast page loads',
 		cmpR4: 'Any feature, on request, no limits',
