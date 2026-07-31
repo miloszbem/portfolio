@@ -27,6 +27,16 @@ const websiteSchema = {
 	name: 'Miłosz Bembnowicz',
 	url: Astro.site?.toString(),
 }
+
+const organizationSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Organization',
+	name: 'Miłosz Bembnowicz',
+	url: Astro.site?.toString(),
+	logo: ogImageURL.toString(),
+	email: 'miloszbembnowicz@gmail.com',
+	sameAs: ['https://www.linkedin.com/in/miloszbembnowicz'],
+}
 ---
 
 <html lang="pl">
@@ -59,6 +69,7 @@ const websiteSchema = {
 
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
 
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
