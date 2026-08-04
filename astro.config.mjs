@@ -4,5 +4,6 @@ import react from '@astrojs/react';
 
 export default defineConfig({
 	site: 'https://miloszbembnowicz.pl',
+	trailingSlash: 'always',
 	integrations: [react()],
 });
