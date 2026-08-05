@@ -47,6 +47,37 @@ const { pl, en } = Astro.props
 		let startX = 0
 		let scrollStart = 0
 		let dragged = false
+		let autoplayTimer: ReturnType<typeof setInterval> | null = null
+		let resumeTimer: ReturnType<typeof setTimeout> | null = null
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+		const cardStep = () => {
+			const card = track.querySelector<HTMLElement>('.review-card')
+			if (!card) return 0
+			const gap = parseFloat(getComputedStyle(track).gap || '0')
+			return card.offsetWidth + gap
+		}
+
+		const advance = () => {
+			const step = cardStep()
+			if (!step) return
+			const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4
+			track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + step, behavior: 'smooth' })
+		}
+
+		const startAutoplay = () => {
+			if (reducedMotion || track.scrollWidth <= track.clientWidth + 4) return
+			stopAutoplay()
+			autoplayTimer = setInterval(advance, 3500)
+		}
+		const stopAutoplay = () => {
+			if (autoplayTimer) clearInterval(autoplayTimer)
+			autoplayTimer = null
+		}
+		const scheduleResume = () => {
+			if (resumeTimer) clearTimeout(resumeTimer)
+			resumeTimer = setTimeout(startAutoplay, 3000)
+		}
 
 		track.addEventListener('pointerdown', (e) => {
 			isDown = true
@@ -55,6 +86,8 @@ const { pl, en } = Astro.props
 			scrollStart = track.scrollLeft
 			track.setPointerCapture(e.pointerId)
 			track.classList.add('is-dragging')
+			stopAutoplay()
+			if (resumeTimer) clearTimeout(resumeTimer)
 		})
 		track.addEventListener('pointermove', (e) => {
 			if (!isDown) return
@@ -65,6 +98,7 @@ const { pl, en } = Astro.props
 		const endDrag = () => {
 			isDown = false
 			track.classList.remove('is-dragging')
+			scheduleResume()
 		}
 		track.addEventListener('pointerup', endDrag)
 		track.addEventListener('pointerleave', endDrag)
@@ -78,6 +112,8 @@ const { pl, en } = Astro.props
 			},
 			{ capture: true }
 		)
+
+		startAutoplay()
 	})
 </script>
 
