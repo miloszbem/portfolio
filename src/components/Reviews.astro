@@ -62,50 +62,49 @@ const { pl, en } = Astro.props
 		let startX = 0
 		let scrollStart = 0
 		let dragged = false
-		let rafId = 0
-		let resumeTimer: ReturnType<typeof setTimeout> | null = null
-		let running = false
-		const speed = 22 // px/s
+		const speed = 22 // px/s, nie px/klatkę - inaczej 120Hz jedzie 2x szybciej niż 60Hz
+		const resumeDelay = 3000
+		let pausedUntil = 0
+		let visible = true
+		let last = 0
+		// Własny licznik float: scrollLeft kwantyzuje się do pikseli urządzenia,
+		// więc czyste += na nim gubi ułamkowe przyrosty przy niskiej prędkości / 120Hz.
+		let pos = track.scrollLeft
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		let lastTime = 0
 
-		const tick = (time: number) => {
-			if (!running) return
-			if (!lastTime) lastTime = time
-			const dt = time - lastTime
-			lastTime = time
+		const canRun = () => visible && !reducedMotion && !isDown
+
+		const step = (now: number) => {
+			requestAnimationFrame(step)
+			const elapsed = last ? now - last : 0
+			last = now
+			if (!canRun() || Date.now() < pausedUntil) {
+				pos = track.scrollLeft
+				return
+			}
 			const width = loopWidth()
-			track.scrollLeft += (speed * dt) / 1000
-			if (width > 0 && track.scrollLeft >= width) track.scrollLeft -= width
-			rafId = requestAnimationFrame(tick)
+			if (width <= 0) return
+			pos = pos >= width ? 0 : pos + (speed * elapsed) / 1000
+			track.scrollLeft = pos
 		}
 
-		const startAutoplay = () => {
-			if (reducedMotion || track.scrollWidth <= track.clientWidth + 4 || running) return
-			running = true
-			lastTime = 0
-			rafId = requestAnimationFrame(tick)
-		}
-		const stopAutoplay = () => {
-			running = false
-			cancelAnimationFrame(rafId)
-		}
-		const scheduleResume = () => {
-			if (resumeTimer) clearTimeout(resumeTimer)
-			resumeTimer = setTimeout(startAutoplay, 3000)
+		const hold = () => {
+			pausedUntil = Date.now() + resumeDelay
 		}
 
-		track.addEventListener('pointerdown', (e) => {
+		new IntersectionObserver((entries) => {
+			visible = entries[0].isIntersecting
+		}).observe(track)
+
+		track.addEventListener('mousedown', (e) => {
 			isDown = true
 			dragged = false
 			startX = e.clientX
 			scrollStart = track.scrollLeft
-			track.setPointerCapture(e.pointerId)
 			track.classList.add('is-dragging')
-			stopAutoplay()
-			if (resumeTimer) clearTimeout(resumeTimer)
+			hold()
 		})
-		track.addEventListener('pointermove', (e) => {
+		window.addEventListener('mousemove', (e) => {
 			if (!isDown) return
 			const dx = e.clientX - startX
 			if (Math.abs(dx) > 4) dragged = true
@@ -117,12 +116,17 @@ const { pl, en } = Astro.props
 			track.scrollLeft = next
 		})
 		const endDrag = () => {
+			if (!isDown) return
 			isDown = false
 			track.classList.remove('is-dragging')
-			scheduleResume()
+			hold()
 		}
-		track.addEventListener('pointerup', endDrag)
-		track.addEventListener('pointerleave', endDrag)
+		window.addEventListener('mouseup', endDrag)
+
+		track.addEventListener('touchstart', hold, { passive: true })
+		track.addEventListener('touchend', hold, { passive: true })
+		track.addEventListener('wheel', hold, { passive: true })
+
 		track.addEventListener(
 			'click',
 			(e) => {
@@ -134,7 +138,7 @@ const { pl, en } = Astro.props
 			{ capture: true }
 		)
 
-		startAutoplay()
+		requestAnimationFrame(step)
 	})
 </script>
 
