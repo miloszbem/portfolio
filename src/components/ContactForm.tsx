@@ -154,6 +154,8 @@ export default function ContactForm({ pl, en }: Props) {
 							placeholder={t.fPhoneP}
 							value={phone}
 							onChange={(e) => setPhone(e.target.value)}
+							pattern="^[+0-9\s()-]{6,20}$"
+							title={t.fPhoneInvalid}
 							style={inputStyle}
 						/>
 					</div>

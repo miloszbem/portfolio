@@ -16,12 +16,31 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 			<div class="eyebrow" data-pl={pl.priceEy} data-en={en.priceEy}>{pl.priceEy}</div>
 			<h2 class="section-title" data-pl={pl.priceTitle} data-en={en.priceTitle}>{pl.priceTitle}</h2>
 		</div>
+		<div data-reveal class="pricing-tabs" role="tablist">
+			{packages.map((key, i) => {
+				const plPkg = pl[key]
+				const enPkg = en[key]
+				return (
+					<button
+						type="button"
+						class={`pricing-tab${i === 0 ? ' is-active' : ''}`}
+						data-pricing-tab={key}
+						role="tab"
+						aria-selected={i === 0 ? 'true' : 'false'}
+						data-pl={plPkg.name}
+						data-en={enPkg.name}
+					>
+						{plPkg.name}
+					</button>
+				)
+			})}
+		</div>
 		<div class="pricing-grid">
 			{packages.map((key, i) => {
 				const plPkg = pl[key]
 				const enPkg = en[key]
 				return (
-					<div data-reveal data-reveal-d={i % 2 === 1 ? '1' : undefined} class="plan-card border-accent">
+					<div data-pricing-panel={key} class={`plan-card border-accent${i === 0 ? ' is-active' : ''}`}>
 						{plPkg.includesNote && (
 							<div class="plan-note" data-pl={plPkg.includesNote} data-en={enPkg.includesNote}>{plPkg.includesNote}</div>
 						)}
@@ -103,20 +122,52 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		line-height: 1.05;
 	}
 
+	.pricing-tabs {
+		display: flex;
+		gap: 8px;
+		margin-bottom: 20px;
+	}
+
+	.pricing-tab {
+		flex: 1;
+		min-width: 0;
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		padding: 10px 12px;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--muted);
+		cursor: pointer;
+		font-family: 'DM Sans', sans-serif;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: center;
+	}
+
+	.pricing-tab.is-active {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: #fff;
+	}
+
 	.pricing-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 14px;
 	}
 
 	.plan-card {
+		display: none;
 		background: var(--bg);
 		border: 1px solid var(--border);
 		border-radius: 12px;
 		padding: 30px;
 		border-top-width: 3px;
-		display: flex;
 		flex-direction: column;
+	}
+
+	.plan-card.is-active {
+		display: flex;
 	}
 
 	.border-accent { border-top-color: var(--accent); }
@@ -245,16 +296,30 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		text-align: center;
 	}
 
-	@media (max-width: 900px) {
-		.pricing-grid { grid-template-columns: 1fr; }
-	}
-
 	@media (max-width: 768px) {
 		.pricing { padding: 64px 16px; }
+		.pricing-tab { padding: 9px 8px; font-size: 11.5px; }
 	}
 </style>
 
 <script>
+	document.querySelectorAll<HTMLElement>('.pricing-tabs').forEach((tabs) => {
+		const grid = tabs.nextElementSibling
+		if (!grid) return
+		tabs.querySelectorAll<HTMLButtonElement>('.pricing-tab').forEach((tab) => {
+			tab.addEventListener('click', () => {
+				const key = tab.dataset.pricingTab
+				tabs.querySelectorAll('.pricing-tab').forEach((t) => {
+					t.classList.toggle('is-active', t === tab)
+					t.setAttribute('aria-selected', t === tab ? 'true' : 'false')
+				})
+				grid.querySelectorAll('[data-pricing-panel]').forEach((panel) => {
+					panel.classList.toggle('is-active', panel.getAttribute('data-pricing-panel') === key)
+				})
+			})
+		})
+	})
+
 	document.querySelectorAll<HTMLDetailsElement>('.plan-retainer').forEach((details) => {
 		const summary = details.querySelector('summary')
 		const body = details.querySelector<HTMLElement>('.retainer-body')

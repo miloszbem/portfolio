@@ -14,7 +14,7 @@ const { pl, en } = Astro.props
 		<div class="eyebrow" data-pl={pl.revEy} data-en={en.revEy}>{pl.revEy}</div>
 		<h2 class="section-title" data-pl={pl.revTitle} data-en={en.revTitle}>{pl.revTitle}</h2>
 	</div>
-	<div class="reviews-grid">
+	<div class="reviews-track" data-reviews-track>
 		<div data-reveal class="review-card">
 			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
@@ -40,6 +40,46 @@ const { pl, en } = Astro.props
 	</div>
 </div>
 </section>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-reviews-track]').forEach((track) => {
+		let isDown = false
+		let startX = 0
+		let scrollStart = 0
+		let dragged = false
+
+		track.addEventListener('pointerdown', (e) => {
+			isDown = true
+			dragged = false
+			startX = e.clientX
+			scrollStart = track.scrollLeft
+			track.setPointerCapture(e.pointerId)
+			track.classList.add('is-dragging')
+		})
+		track.addEventListener('pointermove', (e) => {
+			if (!isDown) return
+			const dx = e.clientX - startX
+			if (Math.abs(dx) > 4) dragged = true
+			track.scrollLeft = scrollStart - dx
+		})
+		const endDrag = () => {
+			isDown = false
+			track.classList.remove('is-dragging')
+		}
+		track.addEventListener('pointerup', endDrag)
+		track.addEventListener('pointerleave', endDrag)
+		track.addEventListener(
+			'click',
+			(e) => {
+				if (dragged) {
+					e.preventDefault()
+					e.stopPropagation()
+				}
+			},
+			{ capture: true }
+		)
+	})
+</script>
 
 <style>
 	.reviews {
@@ -70,16 +110,23 @@ const { pl, en } = Astro.props
 		line-height: 1.05;
 	}
 
-	.reviews-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
+	.reviews-track {
+		display: flex;
 		gap: 14px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		cursor: grab;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
 	}
 
-	.reviews-grid.single {
-		grid-template-columns: 1fr;
-		max-width: 540px;
-		margin: 0 auto;
+	.reviews-track::-webkit-scrollbar {
+		display: none;
+	}
+
+	.reviews-track.is-dragging {
+		cursor: grabbing;
+		scroll-snap-type: none;
 	}
 
 	.review-card {
@@ -87,6 +134,9 @@ const { pl, en } = Astro.props
 		border: 1px solid var(--border);
 		border-radius: 12px;
 		padding: 30px;
+		flex: 0 0 min(420px, 88vw);
+		scroll-snap-align: start;
+		user-select: none;
 	}
 
 	.quote-mark {
@@ -132,6 +182,5 @@ const { pl, en } = Astro.props
 
 	@media (max-width: 768px) {
 		.reviews { padding: 64px 16px; }
-		.reviews-grid { grid-template-columns: 1fr; }
 	}
 </style>
