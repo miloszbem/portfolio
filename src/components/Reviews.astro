@@ -43,36 +43,52 @@ const { pl, en } = Astro.props
 
 <script>
 	document.querySelectorAll<HTMLElement>('[data-reviews-track]').forEach((track) => {
+		const originalCards = Array.from(track.children)
+		originalCards.forEach((card) => {
+			const clone = card.cloneNode(true) as HTMLElement
+			clone.setAttribute('aria-hidden', 'true')
+			clone.removeAttribute('data-reveal')
+			clone.removeAttribute('data-reveal-d')
+			clone.style.opacity = '1'
+			clone.style.transform = 'none'
+			track.appendChild(clone)
+		})
+		const loopWidth = () => {
+			const gap = parseFloat(getComputedStyle(track).gap || '0')
+			return originalCards.reduce((sum, card) => sum + (card as HTMLElement).offsetWidth + gap, 0)
+		}
+
 		let isDown = false
 		let startX = 0
 		let scrollStart = 0
 		let dragged = false
-		let autoplayTimer: ReturnType<typeof setInterval> | null = null
+		let rafId = 0
 		let resumeTimer: ReturnType<typeof setTimeout> | null = null
+		let running = false
+		const speed = 22 // px/s
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		let lastTime = 0
 
-		const cardStep = () => {
-			const card = track.querySelector<HTMLElement>('.review-card')
-			if (!card) return 0
-			const gap = parseFloat(getComputedStyle(track).gap || '0')
-			return card.offsetWidth + gap
-		}
-
-		const advance = () => {
-			const step = cardStep()
-			if (!step) return
-			const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4
-			track.scrollTo({ left: atEnd ? 0 : track.scrollLeft + step, behavior: 'smooth' })
+		const tick = (time: number) => {
+			if (!running) return
+			if (!lastTime) lastTime = time
+			const dt = time - lastTime
+			lastTime = time
+			const width = loopWidth()
+			track.scrollLeft += (speed * dt) / 1000
+			if (width > 0 && track.scrollLeft >= width) track.scrollLeft -= width
+			rafId = requestAnimationFrame(tick)
 		}
 
 		const startAutoplay = () => {
-			if (reducedMotion || track.scrollWidth <= track.clientWidth + 4) return
-			stopAutoplay()
-			autoplayTimer = setInterval(advance, 3500)
+			if (reducedMotion || track.scrollWidth <= track.clientWidth + 4 || running) return
+			running = true
+			lastTime = 0
+			rafId = requestAnimationFrame(tick)
 		}
 		const stopAutoplay = () => {
-			if (autoplayTimer) clearInterval(autoplayTimer)
-			autoplayTimer = null
+			running = false
+			cancelAnimationFrame(rafId)
 		}
 		const scheduleResume = () => {
 			if (resumeTimer) clearTimeout(resumeTimer)
@@ -93,7 +109,12 @@ const { pl, en } = Astro.props
 			if (!isDown) return
 			const dx = e.clientX - startX
 			if (Math.abs(dx) > 4) dragged = true
-			track.scrollLeft = scrollStart - dx
+			const width = loopWidth()
+			let next = scrollStart - dx
+			if (width > 0) {
+				next = ((next % width) + width) % width
+			}
+			track.scrollLeft = next
 		})
 		const endDrag = () => {
 			isDown = false
@@ -148,10 +169,8 @@ const { pl, en } = Astro.props
 
 	.reviews-track {
 		display: flex;
-		justify-content: center;
 		gap: 14px;
 		overflow-x: auto;
-		scroll-snap-type: x mandatory;
 		cursor: grab;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
@@ -163,7 +182,6 @@ const { pl, en } = Astro.props
 
 	.reviews-track.is-dragging {
 		cursor: grabbing;
-		scroll-snap-type: none;
 	}
 
 	.review-card {
