@@ -43,6 +43,9 @@ const { pl, en } = Astro.props
 
 <script>
 	document.querySelectorAll<HTMLElement>('[data-reviews-track]').forEach((track) => {
+		const isMobile = window.matchMedia('(max-width: 768px)').matches
+		if (!isMobile) return
+
 		const originalCards = Array.from(track.children)
 		originalCards.forEach((card) => {
 			const clone = card.cloneNode(true) as HTMLElement
@@ -186,6 +189,13 @@ const { pl, en } = Astro.props
 
 	.reviews-track.is-dragging {
 		cursor: grabbing;
+	}
+
+	@media (min-width: 769px) {
+		.reviews-track {
+			justify-content: center;
+			cursor: default;
+		}
 	}
 
 	.review-card {
