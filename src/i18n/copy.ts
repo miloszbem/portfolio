@@ -72,7 +72,7 @@ const RAW_COPY = {
 			includesNote: 'Usługa podstawowa',
 			price: '1 000',
 			carePrice: 'od 150 zł / mies.',
-			teaser: 'Twoja firma w internecie, szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie stała opieka: hosting, domena i bieżące zmiany treści, żebyś nie musiał się tym martwić.',
+			teaser: 'Twoja firma w internecie, szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie stała opieka: hosting i bieżące zmiany treści, żebyś nie musiał się tym martwić.',
 			checklist: [
 				'Do 5 podstawowych podstron',
 				'Projekt w pełni autorski, bez gotowych szablonów',
@@ -85,7 +85,7 @@ const RAW_COPY = {
 			],
 			desc: 'Strona wizytówkowa, która daje Twojej firmie solidną obecność w internecie. Klient wchodzi, widzi czym się zajmujesz, jak się z Tobą skontaktować i gdzie Cię znaleźć na mapie.',
 			retainerChecklist: [
-				'Utrzymanie hostingu i domeny',
+				'Utrzymanie hostingu',
 				'Podstawowe zmiany treści (godziny, cennik, kontakt)',
 				'Monitoring działania strony',
 				'Wsparcie techniczne w razie problemów',
@@ -257,7 +257,7 @@ const RAW_COPY = {
 			includesNote: 'Base service',
 			price: '1,000',
 			carePrice: 'from 150 zł / mo.',
-			teaser: "Your business online, a fast, clean site with a map location and visibility in Google search. Ongoing care is included: hosting, domain and content updates, so you don't have to worry about it.",
+			teaser: "Your business online, a fast, clean site with a map location and visibility in Google search. Ongoing care is included: hosting and content updates, so you don't have to worry about it.",
 			checklist: [
 				'Up to 5 core pages',
 				'Fully custom design, no off-the-shelf templates',
@@ -270,7 +270,7 @@ const RAW_COPY = {
 			],
 			desc: 'A business card website that gives your company a solid presence online. Visitors see what you do, how to reach you, and where to find you on the map.',
 			retainerChecklist: [
-				'Hosting and domain upkeep',
+				'Hosting upkeep',
 				'Basic content changes (hours, prices, contact info)',
 				'Site uptime monitoring',
 				'Technical support if issues arise',
