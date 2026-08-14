@@ -13,7 +13,7 @@ function noOrphans(text: string): string {
 	result = result.replace(SENTENCE_START_PATTERN, '$1 ')
 	result = result.replace(/(\d)\s(\d)/g, '$1 $2')
 	const lastSpace = result.lastIndexOf(' ')
-	if (lastSpace !== -1) {
+	if (lastSpace !== -1 && result.length - lastSpace < 15) {
 		result = result.slice(0, lastSpace) + ' ' + result.slice(lastSpace + 1)
 	}
 	return result
@@ -72,18 +72,18 @@ const RAW_COPY = {
 			includesNote: 'Usługa podstawowa',
 			price: '1 000',
 			carePrice: 'od 150 zł / mies.',
-			teaser: 'Twoja firma w internecie, szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie stała opieka: hosting i bieżące zmiany treści, żebyś nie musiał się tym martwić.',
+			teaser: 'Twoja firma w internecie, szybka, przejrzysta strona z lokalizacją na mapie i widocznością w wyszukiwaniach Google. W cenie hosting, a opieka zawiera bieżące zmiany treści, żebyś nie musiał się tym martwić.',
 			checklist: [
 				'Do 5 podstawowych podstron',
 				'Projekt w pełni autorski, bez gotowych szablonów',
 				'Mapa Google z lokalizacją firmy',
 				'SSL + hosting z ochroną przed atakami',
-				'Podstawowe SEO',
-				'Poprawne wyświetlanie linku na Facebooku/Messengerze',
+				'Rozszerzone SEO',
+				'Poprawne wyświetlanie linku na Facebooku/Messengerze i innych miejscach, gdzie udostępnisz adres strony',
 				'Konfiguracja Google Search Console',
 				'Konfiguracja i optymalizacja wizytówki Google Maps',
 			],
-			desc: 'Strona wizytówkowa, która daje Twojej firmie solidną obecność w internecie. Klient wchodzi, widzi czym się zajmujesz, jak się z Tobą skontaktować i gdzie Cię znaleźć na mapie.',
+			desc: 'Strona wizytówkowa, która daje Twojej firmie solidną obecność w internecie. Klient wchodzi, widzi czym się zajmujesz, jak się z Tobą skontaktować i gdzie Cię znaleźć.',
 			retainerChecklist: [
 				'Utrzymanie hostingu',
 				'Podstawowe zmiany treści (godziny, cennik, kontakt)',
@@ -105,6 +105,9 @@ const RAW_COPY = {
 				'Śledzenie kluczowych działań (np. kliknięcie w telefon)',
 				'Rozszerzone SEO pod lokalne wyszukiwania',
 				'Większy zakres modyfikacji strony we wdrożeniu',
+				'System rezerwacji online',
+				'Baza danych',
+				'Automatyczna kopia zapasowa',
 			],
 			desc: 'Możliwość pokazania się z najlepszej strony, galeria Twojej pracy czy lokalu i formularz, który automatycznie przekazuje Ci zapytania od klientów.',
 			retainerChecklist: [
@@ -125,6 +128,9 @@ const RAW_COPY = {
 				'Nielimitowana liczba podstron i wpisów',
 				'Szybkie wczytywanie zdjęć i plików niezależnie od ilości treści',
 				'Struktura kategorii/tagów dopasowana do potrzeb',
+				'System rezerwacji online',
+				'Baza danych',
+				'Automatyczna kopia zapasowa',
 			],
 			desc: 'Proste narzędzie do samodzielnego zarządzania treścią, bez potrzeby znajomości kodu. Ty decydujesz co publikujesz, ja zapewniam, że wszystko działa szybko i bez awarii.',
 			retainerChecklist: [
@@ -257,18 +263,18 @@ const RAW_COPY = {
 			includesNote: 'Base service',
 			price: '1,000',
 			carePrice: 'from 150 zł / mo.',
-			teaser: "Your business online, a fast, clean site with a map location and visibility in Google search. Ongoing care is included: hosting and content updates, so you don't have to worry about it.",
+			teaser: "Your business online, a fast, clean site with a map location and visibility in Google search. Hosting is included, and ongoing care covers content updates, so you don't have to worry about it.",
 			checklist: [
 				'Up to 5 core pages',
 				'Fully custom design, no off-the-shelf templates',
 				'Google Maps with your business location',
 				'SSL + hosting with attack protection',
-				'Basic SEO',
-				'Clean link previews on Facebook/Messenger',
+				'Expanded SEO',
+				'Clean link previews on Facebook/Messenger and everywhere else your link gets shared',
 				'Google Search Console setup',
 				'Google Maps listing setup and optimization',
 			],
-			desc: 'A business card website that gives your company a solid presence online. Visitors see what you do, how to reach you, and where to find you on the map.',
+			desc: 'A business card website that gives your company a solid presence online. Visitors see what you do, how to reach you, and where to find you.',
 			retainerChecklist: [
 				'Hosting upkeep',
 				'Basic content changes (hours, prices, contact info)',
@@ -290,6 +296,9 @@ const RAW_COPY = {
 				'Tracking of key actions (e.g. phone number clicks)',
 				'Expanded SEO for local search',
 				'A wider scope of site changes included in setup',
+				'Online booking system',
+				'Database',
+				'Automatic backups',
 			],
 			desc: 'A chance to put your best foot forward, a gallery of your work or premises, and a form that automatically forwards client inquiries to you.',
 			retainerChecklist: [
@@ -310,6 +319,9 @@ const RAW_COPY = {
 				'Unlimited pages and posts',
 				'Fast-loading photos and files regardless of content volume',
 				'Category/tag structure tailored to your needs',
+				'Online booking system',
+				'Database',
+				'Automatic backups',
 			],
 			desc: 'A simple tool for managing content yourself, no coding knowledge required. You decide what to publish, I make sure everything runs fast and stays reliable.',
 			retainerChecklist: [

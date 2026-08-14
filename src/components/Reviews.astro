@@ -19,7 +19,7 @@ const { pl, en } = Astro.props
 			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
 			<div class="reviewer">
-				<img src="/damian-dzida-logo.png" alt="Damian Dzida" class="avatar" loading="lazy" />
+				<img src="/damian-dzida-logo.png" alt="Damian Dzida" class="avatar" loading="lazy" draggable="false" />
 				<div>
 					<div class="reviewer-name">Damian Dzida</div>
 					<div class="reviewer-role">Kancelaria Adwokacka Damian Dzida · Jasło</div>
@@ -30,7 +30,7 @@ const { pl, en } = Astro.props
 			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev2} data-en={en.rev2}>{pl.rev2}</p>
 			<div class="reviewer">
-				<img src="/pod24-logo.png" alt="POD24.info" class="avatar" loading="lazy" />
+				<img src="/pod24-logo.png" alt="POD24.info" class="avatar" loading="lazy" draggable="false" />
 				<div>
 					<div class="reviewer-name">POD24.info</div>
 					<div class="reviewer-role" data-pl="Serwis informacyjny regionu Jarosławia i Podkarpacia" data-en="News portal for the Jarosław and Podkarpacie region">Serwis informacyjny regionu Jarosławia i Podkarpacia</div>
@@ -181,6 +181,8 @@ const { pl, en } = Astro.props
 		cursor: grab;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	.reviews-track::-webkit-scrollbar {
@@ -195,6 +197,7 @@ const { pl, en } = Astro.props
 		.reviews-track {
 			justify-content: center;
 			cursor: default;
+			overflow: visible;
 		}
 	}
 
@@ -206,6 +209,11 @@ const { pl, en } = Astro.props
 		flex: 0 0 min(420px, 88vw);
 		scroll-snap-align: start;
 		user-select: none;
+	}
+
+	.avatar {
+		-webkit-user-drag: none;
+		user-drag: none;
 	}
 
 	.quote-mark {
