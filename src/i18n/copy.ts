@@ -141,8 +141,8 @@ const RAW_COPY = {
 			],
 			retainerDesc: 'Zajmuję się techniczną stroną Twojego portalu - panel działa bezawaryjnie, a strona się nie zwalnia mimo rosnącej ilości treści. Redagowanie i pisanie treści zostaje po Twojej stronie.',
 		},
-		aboutEy: 'Dlaczego warto?',
-		aboutTitle: 'Nie ogranicza mnie WordPress.',
+		aboutEy: 'Dlaczego warto wybrać mnie?',
+		aboutTitle: 'Żadnych gotowych szablonów. Każda strona pisana od zera, dopasowana do potrzeb Twojej firmy.',
 		reasons: [
 			{
 				title: 'Bezpieczeństwo, o które nie musisz się martwić',
@@ -332,8 +332,8 @@ const RAW_COPY = {
 			],
 			retainerDesc: "I handle the technical side of your portal - the panel runs smoothly and the site doesn't slow down as content grows. Editing and writing content stays entirely up to you.",
 		},
-		aboutEy: 'Why me?',
-		aboutTitle: "WordPress doesn't limit me.",
+		aboutEy: 'Why choose me?',
+		aboutTitle: 'No off-the-shelf templates. Every site is built from scratch, tailored to your business.',
 		reasons: [
 			{
 				title: "Security you don't have to worry about",
