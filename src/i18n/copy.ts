@@ -146,6 +146,10 @@ const RAW_COPY = {
 		aboutTitle: 'Żadnych gotowych szablonów. Każda strona pisana od zera, dopasowana do potrzeb Twojej firmy.',
 		reasons: [
 			{
+				title: 'O mnie',
+				body: 'Programuję od 7 lat, od technikum programistycznego aż po dzisiejszą pracę zawodową. Obecnie studiuję informatykę, a od roku pracuję też w firmie programistycznej, gdzie zajmuję się realnymi projektami dla klientów.',
+			},
+			{
 				title: 'Bezpieczeństwo, o które nie musisz się martwić',
 				body: 'Twoja strona nie stoi na WordPressie, najczęściej atakowanym systemie do zarządzania stronami na świecie. Zamiast tego dostajesz kod pisany od zera, bez wtyczek które trzeba bez końca aktualizować i które są najczęstszą furtką dla hakerów. Do tego ochrona przed atakami DDoS wliczona w hosting, automatyczny certyfikat bezpieczeństwa (SSL) i tam gdzie to potrzebne, baza danych całkowicie odseparowana od tego co widzi internet.',
 			},
@@ -337,6 +341,10 @@ const RAW_COPY = {
 		aboutEy: 'Why choose me?',
 		aboutTitle: 'No off-the-shelf templates. Every site is built from scratch, tailored to your business.',
 		reasons: [
+			{
+				title: 'About me',
+				body: "I've been coding for 7 years, from a programming-focused technical school to my current job. I'm currently studying computer science, and for a year I've also worked at a software company, working on real client projects.",
+			},
 			{
 				title: "Security you don't have to worry about",
 				body: "Your site doesn't run on WordPress, the most attacked website platform in the world. Instead, you get code written from scratch, with no plugins that need endless updates and that are the most common way hackers get in. On top of that, DDoS protection is included with hosting, you get an automatic SSL certificate, and, where it matters, a database that's completely separated from what the public internet can see.",

@@ -65,11 +65,15 @@ const { pl, en } = Astro.props
 	}
 
 	.reasons-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 14px;
+		columns: 2;
+		column-gap: 14px;
 		margin-top: 26px;
 		margin-bottom: 32px;
+	}
+
+	.reason-card {
+		break-inside: avoid;
+		margin-bottom: 28px;
 	}
 
 	.reason-title {
@@ -89,7 +93,7 @@ const { pl, en } = Astro.props
 	@media (max-width: 768px) {
 		.about { padding: 72px 16px; }
 		.about-title { font-size: 24px; }
-		.reasons-grid { grid-template-columns: 1fr; }
+		.reasons-grid { columns: 1; }
 	}
 
 	.chips {
