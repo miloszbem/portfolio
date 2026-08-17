@@ -15,6 +15,7 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		<div data-reveal class="pricing-header">
 			<div class="eyebrow" data-pl={pl.priceEy} data-en={en.priceEy}>{pl.priceEy}</div>
 			<h2 class="section-title" data-pl={pl.priceTitle} data-en={en.priceTitle}>{pl.priceTitle}</h2>
+			<p class="pricing-note" data-pl={pl.priceDisclaimer} data-en={en.priceDisclaimer}>{pl.priceDisclaimer}</p>
 		</div>
 		<div data-reveal class="pricing-tabs" role="tablist">
 			{packages.map((key, i) => {
@@ -88,7 +89,6 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 				)
 			})}
 		</div>
-		<div data-reveal class="pricing-disclaimer" data-pl={pl.priceDisclaimer} data-en={en.priceDisclaimer}>{pl.priceDisclaimer}</div>
 	</div>
 </section>
 
@@ -295,11 +295,10 @@ const packages = ['pkg1', 'pkg2', 'pkg3'] as const
 		text-decoration: underline;
 	}
 
-	.pricing-disclaimer {
-		margin-top: 24px;
+	.pricing-note {
+		margin-top: 12px;
 		font-size: 13px;
 		color: var(--muted-light);
-		text-align: center;
 	}
 
 	@media (max-width: 768px) {
