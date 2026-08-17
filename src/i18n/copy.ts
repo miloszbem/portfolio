@@ -144,7 +144,6 @@ const RAW_COPY = {
 		},
 		aboutEy: 'Dlaczego warto wybrać mnie?',
 		aboutTitle: 'Żadnych gotowych szablonów. Każda strona pisana od zera, dopasowana do potrzeb Twojej firmy.',
-		aboutBio: 'Z wykształcenia jestem programistą piszącym strony internetowe. Z programowaniem mam do czynienia od 7 lat, a doświadczenie w wytwarzaniu oprogramowania w firmie programistycznej zdobywam od roku.',
 		reasons: [
 			{
 				title: 'Bezpieczeństwo, o które nie musisz się martwić',
@@ -337,7 +336,6 @@ const RAW_COPY = {
 		},
 		aboutEy: 'Why choose me?',
 		aboutTitle: 'No off-the-shelf templates. Every site is built from scratch, tailored to your business.',
-		aboutBio: "I'm a programmer by education who builds websites. I've been coding for 7 years, and I've been gaining professional software development experience at a software company for a year.",
 		reasons: [
 			{
 				title: "Security you don't have to worry about",

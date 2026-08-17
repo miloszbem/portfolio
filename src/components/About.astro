@@ -13,7 +13,6 @@ const { pl, en } = Astro.props
 	<div data-reveal class="about-content">
 		<div class="eyebrow" data-pl={pl.aboutEy} data-en={en.aboutEy}>{pl.aboutEy}</div>
 		<h2 class="about-title" data-pl={pl.aboutTitle} data-en={en.aboutTitle}>{pl.aboutTitle}</h2>
-		<p class="about-bio" data-pl={pl.aboutBio} data-en={en.aboutBio}>{pl.aboutBio}</p>
 		<div class="reasons-grid">
 			{pl.reasons.map((reason, i) => {
 				const enReason = en.reasons[i]
@@ -63,14 +62,6 @@ const { pl, en } = Astro.props
 		letter-spacing: -0.5px;
 		margin: 0 0 26px;
 		line-height: 1.08;
-	}
-
-	.about-bio {
-		color: var(--muted);
-		font-size: 16px;
-		line-height: 1.65;
-		max-width: 640px;
-		margin: 0;
 	}
 
 	.reasons-grid {
