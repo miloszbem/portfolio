@@ -17,17 +17,6 @@ const { pl, en } = Astro.props
 	<div class="reviews-track" data-reviews-track>
 		<div data-reveal class="review-card">
 			<div class="quote-mark">"</div>
-			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
-			<div class="reviewer">
-				<img src="/damian-dzida-logo.png" alt="Damian Dzida" class="avatar" loading="lazy" draggable="false" />
-				<div>
-					<div class="reviewer-name">Damian Dzida</div>
-					<div class="reviewer-role">Kancelaria Adwokacka Damian Dzida · Jasło</div>
-				</div>
-			</div>
-		</div>
-		<div data-reveal data-reveal-d="1" class="review-card">
-			<div class="quote-mark">"</div>
 			<p class="quote-text" data-pl={pl.rev2} data-en={en.rev2}>{pl.rev2}</p>
 			<div class="reviewer">
 				<img src="/pod24-logo.png" alt="POD24.info" class="avatar" loading="lazy" draggable="false" />
@@ -37,59 +26,87 @@ const { pl, en } = Astro.props
 				</div>
 			</div>
 		</div>
+		<div data-reveal data-reveal-d="1" class="review-card">
+			<div class="quote-mark">"</div>
+			<p class="quote-text" data-pl={pl.rev1} data-en={en.rev1}>{pl.rev1}</p>
+			<div class="reviewer">
+				<img src="/damian-dzida-logo.png" alt="Damian Dzida" class="avatar" loading="lazy" draggable="false" />
+				<div>
+					<div class="reviewer-name">Damian Dzida</div>
+					<div class="reviewer-role">Kancelaria Adwokacka Damian Dzida · Jasło</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="reviews-dots" data-reviews-dots>
+		<button type="button" class="reviews-dot is-active" data-dot-index="0" aria-label="Opinia 1"></button>
+		<button type="button" class="reviews-dot" data-dot-index="1" aria-label="Opinia 2"></button>
 	</div>
 </div>
 </section>
 
 <script>
 	document.querySelectorAll<HTMLElement>('[data-reviews-track]').forEach((track) => {
-		const isMobile = window.matchMedia('(max-width: 768px)').matches
-		if (!isMobile) return
+		const section = track.closest('.reviews')
+		const dotsWrap = section?.querySelector<HTMLElement>('[data-reviews-dots]')
+		if (!dotsWrap) return
 
-		const originalCards = Array.from(track.children)
-		originalCards.forEach((card) => {
-			const clone = card.cloneNode(true) as HTMLElement
-			clone.setAttribute('aria-hidden', 'true')
-			clone.removeAttribute('data-reveal')
-			clone.removeAttribute('data-reveal-d')
-			clone.style.opacity = '1'
-			clone.style.transform = 'none'
-			track.appendChild(clone)
+		const cards = Array.from(track.children) as HTMLElement[]
+		const dots = Array.from(dotsWrap.children) as HTMLButtonElement[]
+
+		const setActive = (index: number) => {
+			dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index))
+		}
+
+		const scrollToCard = (index: number) => {
+			const card = cards[index]
+			const left = card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2
+			track.scrollTo({ left, behavior: 'smooth' })
+		}
+
+		const currentIndex = () => {
+			const trackCenter = track.scrollLeft + track.clientWidth / 2
+			let closest = 0
+			let closestDist = Infinity
+			cards.forEach((card, i) => {
+				const cardCenter = card.offsetLeft + card.offsetWidth / 2
+				const dist = Math.abs(cardCenter - trackCenter)
+				if (dist < closestDist) {
+					closestDist = dist
+					closest = i
+				}
+			})
+			return closest
+		}
+
+		let ticking = false
+		track.addEventListener(
+			'scroll',
+			() => {
+				if (ticking) return
+				ticking = true
+				requestAnimationFrame(() => {
+					setActive(currentIndex())
+					ticking = false
+				})
+			},
+			{ passive: true }
+		)
+
+		dots.forEach((dot, i) => {
+			dot.addEventListener('click', () => {
+				scrollToCard(i)
+				hold()
+			})
 		})
-		const loopWidth = () => {
-			const gap = parseFloat(getComputedStyle(track).gap || '0')
-			return originalCards.reduce((sum, card) => sum + (card as HTMLElement).offsetWidth + gap, 0)
-		}
 
-		let isDown = false
-		let startX = 0
-		let scrollStart = 0
-		let dragged = false
-		const speed = 22 // px/s, nie px/klatkę - inaczej 120Hz jedzie 2x szybciej niż 60Hz
-		const resumeDelay = 3000
-		let pausedUntil = 0
-		let visible = true
-		let last = 0
-		// Własny licznik float: scrollLeft kwantyzuje się do pikseli urządzenia,
-		// więc czyste += na nim gubi ułamkowe przyrosty przy niskiej prędkości / 120Hz.
-		let pos = track.scrollLeft
+		setActive(0)
+
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-		const canRun = () => visible && !reducedMotion && !isDown
-
-		const step = (now: number) => {
-			requestAnimationFrame(step)
-			const elapsed = last ? now - last : 0
-			last = now
-			if (!canRun() || Date.now() < pausedUntil) {
-				pos = track.scrollLeft
-				return
-			}
-			const width = loopWidth()
-			if (width <= 0) return
-			pos = pos >= width ? 0 : pos + (speed * elapsed) / 1000
-			track.scrollLeft = pos
-		}
+		const autoplayDelay = 10000
+		const resumeDelay = 5000
+		let visible = true
+		let pausedUntil = 0
 
 		const hold = () => {
 			pausedUntil = Date.now() + resumeDelay
@@ -99,49 +116,17 @@ const { pl, en } = Astro.props
 			visible = entries[0].isIntersecting
 		}).observe(track)
 
-		track.addEventListener('mousedown', (e) => {
-			isDown = true
-			dragged = false
-			startX = e.clientX
-			scrollStart = track.scrollLeft
-			track.classList.add('is-dragging')
-			hold()
-		})
-		window.addEventListener('mousemove', (e) => {
-			if (!isDown) return
-			const dx = e.clientX - startX
-			if (Math.abs(dx) > 4) dragged = true
-			const width = loopWidth()
-			let next = scrollStart - dx
-			if (width > 0) {
-				next = ((next % width) + width) % width
-			}
-			track.scrollLeft = next
-		})
-		const endDrag = () => {
-			if (!isDown) return
-			isDown = false
-			track.classList.remove('is-dragging')
-			hold()
-		}
-		window.addEventListener('mouseup', endDrag)
-
 		track.addEventListener('touchstart', hold, { passive: true })
 		track.addEventListener('touchend', hold, { passive: true })
-		track.addEventListener('wheel', hold, { passive: true })
 
-		track.addEventListener(
-			'click',
-			(e) => {
-				if (dragged) {
-					e.preventDefault()
-					e.stopPropagation()
-				}
-			},
-			{ capture: true }
-		)
-
-		requestAnimationFrame(step)
+		if (!reducedMotion) {
+			setInterval(() => {
+				if (!visible || Date.now() < pausedUntil) return
+				if (track.scrollWidth <= track.clientWidth + 1) return
+				const next = (currentIndex() + 1) % cards.length
+				scrollToCard(next)
+			}, autoplayDelay)
+		}
 	})
 </script>
 
@@ -178,26 +163,22 @@ const { pl, en } = Astro.props
 		display: flex;
 		gap: 14px;
 		overflow-x: auto;
-		cursor: grab;
+		overflow-y: hidden;
 		-webkit-overflow-scrolling: touch;
 		scrollbar-width: none;
-		user-select: none;
-		-webkit-user-select: none;
+		scroll-snap-type: x mandatory;
+		touch-action: pan-x;
 	}
 
 	.reviews-track::-webkit-scrollbar {
 		display: none;
 	}
 
-	.reviews-track.is-dragging {
-		cursor: grabbing;
-	}
-
 	@media (min-width: 769px) {
 		.reviews-track {
 			justify-content: center;
-			cursor: default;
 			overflow: visible;
+			scroll-snap-type: none;
 		}
 	}
 
@@ -207,8 +188,41 @@ const { pl, en } = Astro.props
 		border-radius: 12px;
 		padding: 30px;
 		flex: 0 0 min(420px, 88vw);
-		scroll-snap-align: start;
-		user-select: none;
+		scroll-snap-align: center;
+	}
+
+	.reviews-dots {
+		display: none;
+	}
+
+	@media (max-width: 768px) {
+		.reviews-track {
+			padding-inline: calc((100% - min(420px, 88vw)) / 2);
+			scroll-padding-inline: calc((100% - min(420px, 88vw)) / 2);
+		}
+
+		.reviews-dots {
+			display: flex;
+			justify-content: center;
+			gap: 8px;
+			margin-top: 20px;
+		}
+
+		.reviews-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			border: 0;
+			padding: 0;
+			background: var(--border-med, rgba(15, 22, 41, 0.18));
+			cursor: pointer;
+			transition: background 0.2s, transform 0.2s;
+		}
+
+		.reviews-dot.is-active {
+			background: var(--accent);
+			transform: scale(1.25);
+		}
 	}
 
 	.avatar {

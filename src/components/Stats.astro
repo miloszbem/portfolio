@@ -24,11 +24,6 @@ const { pl, en } = Astro.props
 			<div class="stat-num">∞</div>
 			<div class="stat-label" data-pl={pl.s3} data-en={en.s3}>{pl.s3}</div>
 		</div>
-		<div class="sep"></div>
-		<div data-reveal data-reveal-d="3" class="stat">
-			<div class="stat-num accent">1k+</div>
-			<div class="stat-label" data-pl={pl.s4} data-en={en.s4}>{pl.s4}</div>
-		</div>
 	</div>
 </div>
 
@@ -51,12 +46,10 @@ const { pl, en } = Astro.props
 		display: flex;
 		gap: 14px;
 		align-items: center;
+		justify-content: center;
 		flex: 1;
 		padding: 0 32px;
 	}
-
-	.stat:first-child { padding-left: 0; }
-	.stat:last-child { padding-right: 0; }
 
 	.stat-num {
 		font-family: var(--display);
