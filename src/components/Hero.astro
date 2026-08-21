@@ -14,14 +14,14 @@ const { pl, en } = Astro.props
 		<span class="dot"></span>
 		<span data-pl={pl.status} data-en={en.status}>{pl.status}</span>
 	</div>
-	<h1 data-reveal data-reveal-d="1" class="hero-name">Miłosz Bembnowicz<span class="sr-only" data-pl={` - ${pl.heroTagline}`} data-en={` - ${en.heroTagline}`}>{` - ${pl.heroTagline}`}</span></h1>
-	<p data-reveal data-reveal-d="2" class="hero-headline">
+	<p data-reveal data-reveal-d="1" class="hero-name">Miłosz Bembnowicz<span class="sr-only" data-pl={` - ${pl.heroTagline}`} data-en={` - ${en.heroTagline}`}>{` - ${pl.heroTagline}`}</span></p>
+	<h1 data-reveal data-reveal-d="2" class="hero-headline">
 		<span data-pl={pl.h1a} data-en={en.h1a}>{pl.h1a}</span>
 		{' '} <br />
 		<span class="accent" data-pl={pl.h1b} data-en={en.h1b}>{pl.h1b}</span>
 		{' '}
 		<span data-pl={pl.h1c} data-en={en.h1c}>{pl.h1c}</span>
-	</p>
+	</h1>
 	<div data-reveal data-reveal-d="3" class="hero-cta">
 		<a href="#kontakt" class="btn-primary" data-pl={pl.cta1} data-en={en.cta1}>{pl.cta1}</a>
 		<a href="#realizacje" class="btn-text">
