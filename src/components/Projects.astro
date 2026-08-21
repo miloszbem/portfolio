@@ -8,8 +8,8 @@ interface Props {
 const { pl, en } = Astro.props
 
 const projects = [
-	{ color: '#214eb8', domain: 'adwokatdamiandzida.pl', href: '/out/kancelaria', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true, desktopScroll: 'kancelaria-desktop-scroll.jpg', mobileScroll: 'kancelaria-mobile-scroll.jpg', scrollEndDesktop: '-76.2%', scrollEndMobile: '-86.1%' },
-	{ color: '#c0392b', domain: 'pod24.info', href: 'https://pod24.info', name: 'POD24.info', descPl: pl.p5, descEn: en.p5, deviceMockup: true, desktopScroll: 'pod24-desktop-scroll.jpg', mobileScroll: 'pod24-mobile-scroll.jpg', scrollEndDesktop: '-70.2%', scrollEndMobile: '-84.7%' },
+	{ color: '#214eb8', domain: 'adwokatdamiandzida.pl', href: '/out/kancelaria', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true, desktopScroll: 'kancelaria-desktop-scroll.webp', mobileScroll: 'kancelaria-mobile-scroll.webp', scrollEndDesktop: '-76.2%', scrollEndMobile: '-86.1%', altDesktop: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na komputerze', altMobile: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na telefonie', widthDesktop: 900, heightDesktop: 2367, widthMobile: 400, heightMobile: 6248 },
+	{ color: '#c0392b', domain: 'pod24.info', href: 'https://pod24.info', name: 'POD24.info', descPl: pl.p5, descEn: en.p5, deviceMockup: true, desktopScroll: 'pod24-desktop-scroll.webp', mobileScroll: 'pod24-mobile-scroll.webp', scrollEndDesktop: '-70.2%', scrollEndMobile: '-84.7%', altDesktop: 'Zrzut ekranu portalu informacyjnego POD24.info na komputerze', altMobile: 'Zrzut ekranu portalu informacyjnego POD24.info na telefonie', widthDesktop: 1440, heightDesktop: 3024, widthMobile: 300, heightMobile: 4262 },
 ]
 ---
 
@@ -51,14 +51,14 @@ const projects = [
 							<div class="device-group">
 								<div class="device-laptop">
 									<div class="laptop-screen">
-										<img src={`/projects/${p.desktopScroll}`} alt={p.name} class="screen-shot" style={`--scroll-end: ${p.scrollEndDesktop}`} loading="lazy" />
+										<img src={`/projects/${p.desktopScroll}`} alt={p.altDesktop} width={p.widthDesktop} height={p.heightDesktop} class="screen-shot" style={`--scroll-end: ${p.scrollEndDesktop}`} loading="lazy" />
 										<div class="scroll-flash"></div>
 									</div>
 									<div class="laptop-base"></div>
 								</div>
 								<div class="device-phone">
 									<div class="phone-screen">
-										<img src={`/projects/${p.mobileScroll}`} alt={p.name} class="screen-shot" style={`--scroll-end: ${p.scrollEndMobile}`} loading="lazy" />
+										<img src={`/projects/${p.mobileScroll}`} alt={p.altMobile} width={p.widthMobile} height={p.heightMobile} class="screen-shot" style={`--scroll-end: ${p.scrollEndMobile}`} loading="lazy" />
 										<div class="scroll-flash"></div>
 									</div>
 								</div>

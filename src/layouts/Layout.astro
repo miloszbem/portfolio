@@ -37,6 +37,15 @@ const organizationSchema = {
 	email: 'miloszbembnowicz@gmail.com',
 	sameAs: ['https://www.linkedin.com/in/miloszbembnowicz'],
 }
+
+const personEntitySchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Miłosz Bembnowicz',
+	jobTitle: 'Developer',
+	worksFor: { '@type': 'Organization', name: 'Miłosz Bembnowicz' },
+	sameAs: ['https://www.linkedin.com/in/miloszbembnowicz'],
+}
 ---
 
 <html lang="pl">
@@ -71,6 +80,7 @@ const organizationSchema = {
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(personEntitySchema)} />
 
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />
