@@ -55,7 +55,6 @@ const RAW_COPY = {
 		workTitle: 'Realizacje',
 		workNote: 'Strony, które zaprojektowałem i wdrożyłem dla przedsiębiorców prowadzących lokalne firmy.',
 		workAll: 'Zobacz wszystkie',
-		packageLabel: 'Pakiet',
 		p1: 'Kancelaria Adwokacka Damian Dzida · Jasło',
 		p1Features: [
 			'Hosting z ochroną przed atakami DDoS i automatycznym certyfikatem SSL',
@@ -270,7 +269,6 @@ const RAW_COPY = {
 		workTitle: 'Case studies',
 		workNote: 'Websites I designed and built for entrepreneurs running local businesses.',
 		workAll: 'View all',
-		packageLabel: 'Package',
 		p1: 'Kancelaria Adwokacka Damian Dzida · Jasło',
 		p1Features: [
 			'Hosting with DDoS protection and an automatic SSL certificate',

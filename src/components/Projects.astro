@@ -8,8 +8,8 @@ interface Props {
 const { pl, en } = Astro.props
 
 const projects = [
-	{ color: '#214eb8', domain: 'adwokatdamiandzida.pl', href: '/out/kancelaria', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true, desktopScroll: 'kancelaria-desktop-scroll.webp', mobileScroll: 'kancelaria-mobile-scroll.webp', scrollEndDesktop: '-76.2%', scrollEndMobile: '-86.1%', altDesktop: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na komputerze', altMobile: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na telefonie', widthDesktop: 900, heightDesktop: 2367, widthMobile: 400, heightMobile: 6248, featuresPl: pl.p1Features, featuresEn: en.p1Features, summaryPl: pl.p1Summary, summaryEn: en.p1Summary, packageNamePl: pl.pkg1.name, packageNameEn: en.pkg1.name },
-	{ color: '#c0392b', domain: 'pod24.info', href: 'https://pod24.info', name: 'POD24.info', descPl: pl.p5, descEn: en.p5, deviceMockup: true, desktopScroll: 'pod24-desktop-scroll.webp', mobileScroll: 'pod24-mobile-scroll.webp', scrollEndDesktop: '-70.2%', scrollEndMobile: '-84.7%', altDesktop: 'Zrzut ekranu portalu informacyjnego POD24.info na komputerze', altMobile: 'Zrzut ekranu portalu informacyjnego POD24.info na telefonie', widthDesktop: 1440, heightDesktop: 3024, widthMobile: 300, heightMobile: 4262, featuresPl: pl.p5Features, featuresEn: en.p5Features, summaryPl: pl.p5Summary, summaryEn: en.p5Summary, packageNamePl: pl.pkg3.name, packageNameEn: en.pkg3.name },
+	{ color: '#214eb8', domain: 'adwokatdamiandzida.pl', href: '/out/kancelaria', name: 'Kancelaria', descPl: pl.p1, descEn: en.p1, mockupAccent: '#214eb8', mockupBg: '#eeebe4', mockupLine: '#e5e1da', deviceMockup: true, desktopScroll: 'kancelaria-desktop-scroll.webp', mobileScroll: 'kancelaria-mobile-scroll.webp', scrollEndDesktop: '-76.2%', scrollEndMobile: '-86.1%', altDesktop: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na komputerze', altMobile: 'Zrzut ekranu strony Kancelaria Adwokacka Damian Dzida na telefonie', widthDesktop: 900, heightDesktop: 2367, widthMobile: 400, heightMobile: 6248, featuresPl: pl.p1Features, featuresEn: en.p1Features, summaryPl: pl.p1Summary, summaryEn: en.p1Summary },
+	{ color: '#c0392b', domain: 'pod24.info', href: 'https://pod24.info', name: 'POD24.info', descPl: pl.p5, descEn: en.p5, deviceMockup: true, desktopScroll: 'pod24-desktop-scroll.webp', mobileScroll: 'pod24-mobile-scroll.webp', scrollEndDesktop: '-70.2%', scrollEndMobile: '-84.7%', altDesktop: 'Zrzut ekranu portalu informacyjnego POD24.info na komputerze', altMobile: 'Zrzut ekranu portalu informacyjnego POD24.info na telefonie', widthDesktop: 1440, heightDesktop: 3024, widthMobile: 300, heightMobile: 4262, featuresPl: pl.p5Features, featuresEn: en.p5Features, summaryPl: pl.p5Summary, summaryEn: en.p5Summary },
 ]
 ---
 
@@ -96,9 +96,6 @@ const projects = [
 				</div>
 				{p.featuresPl && (
 					<div class="card-features">
-						<div class="feature-package">
-							<span data-pl={pl.packageLabel} data-en={en.packageLabel}>{pl.packageLabel}</span>: <span data-pl={p.packageNamePl} data-en={p.packageNameEn}>{p.packageNamePl}</span>
-						</div>
 						<ul class="feature-list">
 							{p.featuresPl.map((item: string, idx: number) => (
 								<li data-pl={item} data-en={p.featuresEn[idx]}>{item}</li>
@@ -446,19 +443,6 @@ const projects = [
 		font-size: 14px;
 		color: var(--muted-light);
 		margin-top: 5px;
-	}
-
-	.card-features {
-		margin-top: 14px;
-	}
-
-	.feature-package {
-		font-size: 11px;
-		font-weight: 600;
-		letter-spacing: 0.5px;
-		text-transform: uppercase;
-		color: var(--accent);
-		margin-bottom: 10px;
 	}
 
 	.feature-list {
